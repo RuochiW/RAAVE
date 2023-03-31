@@ -9,29 +9,32 @@ from data.tables import db_path
 from src import notifications
 
 
-def write_notification(notification):
+def write_notification(notification_obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
+        if isinstance(notification_obj, notifications.Notification):
+            attributes = dir(notification_obj)[25]
+            if attributes[0] is None:
+                c.execute('''INSERT INTO raave_notification (event, account, notify_date, info)
+                             VALUES (?, ?, ?, ?)''',
+                          (attributes[1], attributes[2], attributes[3],
+                           attributes[4]))
 
-        if notification.attributes[0] is None:
-            c.execute('''INSERT INTO raave_notification (event, account, notify_date, info)
-                         VALUES (?, ?, ?, ?)''',
-                      (notification.attributes[1], notification.attributes[2], notification.attributes[3],
-                       notification.attributes[4]))
+                notify_id = c.lastrowid
+                return [True, notify_id]
+            else:
+                c.execute('''UPDATE raave_notification SET event=?, account=?, notify_date=?, info=?
+                             WHERE notify_id=?''',
+                          (attributes[1], attributes[2], attributes[3],
+                           attributes[4], attributes[0]))
 
-            notify_id = c.lastrowid
-            return [True, notify_id]
+            conn.commit()
+            conn.close()
+
+            return [True]
         else:
-            c.execute('''UPDATE raave_notification SET event=?, account=?, notify_date=?, info=?
-                         WHERE notify_id=?''',
-                      (notification.attributes[1], notification.attributes[2], notification.attributes[3],
-                       notification.attributes[4], notification.attributes[0]))
-
-        conn.commit()
-        conn.close()
-
-        return [True]
+            return [False, 'Invalid object type.']
 
     except Exception as e:
         return [False, str(e)]

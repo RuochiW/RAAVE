@@ -6,32 +6,38 @@ import sqlite3
 
 from data.tables import db_path
 
+
 from src import accounts
 
 
-def write_account(account):
+def write_account(account_obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        if account.attributes[0] is None:
-            c.execute('''INSERT INTO raave_account (type, username, password, first_name, last_name, email)
-                         VALUES (?, ?, ?, ?, ?, ?)''',
-                      (account.attributes[1], account.attributes[2], account.attributes[3], account.attributes[4],
-                       account.attributes[5], account.attributes[6]))
+        if isinstance(account_obj, accounts.Account):
+            attributes = dir(account_obj)[25]
+            if attributes[0] is None:
+                c.execute('''INSERT INTO raave_account (type, username, password, first_name, last_name, email)
+                              VALUES (?, ?, ?, ?, ?, ?)''',
+                          (attributes[1], attributes[2], attributes[3], attributes[4],
+                           attributes[5], attributes[6]))
 
-            account_id = c.lastrowid
-            return [True, account_id]
+                account_id = c.lastrowid
+                return [True, account_id]
+            else:
+                c.execute('''UPDATE raave_account
+                              SET type=?, username=?, password=?, first_name=?, last_name=?, email=?
+                              WHERE account_id=?''',
+                          (attributes[1], attributes[2], attributes[3], attributes[4],
+                           attributes[5], attributes[6], attributes[0]))
+
+            conn.commit()
+            conn.close()
+
+            return [True]
         else:
-            c.execute('''UPDATE raave_account
-                         SET type=?, username=?, password=?, first_name=?, last_name=?, email=?
-                         WHERE account_id=?''',
-                      (account.attributes[1], account.attributes[2], account.attributes[3], account.attributes[4],
-                       account.attributes[5], account.attributes[6], account.attributes[0]))
 
-        conn.commit()
-        conn.close()
-
-        return [True]
+            return [False, 'Invalid object type.']
     except Exception as e:
         return [False, str(e)]
 

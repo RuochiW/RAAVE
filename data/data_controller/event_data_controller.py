@@ -13,31 +13,31 @@ def write_event(obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-
+        attributes = dir(obj)[25]
         if isinstance(obj, events.Event):
-            if obj.attributes[0] is None:
+            if attributes[0] is None:
                 c.execute('''INSERT INTO raave_event (category, type, name, start_date, end_date, visibility)
                              VALUES (?, ?, ?, ?, ?, ?)''',
-                          (obj.attributes[1], obj.attributes[2], obj.attributes[3], obj.attributes[4],
-                           obj.attributes[5], obj.attributes[6]))
+                          (attributes[1], attributes[2], attributes[3], attributes[4],
+                           attributes[5], attributes[6]))
 
                 event_id = c.lastrowid
                 return [True, event_id]
             else:
                 c.execute('''UPDATE raave_event SET category=?, type=?, name=?, start_date=?, end_date=?, visibility=?
                              WHERE event_id=?''',
-                          (obj.attributes[1], obj.attributes[2], obj.attributes[3], obj.attributes[4],
-                           obj.attributes[5], obj.attributes[6], obj.attributes[0]))
+                          (attributes[1], attributes[2], attributes[3], attributes[4],
+                           attributes[5], attributes[6], attributes[0]))
 
         elif isinstance(obj, events.Deliverable):
-            if obj.attributes[0] is None:
+            if attributes[0] is None:
                 c.execute('''INSERT INTO raave_deliverable (weight, time_estimate, time_spent)
                              VALUES (?, ?, ?)''',
-                          (obj.attributes[1], obj.attributes[2], obj.attributes[3]))
+                          (attributes[1], attributes[2], attributes[3]))
             else:
                 c.execute('''UPDATE raave_deliverable SET weight=?, time_estimate=?, time_spent=?
                              WHERE deliverable_id=?''',
-                          (obj.attributes[1], obj.attributes[2], obj.attributes[3], obj.attributes[0]))
+                          (attributes[1], attributes[2], attributes[3], attributes[0]))
 
         else:
             return [False, 'Invalid object type.']
