@@ -1,2 +1,2 @@
 # RAAVE
-CSCI375 Project
+CSCI375 Team 4 RAAVE
