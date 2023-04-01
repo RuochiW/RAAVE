@@ -16,7 +16,7 @@ def write_account(account_obj):
         if isinstance(account_obj, accounts.Account):
             if account_obj.account_id is None:
                 c.execute('''INSERT INTO raave_account (type, username, password, first_name, last_name, email)
-                              VALUES (?, ?, ?, ?, ?, ?)''',
+                             VALUES (?, ?, ?, ?, ?, ?)''',
                           (account_obj.type, account_obj.username, account_obj.password, account_obj.first_name,
                            account_obj.last_name, account_obj.email))
                 account_id = c.lastrowid
@@ -25,8 +25,8 @@ def write_account(account_obj):
                 return [True, account_id]
             else:
                 c.execute('''UPDATE raave_account
-                              SET type=?, username=?, password=?, first_name=?, last_name=?, email=?
-                              WHERE account_id=?''',
+                             SET type=?, username=?, password=?, first_name=?, last_name=?, email=?
+                             WHERE account_id=?''',
                           (account_obj.type, account_obj.username, account_obj.password, account_obj.first_name,
                            account_obj.last_name, account_obj.email, account_obj.account_id))
             conn.commit()
