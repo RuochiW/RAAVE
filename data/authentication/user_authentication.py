@@ -19,9 +19,9 @@ def read_account(account_obj):
                       (account_obj.username, account_obj.password))
             result = c.fetchone()
             if result:
-                account_data = list(result)
+                account_id = list(result)
                 conn.close()
-                return [True] + account_data
+                return [True] + account_id
             else:
                 conn.close()
                 return [False, 'Account not found.']
