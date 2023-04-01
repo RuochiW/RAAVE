@@ -3,13 +3,17 @@
 
 from data import *
 
+
 class Event:
-    """The event class contains all the information pertaining to an event"""
+    """The event class contains a layout of the information pertaining to an event. Conceptually it
+    represents a simple task or event that is contained wthin a grouping, that is, the category class.
+    """
+    
     eventID = int()
     eType = int()
     visibility = int()
     name = str()
-    date = str() #class diagram has this listed as time but that is not a built in type
+    date = str()
     timeEstimate = int()
     weight = int()
     categoryID = int()
@@ -18,11 +22,12 @@ class Event:
 
 
     
-    def __init__(self, eventID = int(-1), eType = -1, 
-                visibility = -1, name = "", date = "",
-                timeEstimate = -1, weight = -1, categoryID = -1, startDate = "", endDate = ""):
-        """The event constructor defaults to -1 for integers and "" for strings, otherwise 
-            it sets paramters as specified        
+    def __init__(self, eventID = None, eType = None, 
+                visibility = None, name = None, date = None,
+                timeEstimate = None, weight = None, 
+                categoryID = None, startDate = None, endDate = None):
+        """The event constructor defaults every attribute to None, otherwise 
+            it sets paramters as specified.        
         """
         self.setEventID(eventID)
         self.setEType(eType)
@@ -31,11 +36,12 @@ class Event:
         self.setDate(date)
         self.setTimeEstimate(timeEstimate)
         self.setWeight(weight)
-        self.categoryID = categoryID
-        self.startDate = startDate
-        self.endDate = endDate
+        self.setCategoryID(categoryID) 
+        self.setStartDate(startDate)
+        self.setEndDate(endDate)
 
-    def __str__(self): 
+    def __str__(self):
+        """Formated output for the Event object, it will print each attribute line by line.""" 
         return f"eventID: {self.eventID},\n eType: {self.eType},\n visibility: {self.visibility},\n name: {self.name},\n date: {self.date},\n timeEstimate: {self.timeEstimate},\n weight: {self.weight}"
 
     
@@ -44,7 +50,7 @@ class Event:
     
     #Likely will only be used for testing purposes
     def setEventID(self, eventID):
-        if type(eventID) is not type(Event.eventID):
+        if type(eventID) is not type(Event.eventID) and type(eventID) is not type(None):
             print("Error: eventID must be of type {}.\n".format(type(Event.eventID)))
         else:
             self.eventID = eventID
@@ -54,7 +60,7 @@ class Event:
         return self.eType
 
     def setEType(self, eType):
-        if type(eType) is not type(Event.eType):
+        if type(eType) is not type(Event.eType) and type(eType) is not type(None):
             print("Error: EType must be of type {}.\n".format(type(Event.eType)))
         else:
             self.eType = eType
@@ -63,7 +69,7 @@ class Event:
         return self.visibility
     
     def setVisibility(self, visibility):
-        if type(visibility) is not type(Event.visibility):
+        if type(visibility) is not type(Event.visibility) and type(visibility) is not type(None):
             print("Error: visibility must be of type {}\n".format(type(Event.visibility)))
         else:
             self.visibility = visibility
@@ -72,7 +78,7 @@ class Event:
         return self.name
     
     def setName(self, name):
-        if type(name) is not type(Event.name):
+        if type(name) is not type(Event.name) and type(name) is not type(None):
             print("Error: name must be of type {}.\n".format(type(Event.name)))
         else:
             self.name = name
@@ -81,7 +87,7 @@ class Event:
         return self.date
     
     def setDate(self, date):
-        if type(date) is not type(Event.date):
+        if type(date) is not type(Event.date) and type(date) is not type(None):
             print("Error: date must be of type {}.\n".format(type(Event.date)))
         else:
             self.date = date
@@ -90,7 +96,7 @@ class Event:
         return self.timeEstimate
     
     def setTimeEstimate(self, timeEstimate):
-        if type(timeEstimate) is not type(Event.timeEstimate):
+        if type(timeEstimate) is not type(Event.timeEstimate) and type(timeEstimate) is not type(None):
             print("Error: timeEstimate must be of type {}.\n".format(type(Event.timeEstimate)))
         else:
             self.timeEstimate = timeEstimate
@@ -99,30 +105,51 @@ class Event:
         return self.weight
     
     def setWeight(self, weight):
-        if type(weight) is not type(Event.weight):
+        if type(weight) is not type(Event.weight) and type(weight) is not type(None):
             print("Error: weight must be of type {}.\n".format(type(Event.weight)))
         else:
             self.weight = weight
 
-    '''def getContent(self):
-        return self.content
+    def getCategoryID(self):
+        return self.categoryID
     
-    def setContent(self, content):
-        if type(content) is not type(Event.content):
-            print("Error: content must be of type {}.\n".format(type(Event.content)))
+    def setCategoryID(self, categoryID):
+        if type(categoryID) is not type(Event.categoryID) and type(categoryID) is not type(None):
+            print("Error: categoryID must be of type {}.\n".format(type(Event.categoryID)))
         else:
-            self.content = content'''
+            self.categoryID = categoryID
+
+    def getStartDate(self):
+        return self.startDate
+    
+    def setStartDate(self, startDate):
+        if type(startDate) is not type(Event.startDate) and type(startDate) is not type(None):
+            print("Error: startDate must be of type {}.\n".format(type(Event.startDate)))
+        else:
+            self.startDate = startDate
+
+    def getEndDate(self):
+        return self.endDate
+    
+    def setEndDate(self, endDate):
+        if type(endDate) is not type(Event.endDate) and type(endDate) is not type(None):
+            print("Error: endDate must be of type {}.\n".format(type(Event.endDate)))
+        else:
+            self.endDate = endDate
 
     def getAll(self):
         attributes = list()
         for i in dir(self):
             if not i.startswith('__') and not i.startswith('get') and not i.startswith('set'):
-                attributes.append(i) #in alphabetical order
+                attributes.append(i) 
 
-        return attributes
+        return attributes #in alphabetical order
 
 
 class EventController(Event):
+    """Inherits from the Event Class. It controls the interactions between the frontend and 
+    the database related to the creation, deletion, reading and writing of event objects"""
+
     def createEvent():
         E = Event()
 
@@ -154,23 +181,18 @@ class EventController(Event):
             
             event_obj.__setattr__(attributes[i], update_list[i])
 
-
-        #data.writeEvent(event_obj)
         writeEvent(event_obj)
 
     
     def readEvent(self):
         id = input("Enter the eventID of the event you would like to read: ")
-        #data.readEvent(id)
         readEvent(id)
 
     def deleteEvent(self):
         id = input("Enter the eventID of the event you would like to delete: ")
         id = int(id)
-        #e = Event(id, None, None, None, None, None, None, None)
-        e = Event(id, -1, -1, "", "", -1, -1, -1, "", "")
+        e = Event(id)
         
-        #data.readEvent(e)
         readEvent(e)
         
 
@@ -181,30 +203,24 @@ class EventController(Event):
 def getEventInput():
         """
         Helper function that gets user input for updating attribute value,
-        likely to be replaced with html form input
+        likely to be replaced with html form input.
         """
         e = Event()
-        #e.__setattr__()
-
-        updated_attr = list()
+        
         source_attr = e.getAll() #getAll() returns a list of only the user defined attributes of a class
+        updated_attr = list()
         
         #iterate through all attributes prompting for input for each then storing that input in a list
         for i in range(0, source_attr.__len__()):
-            #src_attr = source_attr[i]
+        
             attr = input("Enter value for {}: ".format(source_attr[i]))
-            print(type(e.__getattribute__(source_attr[i])))
 
             if (type(e.__getattribute__(source_attr[i]) == type(int))):
                 attr = int(attr)
             
             if(type(e.__getattribute__(source_attr[i]) == type(str))):
-                #attribute is of type string
                 attr = str(attr)
 
             updated_attr.append(attr)
-            #print("\n----------\n\t Type of {}: {} \n \t Source Type: {} \n---------\n".format(source_attr[i], type(attr), type(e.__getattribute__(source_attr[i]))))
             
         return updated_attr
-
-
