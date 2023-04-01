@@ -35,6 +35,16 @@
     <meta charset=utf-8> </head>
     <body>
         <h1>Welcome to RAVEN - Please Login</h1>
+
+        <!-- Snippet to flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {%  if  messages %}
+        {%  for  message  in  messages %} 
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
             
         <form name="login" action="http://localhost:5000/login" method="post">
 
@@ -42,6 +52,9 @@
             password: <input type="text" name="password">
             <input type="submit" value="Submit">
         </form>
+
+        <a href="{{ url_for('create_account') }}">Create an Account</a>
+
 
 
     </body>

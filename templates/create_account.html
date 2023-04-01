@@ -1,0 +1,32 @@
+
+
+
+
+<!doctype html>
+
+
+<head><title>Create Account</title> 
+    <meta charset=utf-8> </head>
+    <body>
+        <h1>Create Account</h1>
+            
+        <form name="Create" action="http://localhost:5000/create_account" method="post">
+
+            username: <input type="text" name="username">
+            password: <input type="text" name="password">
+
+            Type: <select name="type" id="type">
+
+                <option value="1">Student</option>
+                <option value="2">Professor</option>
+            </select>
+
+            First Name: <input type="text" name="fname">
+            Last Name: <input type="text" name="lname">
+            email: <input type="text" name="email">
+
+            <input type="submit" value="Submit">
+        </form>
+
+
+    </body>

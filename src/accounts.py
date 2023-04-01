@@ -48,7 +48,7 @@ class Account:
   lastName = str()
   email = str()
 
-  def __init__(self, accountID = -1, AccountType = -1, 
+  def __init__(self, accountID = None, AccountType = None, 
               username = "", password = "", 
               firstName = "",  lastName = "", email = ""):
 
@@ -248,12 +248,12 @@ class ViewAccountController:
     print("Accessed Login Function...")
 
     #Uncomment when linked to DB functions
-    # if data.readAccount(tempAcc):
+    if data.readAccount(tempAcc):
 
-    #   #login successful 
-    #   return True
-    # else: 
-    #   return None
+      #login successful 
+      return True
+    else: 
+      return None
 
     return True
 
