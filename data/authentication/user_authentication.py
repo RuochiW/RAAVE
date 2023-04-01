@@ -9,7 +9,7 @@ from data.tables import db_path
 from src import accounts
 
 
-def read_account(account_obj):
+def logging(account_obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
