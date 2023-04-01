@@ -1,2 +1,0 @@
-# RAAVE
-CSCI375 Team 4 RAAVE
