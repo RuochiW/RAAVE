@@ -13,7 +13,6 @@ def write_event(obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        attributes = dir(obj)[25]
         if isinstance(obj, events.Event):
             if obj.event_id is None:
                 c.execute('''INSERT INTO raave_event (category, type, name, start_date, end_date, visibility)

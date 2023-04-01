@@ -14,7 +14,6 @@ def write_notification(notification_obj):
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
         if isinstance(notification_obj, notifications.Notification):
-            attributes = dir(notification_obj)[25]
             if notification_obj.notify_id is None:
                 c.execute('''INSERT INTO raave_notification (event, account, notify_date, info)
                              VALUES (?, ?, ?, ?)''',
