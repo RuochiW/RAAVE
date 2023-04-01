@@ -2,6 +2,11 @@
 AUTHORS: RW
 -->
 
+
+# Requirement
+
+Be consistent with the names in `tables.py`.
+
 # Usage
 View the schema of the database in `tables.py`.\
 View the functions of the corresponding class in the data controller.\
