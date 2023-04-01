@@ -3,19 +3,27 @@
 """
 
 import sqlite3
-import os
 
 db_path = 'raave.db'
 
 
 def clear_tables():
-    if os.path.exists(db_path):
-        os.remove(db_path)
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    c.execute('DROP TABLE raave_account;')
+    c.execute('DROP TABLE raave_category;')
+    c.execute('DROP TABLE raave_course;')
+    c.execute('DROP TABLE raave_subscription;')
+    c.execute('DROP TABLE raave_event;')
+    c.execute('DROP TABLE raave_deliverable;')
+    c.execute('DROP TABLE raave_notification;')
+
+    conn.commit()
+    conn.close()
 
 
 def create_tables():
-    clear_tables()
-
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
