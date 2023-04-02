@@ -59,7 +59,7 @@ def login():
 
         else: 
   
-            print("DB Error: {}", loginAtempt[1], file=sys.stdout) #Debugging: sql error to terminal
+            print("Database Exception: {}", loginAtempt[1], file=sys.stdout) #Debugging: sql error to terminal
             flash('Your Account was not found. Please try again.')
             return redirect(url_for('index')) 
 

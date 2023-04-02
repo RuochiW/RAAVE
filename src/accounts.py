@@ -157,15 +157,15 @@ class AccountController:
     AccountController.activeUser.setlast_name(lname)
     AccountController.activeUser.setEmail(email)
 
-    #then call writeDB to update in DB
-    if account_data_controller.write_account(AccountController.activeUser):
+    results = account_data_controller.write_account(AccountController.activeUser)
 
-      print("Account was not updated in the databse")
+    #then call writeDB to update in DB
+    if results[0] == False:
+
+      print("Account was not updated in the databse. {}".format(results[1]))
       return -1
 
     else: 
-
-      #need to get back account ID from DB here
       return 0
 
 
@@ -181,9 +181,11 @@ class AccountController:
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
-    if account_data_controller.write_account(AccountController.activeUser):
+    results = account_data_controller.write_account(AccountController.activeUser)
 
-      print("Account was not updated in the databse")
+    if results[0] == False:
+
+      print("Account was not updated in the databse. {}".format(results[1]))
       return -1
     else: 
       return 0
