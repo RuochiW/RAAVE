@@ -29,31 +29,44 @@
     </body> -->
 
 <!doctype html>
+   
 
+<head>
+    
+    <title>Test</title> 
+    <meta charset=utf-8> 
 
-<head><title>Test</title> 
-    <meta charset=utf-8> </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
     <body>
-        <h1>Welcome to RAVEN - Please Login</h1>
 
-        <!-- Snippet to flash messages -->
-        {% with messages = get_flashed_messages() %}
-        {%  if  messages %}
-        {%  for  message  in  messages %} 
-        <p>{{ message }}</p>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+       <div class="login">
+        
+            <h1>Welcome to RAVEN - Please Login</h1>
 
-            
-        <form name="login" action="http://localhost:5000/login" method="post">
+            <!-- Snippet to flash messages -->
+            {% with messages = get_flashed_messages() %}
+            {%  if  messages %}
+            {%  for  message  in  messages %} 
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
 
-            username: <input type="text" name="username">
-            password: <input type="text" name="password">
-            <input type="submit" value="Submit">
-        </form>
+                
+            <form name="login" class="login_fields" action="http://localhost:5000/login" method="post">
 
-        <a href="{{ url_for('create_account') }}">Create an Account</a>
+                <div class="text_field">Username: <input type="text" name="username"></div>
+
+                <div class="text_field">Password: <input type="text" name="password"></div>
+
+                <input style="margin: 10px;" type="submit" value="Submit">
+            </form>
+
+            <a  style="padding: 10px;" href="{{ url_for('create_account') }}">Create an Account</a>
+        
+        </div>
 
 
 
