@@ -17,63 +17,63 @@ class Account:
   ...
   Attributes
   ----------
-  accountID : int
+  account_id : int
       unique id for the account
-  AccountType : int
+  account_type : int
       account type - student, proffesor
   username : str
       unique account username
   password : str
       unique account password
-  firstName : str
+  first_name : str
       user's first name
-  lastName : str
+  last_name : str
       user's last name
   email : str
       user's email adddress
 
   Methods
   -------
-  getAccountID():
-      returns the accountID
+  getaccount_id():
+      returns the account_id
 
   !Continue adding methods..
   
   """
-  accountID = int()
-  AccountType = int()
+  account_id = int()
+  account_type = int()
   username = str()
   password = str()
-  firstName = str()
-  lastName = str()
+  first_name = str()
+  last_name = str()
   email = str()
 
-  def __init__(self, accountID = None, AccountType = None, 
+  def __init__(self, account_id = None, account_type = None, 
               username = "", password = "", 
-              firstName = "",  lastName = "", email = ""):
+              first_name = "",  last_name = "", email = ""):
 
-      self.accountID = accountID
-      self.AccountType = AccountType
+      self.account_id = account_id
+      self.account_type = account_type
       self.username = username
       self.password = password
-      self.firstName = firstName
-      self.lastName = lastName
+      self.first_name = first_name
+      self.last_name = last_name
       self.email = email
 
 
   def __str__(self): 
-    return f"{self.lastName}, {self.firstName} [{self.accountID}]"
+    return f"{self.last_name}, {self.first_name} [{self.account_id}]"
 
 
-  def getAccountID(self):
-    return self.accountID
+  def getaccount_id(self):
+    return self.account_id
 
 
-  def getAccountType(self):
-    return self.AccountType
+  def getaccount_type(self):
+    return self.account_type
 
-  def setAccountType(self, AccountType):
-    self.AccountType = AccountType
+  def setaccount_type(self, account_type):
+    self.account_type = account_type
 
 
   def getUsername(self):
@@ -90,18 +90,18 @@ class Account:
     self.password = password
 
 
-  def getFirstName(self):
-    return self.firstName
+  def getfirst_name(self):
+    return self.first_name
 
-  def setFirstName(self, fname):
-    self.firstName = fname
+  def setfirst_name(self, fname):
+    self.first_name = fname
 
 
-  def getLastName(self):
-    return self.lastName
+  def getlast_name(self):
+    return self.last_name
 
-  def setLastName(self, lname): 
-    self.lastName = lname
+  def setlast_name(self, lname): 
+    self.last_name = lname
 
 
   def getEmail(self):
@@ -145,11 +145,11 @@ class AccountController:
   def createAccount(aType, uname, passw, fname, lname, email):
 
     #first update 'active' account object
-    AccountController.activeUser.setAccountType(None)
+    AccountController.activeUser.setaccount_type(None)
     AccountController.activeUser.setUsername(uname)
     AccountController.activeUser.setPassword(passw)
-    AccountController.activeUser.setFirstName(fname)
-    AccountController.activeUser.setLastName(lname)
+    AccountController.activeUser.setfirst_name(fname)
+    AccountController.activeUser.setlast_name(lname)
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
@@ -168,11 +168,11 @@ class AccountController:
   def updateAccount(id, aType, uname, passw, fname, lname, email):
 
     #first update 'active' account object
-    AccountController.activeUser.setAccountType(aType)
+    AccountController.activeUser.setaccount_type(aType)
     AccountController.activeUser.setUsername(uname)
     AccountController.activeUser.setPassword(passw)
-    AccountController.activeUser.setFirstName(fname)
-    AccountController.activeUser.setLastName(lname)
+    AccountController.activeUser.setfirst_name(fname)
+    AccountController.activeUser.setlast_name(lname)
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
@@ -191,12 +191,12 @@ class AccountController:
 
     read_account = Account()
 
-    read_account.accountID = results[2]
-    read_account.AccountType = results[3]
+    read_account.account_id = results[2]
+    read_account.account_type = results[3]
     read_account.username = results[5]
     read_account.password = results[6]
-    read_account.firstName = results[7]
-    read_account.lastName = results[8]
+    read_account.first_name = results[7]
+    read_account.last_name = results[8]
     read_account.email = results[9]
 
     return read_account
@@ -205,11 +205,11 @@ class AccountController:
 def deleteAccount(): 
 
      #first update 'active' account object
-    AccountController.activeUser.setAccountType(None)
+    AccountController.activeUser.setaccount_type(None)
     AccountController.activeUser.setUsername(None)
     AccountController.activeUser.setPassword(None)
-    AccountController.activeUser.setFirstName(None)
-    AccountController.activeUser.setLastName(None)
+    AccountController.activeUser.setfirst_name(None)
+    AccountController.activeUser.setlast_name(None)
     AccountController.activeUser.setEmail(None)
 
     #then call writeDB to update in DB
@@ -223,7 +223,7 @@ def deleteAccount():
 
 def getAllCat():
 
-  results = data.readAllCategory(AccountController.activeUser.accountID)
+  results = data.readAllCategory(AccountController.activeUser.account_id)
   return results
 
 
@@ -231,31 +231,31 @@ def getAllCat():
 def getSubscriptions():
 
   #note: data.readAllSubscriptions does not exist yet...
-  results = data.readAllSubscriptions(AccountController.activeUser.accountID)
+  results = data.readAllSubscriptions(AccountController.activeUser.account_id)
   return results
 
 
 
-class ViewAccountController:
+# class ViewAccountController:
 
-  def login(uname, passw): 
+  # def login(uname, passw): 
 
-    tempAcc = Account
+  #   tempAcc = Account
 
-    tempAcc.username = uname
-    tempAcc.password = passw
+  #   tempAcc.username = uname
+  #   tempAcc.password = passw
 
-    print("Accessed Login Function...")
+  #   print("Accessed Login Function...")
 
-    #Uncomment when linked to DB functions
-    if data.readAccount(tempAcc):
+  #   #Uncomment when linked to DB functions
+  #   if data.readAccount(tempAcc):
 
-      #login successful 
-      return True
-    else: 
-      return None
+  #     #login successful 
+  #     return True
+  #   else: 
+  #     return None
 
-    return True
+  #   return True
 
 
 
@@ -267,9 +267,9 @@ class ViewAccountController:
 
 # print("Print Account: ", testAccount)
   
-# print("Account ID is: ", testAccount.getAccountID())
+# print("Account ID is: ", testAccount.getaccount_id())
 
-# print("Account Type is: ", testAccount.getAccountType())
+# print("Account Type is: ", testAccount.getaccount_type())
 
 # testAccount.setEmail("email@emails.com")
 
