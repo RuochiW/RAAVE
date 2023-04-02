@@ -15,7 +15,7 @@ def login(account_obj):
         c = conn.cursor()
         if isinstance(account_obj, accounts.Account):
             c.execute('''SELECT account_id FROM raave_account WHERE username = ? AND password = ?''',
-                     (account_obj.username, account_obj.password))
+                      (account_obj.username, account_obj.password))
             result = c.fetchone()
             if result:
                 account_id = list(result)
