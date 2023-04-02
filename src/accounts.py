@@ -11,6 +11,7 @@ import sys
 
 from data.data_controller import account_data_controller
 #from data.data_controller import category_data_controller
+#from data.data_controller import subscription_data_controller
 
 
 #Accounts Class
@@ -215,41 +216,47 @@ class AccountController:
       return None
 
 
-def deleteAccount(): 
+  def deleteAccount(): 
 
-     #first update 'active' account object
-    AccountController.activeUser.setaccount_type(None)
-    AccountController.activeUser.setUsername(None)
-    AccountController.activeUser.setPassword(None)
-    AccountController.activeUser.setfirst_name(None)
-    AccountController.activeUser.setlast_name(None)
-    AccountController.activeUser.setEmail(None)
+      #first update 'active' account object
+      AccountController.activeUser.setaccount_type(None)
+      AccountController.activeUser.setUsername(None)
+      AccountController.activeUser.setPassword(None)
+      AccountController.activeUser.setfirst_name(None)
+      AccountController.activeUser.setlast_name(None)
+      AccountController.activeUser.setEmail(None)
 
-    #then call writeDB to update in DB
-    if account_data_controller.write_account(AccountController.activeUser):
+      #then call writeDB to update in DB
+      if account_data_controller.write_account(AccountController.activeUser):
 
-      print("Account was not deleted in the databse")
-      return -1
-    else: 
-      return 0
+        print("Account was not deleted in the databse")
+        return -1
+      else: 
+        return 0
 
+#Cannot test these functions until categories code is completed / debugged
+"""
+  #Note: can't test until categories code is completed / debugged
+  def getAllCat():
 
-def getAllCat():
+    #results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
 
-  results = account_data_controller.readAllCategory(AccountController.activeUser.account_id)
-  return results
-
-
-#get and return a list of all courses the user is subscribed to
-def getSubscriptions():
-
-  #note: data.readAllSubscriptions does not exist yet...
-  #results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
-  results = None
-  return results
+    results = None
+    print("getAllcatResults are: {}".format(results), file=sys.stdout)
+    return results
 
 
+  #Note: can't test until categories code is completed / debugged
+  def getSubscriptions():
 
+    results = subscription_data_controller.read_all_subscription(AccountController.activeUser.account_id)
+    print("Get All Subscription Results are: {}".format(results), file=sys.stdout)
+
+    return results
+"""
+
+
+#NO LONGER NEEDED. WILL PROBABLY REMOVE
 # class ViewAccountController:
 
   # def login(uname, passw): 
@@ -271,22 +278,3 @@ def getSubscriptions():
 
   #   return True
 
-
-
-
-
-#Testing Account Class 
-"""
-# testAccount = Account(1234, 0, "username1", "password1", "fname", "lname", "email")
-
-# print("Print Account: ", testAccount)
-  
-# print("Account ID is: ", testAccount.getaccount_id())
-
-# print("Account Type is: ", testAccount.getaccount_type())
-
-# testAccount.setEmail("email@emails.com")
-
-# print("My new email is: ", testAccount.getEmail())
-	
-"""

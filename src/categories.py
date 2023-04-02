@@ -37,7 +37,7 @@ class Category:
     def getCType(self):
         return self.ctype
 
-    def setCType(self, cType):
+     def setCType(self, cType):
         if type(cType) is not type(Category.cType):
             print("Error: CType must be of type {}.\n".format(type(Category.cType)))
         else:

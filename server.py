@@ -1,3 +1,5 @@
+# Written by Austin Shouli
+
 from flask import Flask, render_template, redirect, url_for, request, flash
 
 
@@ -9,7 +11,6 @@ from src import accounts
 from data.data_controller import account_data_controller
 from data.authentication import user_authentication
 
-from data import tables
 import sys
 
 AcController = accounts.AccountController()
@@ -20,6 +21,7 @@ AcController = accounts.AccountController()
 def index():
     return render_template('index.html')
 
+#remove this
 @app.route('/success/<name>')
 def success(name):
     return 'welcome %s' % name
@@ -45,6 +47,13 @@ def login():
             print("Account logged in is: {}".format(AcController.activeUser), file=sys.stdout) 
             print("Account Type is: {}".format(AcController.activeUser.account_type), file=sys.stdout) 
 
+            #testing get all subs
+            # allSubs = AcController.getSubscriptions()
+
+            # print("All Subs are: {}".format(*allSubs), file=sys.stdout)
+
+            #end testing
+
             print("Server Sees Logged In. accountID is: {}".format(loginAtempt[1]), file=sys.stdout)
             return render_template('logged_in.html')
 
@@ -54,7 +63,6 @@ def login():
             flash('Your Account was not found. Please try again.')
             return redirect(url_for('index')) 
 
-        #  return redirect(url_for('success', name=user))
     else:
         print("Test Point 1", sys.stdout)
         user = request.args.get('username')
