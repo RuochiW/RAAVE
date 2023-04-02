@@ -3,25 +3,33 @@
 """
 
 import sqlite3
-import os
 
 db_path = 'raave.db'
 
 
 def clear_tables():
-    if os.path.exists(db_path):
-        os.remove(db_path)
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    c.execute('DROP TABLE raave_account;')
+    c.execute('DROP TABLE raave_category;')
+    c.execute('DROP TABLE raave_course;')
+    c.execute('DROP TABLE raave_subscription;')
+    c.execute('DROP TABLE raave_event;')
+    c.execute('DROP TABLE raave_deliverable;')
+    c.execute('DROP TABLE raave_notification;')
+
+    conn.commit()
+    conn.close()
 
 
 def create_tables():
-    clear_tables()
-
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute('''CREATE TABLE raave_account
                  (account_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  type INTEGER DEFAULT 1 NOT NULL,
+                  account_type INTEGER DEFAULT 1 NOT NULL,
                   username VARCHAR UNIQUE NOT NULL,
                   password VARCHAR NOT NULL,
                   first_name VARCHAR,
@@ -31,13 +39,12 @@ def create_tables():
     data = [(2, 'johndoe', '1111aaAA', 'John', 'Doe', 'john.doe@example.com'),
             (1, 'jane_smith', '2222bbBB', 'Jane', 'Smith', 'jane.smith@example.com'),
             (1, 'bob_johnson', '3333ccCC', 'Bob', 'Johnson', 'bob.johnson@example.com')]
-    c.executemany(
-        "INSERT INTO raave_account (type, username, password, first_name, last_name, email) VALUES (?, ?, ?, ?, ?, ?)",
-        data)
+    c.executemany('''INSERT INTO raave_account (account_type, username, password, first_name, last_name, email)
+                     VALUES (?, ?, ?, ?, ?, ?)''', data)
 
     c.execute('''CREATE TABLE raave_category
                  (category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  type INTEGER,
+                  category_type INTEGER,
                   owner INTEGER,
                   name VARCHAR,
                   visibility INTEGER DEFAULT 0,
@@ -47,7 +54,7 @@ def create_tables():
     data = [(1, 1, 'CSCI375', '375 etc, etc'),
             (1, 1, 'CSCI370', '370 etc, etc'),
             (3, 0, 'Gym', 'Gym plan etc, etc')]
-    c.executemany("INSERT INTO raave_category (owner, type, name, description) VALUES (?, ?, ?, ?)", data)
+    c.executemany("INSERT INTO raave_category (owner, category_type, name, description) VALUES (?, ?, ?, ?)", data)
 
     c.execute('''CREATE TABLE raave_course
                  (course_id INTEGER PRIMARY KEY UNIQUE,
@@ -77,7 +84,7 @@ def create_tables():
     c.execute('''CREATE TABLE raave_event
                  (event_id INTEGER PRIMARY KEY AUTOINCREMENT,
                   category INTEGER,
-                  type INTEGER,
+                  event_type INTEGER,
                   name VARCHAR,
                   start_date DATETIME,
                   end_date DATETIME,
@@ -87,7 +94,8 @@ def create_tables():
     data = [(1, 2, 'A1', '2023-09-15 10:30:00', '2023-09-15 12:00:00'),
             (2, 2, 'A2', '2023-10-01 13:00:00', '2023-10-01 14:30:00'),
             (3, 1, 'Gmy Time', '2023-11-01 16:00:00', '2023-11-01 17:30:00')]
-    c.executemany("INSERT INTO raave_event (category, type, name, start_date, end_date) VALUES (?, ?, ?, ?, ?)", data)
+    c.executemany('''INSERT INTO raave_event (category, event_type, name, start_date, end_date)
+                     VALUES (?, ?, ?, ?, ?)''', data)
 
     c.execute('''CREATE TABLE raave_deliverable
                  (deliverable_id INTEGER PRIMARY KEY UNIQUE,

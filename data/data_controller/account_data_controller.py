@@ -9,49 +9,52 @@ from data.tables import db_path
 from src import accounts
 
 
-def write_account(account):
+def write_account(account_obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        if account.attributes[0] is None:
-            c.execute('''INSERT INTO raave_account (type, username, password, first_name, last_name, email)
-                         VALUES (?, ?, ?, ?, ?, ?)''',
-                      (account.attributes[1], account.attributes[2], account.attributes[3], account.attributes[4],
-                       account.attributes[5], account.attributes[6]))
-
-            account_id = c.lastrowid
-            return [True, account_id]
+        if isinstance(account_obj, accounts.Account):
+            if account_obj.account_id is None:
+                c.execute('''INSERT INTO raave_account (account_type, username, password, first_name, last_name, email)
+                             VALUES (?, ?, ?, ?, ?, ?)''',
+                          (account_obj.account_type, account_obj.username, account_obj.password, account_obj.first_name,
+                           account_obj.last_name, account_obj.email))
+                account_id = c.lastrowid
+                conn.commit()
+                conn.close()
+                return [True, account_id]
+            else:
+                c.execute('''UPDATE raave_account
+                             SET account_type=?, username=?, password=?, first_name=?, last_name=?, email=?
+                             WHERE account_id=?''',
+                          (account_obj.account_type, account_obj.username, account_obj.password, account_obj.first_name,
+                           account_obj.last_name, account_obj.email, account_obj.account_id))
+            conn.commit()
+            conn.close()
+            return [True]
         else:
-            c.execute('''UPDATE raave_account
-                         SET type=?, username=?, password=?, first_name=?, last_name=?, email=?
-                         WHERE account_id=?''',
-                      (account.attributes[1], account.attributes[2], account.attributes[3], account.attributes[4],
-                       account.attributes[5], account.attributes[6], account.attributes[0]))
-
-        conn.commit()
-        conn.close()
-
-        return [True]
+            return [False, 'Invalid object type.']
     except Exception as e:
         return [False, str(e)]
 
 
-def read_account(account_id):
+def read_account(account_obj):
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-
-        c.execute('''SELECT type, username, first_name, last_name, email
-                     FROM raave_account WHERE account_id = ?''', (account_id,))
-        result = c.fetchone()
-
-        if result:
-            account_data = list(result)
-            conn.close()
-            return [True] + account_data
+        if isinstance(account_obj, accounts.Account):
+            c.execute('''SELECT account_type, username, first_name, last_name, email
+                                 FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
+            result = c.fetchone()
+            if result:
+                account_data = list(result)
+                conn.close()
+                return [True] + account_data
+            else:
+                conn.close()
+                return [False, 'Account not found.']
         else:
             conn.close()
-            return [False, 'Account not found.']
-
+            return [False, 'Invalid object category_type.']
     except Exception as e:
         return [False, str(e)]
