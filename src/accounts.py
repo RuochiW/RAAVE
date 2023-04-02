@@ -3,10 +3,14 @@
 
 
 import pydoc
+import sys
 
 
 
-import data
+
+
+from data.data_controller import account_data_controller
+#from data.data_controller import category_data_controller
 
 
 #Accounts Class
@@ -136,7 +140,7 @@ class AccountController:
   """
   activeUser = Account()
 
-  def __init__(self, activeUser): 
+  def __init__(self, activeUser = None): 
 
     self.acvtiveUser = activeUser
 
@@ -153,7 +157,7 @@ class AccountController:
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
-    if data.writeAccount(AccountController.activeUser):
+    if account_data_controller.write_account(AccountController.activeUser):
 
       print("Account was not updated in the databse")
       return -1
@@ -176,7 +180,7 @@ class AccountController:
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
-    if data.writeAccount(AccountController.activeUser):
+    if account_data_controller.write_account(AccountController.activeUser):
 
       print("Account was not updated in the databse")
       return -1
@@ -187,19 +191,28 @@ class AccountController:
 
   def readAccount(id):
 
-    results = data.readAccount(id)
-
     read_account = Account()
 
-    read_account.account_id = results[2]
-    read_account.account_type = results[3]
-    read_account.username = results[5]
-    read_account.password = results[6]
-    read_account.first_name = results[7]
-    read_account.last_name = results[8]
-    read_account.email = results[9]
+    read_account.account_id = id
 
-    return read_account
+    results = account_data_controller.read_account(read_account)
+
+    if results[0] == True:
+
+      #print("THE ACCOUNT READ WAS {}".format(read_account), file=sys.stdout)
+
+      read_account.account_type = results[1]
+      read_account.username = results[2]
+      read_account.first_name = results[3]
+      read_account.last_name = results[4]
+      read_account.email = results[5]
+
+      return read_account
+    
+    else:
+
+      print("readAccount FAILED!!")
+      return None
 
 
 def deleteAccount(): 
@@ -213,7 +226,7 @@ def deleteAccount():
     AccountController.activeUser.setEmail(None)
 
     #then call writeDB to update in DB
-    if data.writeAccount(AccountController.activeUser):
+    if account_data_controller.write_account(AccountController.activeUser):
 
       print("Account was not deleted in the databse")
       return -1
@@ -223,7 +236,7 @@ def deleteAccount():
 
 def getAllCat():
 
-  results = data.readAllCategory(AccountController.activeUser.account_id)
+  results = account_data_controller.readAllCategory(AccountController.activeUser.account_id)
   return results
 
 
@@ -231,7 +244,8 @@ def getAllCat():
 def getSubscriptions():
 
   #note: data.readAllSubscriptions does not exist yet...
-  results = data.readAllSubscriptions(AccountController.activeUser.account_id)
+  #results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
+  results = None
   return results
 
 

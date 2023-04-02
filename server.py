@@ -12,7 +12,9 @@ from data.authentication import user_authentication
 from data import tables
 import sys
 
-#tables.create_tables()
+AcController = accounts.AccountController()
+
+
 
 @app.route('/')
 def index():
@@ -36,18 +38,21 @@ def login():
 
         if loginAtempt[0] == True: 
 
-            #create new account controller
-            #AcController = accounts.AccountController() 
+
+            #set activeUser's attributes to the database values
+            AcController.activeUser = accounts.AccountController.readAccount(loginAtempt[1])
+
+            print("Account logged in is: {}".format(AcController.activeUser), file=sys.stdout) 
+            print("Account Type is: {}".format(AcController.activeUser.account_type), file=sys.stdout) 
 
             print("Server Sees Logged In. accountID is: {}".format(loginAtempt[1]), file=sys.stdout)
             return render_template('logged_in.html')
-            #AcController.activeUser.accountID = loginAtempt[2]
-            
+
         else: 
   
             print("DB Error: {}", loginAtempt[1], file=sys.stdout) #Debugging: sql error to terminal
             flash('Your Account was not found. Please try again.')
-            return redirect(url_for('index')) ##########
+            return redirect(url_for('index')) 
 
         #  return redirect(url_for('success', name=user))
     else:
