@@ -2,7 +2,7 @@
 #Contains: Notification Class and NotificationController Class
 
 #connect to data.py to use it's functions
-import data
+from data.data_controller import notification_data_controller
 
 #write classes
 
@@ -104,14 +104,14 @@ class NotificationController:
      # create a new notification object
     def createNotification(self, nType, eventID, accountID, date, info):
         newNotification = Notification(nType, eventID, accountID, date, info)
-        result = data.writeNotification(newNotification)
+        result = notification_data_controller.write_notification(newNotification)
         if result[0]:
             self.notification.append(newNotification)
         return result
 
     #update an existing notification in the database
     def updateNotification(self, notification):
-        result = data.writeNotification(notification)
+        result = notification_data_controller.write_notification(notification)
         if result[0]:
             count = self.notification.index(notification)
             self.notification[count] = notification
@@ -121,7 +121,7 @@ class NotificationController:
     def readNotification(self, notificationID):
         notification = Notification("", 0, 0, "", "")
         notification.notificationID = notificationID
-        result = data.readNotification(notification)
+        result = notification_data_controller.read_notification(notification)
         if result[0]:
             #update the notification object with the retrieved data
             notification.nType = result[1]
