@@ -1,47 +1,47 @@
-<!-- 
-<!doctype html>
+<!-- Written by Austin Shouli -->
 
+
+
+<!doctype html>
+   
 
 <head>
+    
+    <title>Test</title> 
+    <meta charset=utf-8> 
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
 </head>
-<body>
-    <form name="login" action="/html/cgi-bin/login.py" method="get">
-
-        username: <input type="text" name="username">
-        <input type="submit" value="Submit">
-    </form>
-</body> -->
-
-<!-- <!doctype html>
-
-
-<head><title>Test</title> 
-    <meta charset=utf-8> </head>
     <body>
-        <h1>My Website</h1>
-        <form action="/my-link/">
-            <input type="submit" value="Click me" />
-        </form>
+
+       <div class="login">
         
-        <button> <a href="/my-link/">Click me</a></button>
+            <h1 style="margin: 30 px;">Welcome to RAVEN - Please Login</h1>
 
-    </body> -->
+            <!-- Snippet to flash messages -->
+            {% with messages = get_flashed_messages() %}
+            {%  if  messages %}
+            {%  for  message  in  messages %} 
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
 
-<!doctype html>
+                
+            <form name="login" class="login_fields" action="http://localhost:5000/login" method="post">
 
+                <div class="text_field">Username: <input type="text" name="username"></div>
 
-<head><title>Test</title> 
-    <meta charset=utf-8> </head>
-    <body>
-        <h1>Welcome to RAVEN - Please Login</h1>
-            
-        <form name="login" action="http://localhost:5000/login" method="post">
+                <div class="text_field">Password: <input type="text" name="password"></div>
 
-            username: <input type="text" name="username">
-            password: <input type="text" name="password">
-            <input type="submit" value="Submit">
-        </form>
+                <input style="margin: 10px;" type="submit" value="Submit">
+            </form>
+
+            <a  style="padding: 10px;" href="{{ url_for('create_account') }}">Create an Account</a>
+        
+        </div>
+
 
 
     </body>
