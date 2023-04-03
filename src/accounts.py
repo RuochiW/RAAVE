@@ -229,9 +229,12 @@ class AccountController:
       AccountController.activeUser.setEmail(None)
 
       #then call writeDB to update in DB
-      if account_data_controller.write_account(AccountController.activeUser):
 
-        print("Account was not deleted in the databse")
+      results = account_data_controller.write_account(AccountController.activeUser)
+
+      if results[0] == False:
+
+        print("Account was not deleted in the databse. {}".format(results[1]))
         return -1
       else: 
         return 0
