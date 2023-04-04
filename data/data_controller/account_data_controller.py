@@ -4,6 +4,7 @@
 
 import sqlite3
 
+from data.log.error_log import logger
 from data.tables import db_path
 
 from src import accounts
@@ -11,16 +12,16 @@ from src import accounts
 
 def write_account(account_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(account_obj, accounts.Account):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             if account_obj.account_id is None:
                 c.execute('''INSERT INTO raave_account (account_type, username, password, first_name, last_name, email)
                              VALUES (?, ?, ?, ?, ?, ?)''',
                           (account_obj.account_type, account_obj.username, account_obj.password, account_obj.first_name,
                            account_obj.last_name, account_obj.email))
-                account_id = c.lastrowid
                 conn.commit()
+                account_id = c.lastrowid
                 conn.close()
                 return [True, account_id]
             else:
@@ -33,16 +34,19 @@ def write_account(account_obj):
             conn.close()
             return [True]
         else:
-            return [False, 'Invalid object type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_account(account_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(account_obj, accounts.Account):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''SELECT account_type, username, first_name, last_name, email
                                  FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
             result = c.fetchone()
@@ -52,9 +56,13 @@ def read_account(account_obj):
                 return [True] + account_data
             else:
                 conn.close()
-                return [False, 'Account not found.']
+                e = 'Account not found.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object category_type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
