@@ -39,7 +39,7 @@ class Notification:
     @classmethod
     def genNoteID(cls):
         cls.id_count += 1      # Increment ID counter for each new object
-        return f"{cls.id_counter}"  # Use ID counter to generate unique ID
+        return f"{cls.id_count}"  # Use ID counter to generate unique ID
 
 
     def getNoteID(self):
