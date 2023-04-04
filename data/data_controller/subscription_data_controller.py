@@ -4,6 +4,7 @@
 
 import sqlite3
 
+from data.log.error_log import logger
 from data.tables import db_path
 
 from src import categories
@@ -12,26 +13,28 @@ from src import accounts
 
 def write_subscription(account_obj, course_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(account_obj, accounts.Account) and isinstance(course_obj, categories.Course):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute("INSERT INTO raave_subscription (course, subscriber) VALUES (?, ?)",
                       (course_obj.course_id, account_obj.account_id))
-        else:
+            conn.commit()
             conn.close()
-            return [False, 'Invalid object category_type.']
-        conn.commit()
-        conn.close()
-        return [True]
+            return [True]
+        else:
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_all_subscription(obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(obj, accounts.Account):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute("SELECT course FROM raave_subscription WHERE subscriber = ?", (obj.account_id,))
             result = c.fetchone()
             if result:
@@ -40,8 +43,12 @@ def read_all_subscription(obj):
                 return [True] + subscription_data
             else:
                 conn.close()
-                return [False, 'No subscribed courses found.']
+                e = 'No subscribed courses found for the specified account.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         elif isinstance(obj, categories.Course):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute("SELECT subscriber FROM raave_subscription WHERE subscriber = ?", (obj.course_id,))
             result = c.fetchone()
             if result:
@@ -50,9 +57,13 @@ def read_all_subscription(obj):
                 return [True] + subscription_data
             else:
                 conn.close()
-                return [False, 'No subscriber found.']
+                e = 'No subscriber account found for the specified course.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object category_type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
