@@ -2,9 +2,12 @@
 @RW
 """
 
+import os
 import sqlite3
 
-db_path = 'raave.db'
+
+dir_path = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(dir_path, "../data/raave.db")
 
 
 def clear_tables():
