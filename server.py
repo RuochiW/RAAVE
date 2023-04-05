@@ -12,9 +12,15 @@ from src import events
 from data.data_controller import account_data_controller
 from data.authentication import user_authentication
 
+from data import tables
+
+#tables.create_tables()
+
 import sys
 
 AcController = accounts.AccountController()
+
+
 
 
 @app.route('/event_input', methods=["POST", "GET"])
@@ -51,7 +57,7 @@ def login():
         loginAccount.username = request.form['username']
         loginAccount.password = request.form['password']
 
-        loginAtempt = user_authentication.logging(loginAccount)
+        loginAtempt = user_authentication.login(loginAccount)
 
         if loginAtempt[0] == True: 
 
@@ -70,7 +76,7 @@ def login():
             #end testing
 
             print("Server Sees Logged In. accountID is: {}".format(loginAtempt[1]), file=sys.stdout)
-            return render_template('logged_in.html')
+            return render_template('event_input.html')
 
         else: 
   

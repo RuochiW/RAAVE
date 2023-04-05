@@ -1,8 +1,8 @@
 #Author: Ethan
 #Contents: Event and deliverable base classes and event controller class
 
-from event_data_controller import *
-
+#from event_data_controller import *
+from data.data_controller import event_data_controller
 
 class Event:
     """The event class contains a layout of the information pertaining to an event. Conceptually it
