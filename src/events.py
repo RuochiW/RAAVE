@@ -38,7 +38,7 @@ class Event:
 
     def __str__(self):
         """Formated output for the Event object, it will print each attribute line by line.""" 
-        return f"event_id: {self.event_id},\n event_type: {self.event_type},\n visibility: {self.visibility},\n name: {self.name},\n date: {self.date},\n time_estimate: {self.time_estimate},\n weight: {self.weight}"
+        return f"event_id: {self.event_id},\n event_type: {self.event_type},\n visibility: {self.visibility},\n name: {self.name}, Category: {self.category},\n Start Date: {self.start_date}, \n End Date: {self.end_date}"
 
     
     def getEventID(self):
