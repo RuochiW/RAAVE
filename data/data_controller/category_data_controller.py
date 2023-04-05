@@ -4,6 +4,7 @@
 
 import sqlite3
 
+from data.log.error_log import logger
 from data.tables import db_path
 
 from src import categories
@@ -12,9 +13,9 @@ from src import accounts
 
 def write_category(obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(obj, categories.Category):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             if obj.category_id is None:
                 c.execute('''INSERT INTO raave_category (category_type, owner, name, visibility, description)
                              VALUES (?, ?, ?, ?, ?)''',
@@ -28,24 +29,28 @@ def write_category(obj):
                              WHERE category_id=?''',
                           (obj.category_type, obj.owner, obj.name, obj.visibility, obj.description, obj.category_id))
         elif isinstance(obj, categories.Course):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''INSERT OR REPLACE INTO raave_course (course_id, department, course, section, start_date, 
-                                     end_date) VALUES (?, ?, ?, ?, ?, ?)''',
+                         end_date) VALUES (?, ?, ?, ?, ?, ?)''',
                       (obj.course_id, obj.department, obj.course, obj.section, obj.start_date, obj.end_date))
-        else:
+            conn.commit()
             conn.close()
-            return [False, 'Invalid object category_type.']
-        conn.commit()
-        conn.close()
-        return [True]
+            return [True]
+        else:
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_category(category_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(category_obj, categories.Category):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''SELECT category_type, owner, name, visibility, description
                          FROM raave_category WHERE category_id = ?''', (category_obj.category_id,))
             result = c.fetchone()
@@ -64,19 +69,23 @@ def read_category(category_obj):
                     return [True] + category_data
             else:
                 conn.close()
-                return [False, 'Category not found.']
+                e = 'Category not found.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object category_type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_all_category(account_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(account_obj, accounts.Account):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''SELECT category_id, name FROM raave_category WHERE owner = ?''', (account_obj.account_id,))
             result = c.fetchall()
             if result:
@@ -85,9 +94,13 @@ def read_all_category(account_obj):
                 return [True] + categories_data
             else:
                 conn.close()
-                return [False, 'No categories found for the specified account.']
+                e = 'No categories found for the specified account.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object category_type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]

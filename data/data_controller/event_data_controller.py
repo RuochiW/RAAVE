@@ -4,6 +4,7 @@
 
 import sqlite3
 
+from data.log.error_log import logger
 from data.tables import db_path
 
 from src import events
@@ -12,9 +13,9 @@ from src import categories
 
 def write_event(obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(obj, events.Event):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             if obj.event_id is None:
                 c.execute('''INSERT INTO raave_event (category,event_type, name, start_date, end_date, visibility)
                              VALUES (?, ?, ?, ?, ?, ?)''',
@@ -29,24 +30,28 @@ def write_event(obj):
                           (obj.category, obj.event_type, obj.name, obj.start_date, obj.end_date, obj.visibility,
                            obj.event_id))
         elif isinstance(obj, events.Deliverable):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''INSERT OR REPLACE INTO raave_deliverable (deliverable_id, weight, time_estimate, time_spent) 
                          VALUES (?, ?, ?, ?)''',
                       (obj.deliverable_id, obj.weight, obj.time_estimate, obj.time_spent))
-        else:
+            conn.commit()
             conn.close()
-            return [False, 'Invalid object type.']
-        conn.commit()
-        conn.close()
-        return [True]
+            return [True]
+        else:
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_event(event_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(event_obj, events.Event):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''SELECT category, event_type, name, start_date, end_date, visibility
                                  FROM raave_event WHERE event_id = ?''', (event_obj.event_id,))
             result = c.fetchone()
@@ -65,19 +70,23 @@ def read_event(event_obj):
                     return [True] + event_data
             else:
                 conn.close()
-                return [False, 'Event not found.']
+                e = 'Event not found.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
 
 
 def read_all_event(category_obj):
     try:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
         if isinstance(category_obj, categories.Category):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
             c.execute('''SELECT event_id, name, start_date, end_date, visibility
                                  FROM raave_event WHERE category = ?''', (category_obj.category_id,))
             result = c.fetchall()
@@ -87,9 +96,13 @@ def read_all_event(category_obj):
                 return [True] + event_data
             else:
                 conn.close()
-                return [False, 'No events found for the category.']
+                e = 'No events found for the category.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
         else:
-            conn.close()
-            return [False, 'Invalid object type.']
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
     except Exception as e:
+        logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
