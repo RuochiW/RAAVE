@@ -8,6 +8,7 @@ app.secret_key = 'super secret key'
 
 
 from src import accounts
+from src import events
 from data.data_controller import account_data_controller
 from data.authentication import user_authentication
 
@@ -16,10 +17,24 @@ import sys
 AcController = accounts.AccountController()
 
 
+@app.route('/event_input', methods=["POST", "GET"])
+def event_input():
+    if request.method == "POST":
+        user = request.form["nm"]
+        
+        return redirect(url_for("event", usr=user))
+    else:
+        return render_template('event_input.html')
+
+@app.route("/event_input/<usr>")
+def event(usr):
+    return f"<h1>Post successful {usr}!</h1>"
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 #remove this
 @app.route('/success/<name>')
