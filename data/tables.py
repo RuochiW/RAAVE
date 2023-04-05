@@ -5,25 +5,19 @@
 import os
 import sqlite3
 
+from data.clear import clear_file
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(dir_path, "../data/raave.db")
 
 
+def reset_tables():
+    clear_tables()
+    create_tables()
+
+
 def clear_tables():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-
-    c.execute('DROP TABLE raave_account;')
-    c.execute('DROP TABLE raave_category;')
-    c.execute('DROP TABLE raave_course;')
-    c.execute('DROP TABLE raave_subscription;')
-    c.execute('DROP TABLE raave_event;')
-    c.execute('DROP TABLE raave_deliverable;')
-    c.execute('DROP TABLE raave_notification;')
-
-    conn.commit()
-    conn.close()
+    clear_file(db_path)
 
 
 def create_tables():
