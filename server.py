@@ -2,7 +2,6 @@
 
 from flask import Flask, render_template, redirect, url_for, request, flash
 
-
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 
@@ -20,17 +19,24 @@ import sys
 
 AcController = accounts.AccountController()
 
-
-
-
+#renders a super simple calendar
+@app.route('/calendar')
+def show_calendar():
+    return render_template('calendar.html')
+    
 @app.route('/event_input', methods=["POST", "GET"])
-def event_input():
+def event_input(): 
     if request.method == "POST":
         user = request.form["nm"]
         
         return redirect(url_for("event", usr=user))
     else:
         return render_template('event_input.html')
+
+#clicking on view calendar in navbar will render a calendar
+@app.route('/home')
+def home_view():
+    return render_template('base.html')
 
 @app.route("/event_input/<usr>")
 def event(usr):
