@@ -67,3 +67,32 @@ def read_all_subscription(obj):
     except Exception as e:
         logger.error("An error occurred: %s", str(e))
         return [False, str(e)]
+
+
+def read_all_subscribable():
+    try:
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        # TODO
+        c.execute("")
+        result = c.fetchone()
+        if result:
+            # TODO
+            # list of list subscribable course that user can subscribe
+            """
+            [[course_id, owner, name, description, department, course, section, start_date, end_date],
+             [course_id, owner, name, description, department, course, section, start_date, end_date],
+             [course_id, owner, name, description, department, course, section, start_date, end_date],
+             [course_id, owner, name, description, department, course, section, start_date, end_date]]
+            """
+            subscribable_data = []
+            conn.close()
+            return [True] + subscribable_data
+        else:
+            conn.close()
+            e = 'No subscribed courses found for the specified account.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
+    except Exception as e:
+        logger.error("An error occurred: %s", str(e))
+        return [False, str(e)]

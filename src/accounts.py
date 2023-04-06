@@ -5,11 +5,9 @@
 import pydoc
 import sys
 
+from data.data_controller.account_data_controller import write_account, read_account
 
 
-
-
-from data.data_controller import account_data_controller
 #from data.data_controller import category_data_controller
 #from data.data_controller import subscription_data_controller
 
@@ -157,7 +155,7 @@ class AccountController:
     AccountController.activeUser.setlast_name(lname)
     AccountController.activeUser.setEmail(email)
 
-    results = account_data_controller.write_account(AccountController.activeUser)
+    results = write_account(AccountController.activeUser)
 
     #then call writeDB to update in DB
     if results[0] == False:
@@ -181,7 +179,7 @@ class AccountController:
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
-    results = account_data_controller.write_account(AccountController.activeUser)
+    results = write_account(AccountController.activeUser)
 
     if results[0] == False:
 
@@ -194,23 +192,23 @@ class AccountController:
 
   def readAccount(id):
 
-    read_account = Account()
+    account_r = Account()
 
-    read_account.account_id = id
+    account_r.account_id = id
 
-    results = account_data_controller.read_account(read_account)
+    results = read_account(account_r)
 
     if results[0] == True:
 
       #print("THE ACCOUNT READ WAS {}".format(read_account), file=sys.stdout)
 
-      read_account.account_type = results[1]
-      read_account.username = results[2]
-      read_account.first_name = results[3]
-      read_account.last_name = results[4]
-      read_account.email = results[5]
+      account_r.account_type = results[1]
+      account_r.username = results[2]
+      account_r.first_name = results[3]
+      account_r.last_name = results[4]
+      account_r.email = results[5]
 
-      return read_account
+      return account_r
     
     else:
 
@@ -230,7 +228,7 @@ class AccountController:
 
       #then call writeDB to update in DB
 
-      results = account_data_controller.write_account(AccountController.activeUser)
+      results = write_account(AccountController.activeUser)
 
       if results[0] == False:
 
