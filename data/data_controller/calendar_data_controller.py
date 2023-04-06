@@ -44,6 +44,40 @@ def read_all_user_calendar(account_obj):
         return [False, str(e)]
 
 
+def read_all_user_week_calendar(account_obj, start_date, end_date):
+    try:
+        if isinstance(account_obj, accounts.Account):
+            conn = sqlite3.connect(db_path)
+            c = conn.cursor()
+            # TODO
+            c.execute("")
+            result = c.fetchall()
+            if result:
+                # TODO
+                # time ordered list of list event that user has in the week
+                """
+                [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent],
+                 [event_id, category, event_type, name, start_date, end_date, visibility],
+                 [event_id, category, event_type, name, start_date, end_date, visibility],
+                 [event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent]]
+                """
+                user_calendar_data = []
+                conn.close()
+                return [True] + user_calendar_data
+            else:
+                conn.close()
+                e = 'No user calendars found for the account in the period.'
+                logger.error("An error occurred: %s", e)
+                return [False, e]
+        else:
+            e = 'Invalid object type.'
+            logger.error("An error occurred: %s", e)
+            return [False, e]
+    except Exception as e:
+        logger.error("An error occurred: %s", str(e))
+        return [False, str(e)]
+
+
 def read_all_user_category_calendar(account_obj):
     try:
         if isinstance(account_obj, accounts.Account):
