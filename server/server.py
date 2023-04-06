@@ -2,14 +2,15 @@
 
 from flask import Flask, render_template, redirect, url_for, request, flash
 
+from data.authentication.user_authentication import user_login
+from data.data_controller.account_data_controller import write_account
+from src.accounts import AccountController, Account
+
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 
 
-from src import accounts
-from src import events
-from data.data_controller import account_data_controller
-from data.authentication import user_authentication
+
 
 from data import tables
 
@@ -17,7 +18,7 @@ from data import tables
 
 import sys
 
-AcController = accounts.AccountController()
+AcController = AccountController()
 
 #renders a super simple calendar
 @app.route('/calendar')
@@ -58,18 +59,18 @@ def success(name):
 def login():
     if request.method == 'POST':
 
-        loginAccount = accounts.Account()
+        loginAccount = Account()
 
         loginAccount.username = request.form['username']
         loginAccount.password = request.form['password']
 
-        loginAtempt = user_authentication.login(loginAccount)
+        loginAtempt = user_login(loginAccount)
 
         if loginAtempt[0] == True: 
 
 
             #set activeUser's attributes to the database values
-            AcController.activeUser = accounts.AccountController.readAccount(loginAtempt[1])
+            AcController.activeUser = AccountController.readAccount(loginAtempt[1])
 
             print("Account logged in is: {}".format(AcController.activeUser), file=sys.stdout) 
             print("Account Type is: {}".format(AcController.activeUser.account_type), file=sys.stdout) 
@@ -104,7 +105,7 @@ def create_account():
 
         
         #try to create account in DB. 
-        newAccount = accounts.Account()
+        newAccount = Account()
         newAccount.username = request.form['username']
         newAccount.password = request.form['password']
         newAccount.account_type = request.form['type']
@@ -112,7 +113,7 @@ def create_account():
         newAccount.last_name = request.form['lname']
         newAccount.email = request.form['email']
 
-        result = account_data_controller.write_account(newAccount)
+        result = write_account(newAccount)
 
         #debugging
         #print("Result of write is: " + {result[0]} + result[1])
