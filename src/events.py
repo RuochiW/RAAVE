@@ -2,7 +2,8 @@
 #Contents: Event and deliverable base classes and event controller class
 
 #from event_data_controller import *
-from data.data_controller import event_data_controller
+from data.data_controller.event_data_controller import write_event, read_event
+
 
 class Event:
     """The event class contains a layout of the information pertaining to an event. Conceptually it
@@ -163,6 +164,7 @@ class Deliverable():
             print("Error: weight must be of type {}.\n".format(type(Deliverable.weight)))
         else:
             self.weight = weight
+
 
 class EventController(Event, Deliverable):
     """Inherits from the Event Class. It controls the interactions between the frontend and 
