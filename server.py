@@ -129,11 +129,30 @@ def create_account():
 
     return render_template('create_account.html')
 
+@app.route('/logout', methods=['GET', 'POST'])
+def sign_out():
+     
+     AcController.activeUser = None
+
+     return redirect(url_for('index'))
+
+@app.rout('/NavCreateEvent', methods=['GET', 'POST'])
+def NavCreateEvent():
+
+    return redirect(url_for('create_event'))
+    
+@app.route('/createEvent')
+def createEvent():
+    if request.method == 'POST':
+
+        #handle submit for create event
+
     
 
 
 
-    
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

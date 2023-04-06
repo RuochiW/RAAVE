@@ -1,0 +1,43 @@
+ <!-- Written by Austin Shouli -->
+
+ <!-- event_id = int() 
+ event_type = int() 
+ visibility = int() 
+ name = str() 
+    #date = str()
+    #time_estimate = int()
+    #weight = int()
+ category = int() 
+ start_date = str() 
+ end_date = str()  -->
+
+<!doctype html>
+
+
+<head><title>Create Account</title> 
+    <meta charset=utf-8> </head>
+    <body>
+        <h1>Create Account</h1>
+            
+        <form name="Create" action="http://localhost:5000/create_event" method="post">
+
+            Name: <input type="text" name="event_name">
+            Start Date: <input type="date" name="start_date">
+            End Date: <input type="date" name="end_date">
+
+            First Name: <input type="text" name="fname">
+            Last Name: <input type="text" name="lname">
+            email: <input type="text" name="email">
+
+            Visibility: <select name="visibility" id="visibility">
+
+                <option value="1">Public</option>
+                <option value="2">Private</option>
+            </select>
+
+
+            <input type="submit" value="Submit">
+        </form>
+
+
+    </body>
