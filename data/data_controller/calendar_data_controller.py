@@ -44,7 +44,7 @@ def read_all_user_calendar(account_obj):
         return [False, str(e)]
 
 
-def read_all_user_week_calendar(account_obj, start_date, end_date):
+def read_all_user_period_calendar(account_obj, start_date, end_date):
     try:
         if isinstance(account_obj, accounts.Account):
             conn = sqlite3.connect(db_path)
@@ -54,7 +54,7 @@ def read_all_user_week_calendar(account_obj, start_date, end_date):
             result = c.fetchall()
             if result:
                 # TODO
-                # time ordered list of list event that user has in the week
+                # time ordered list of list event that user has in the period
                 """
                 [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent],
                  [event_id, category, event_type, name, start_date, end_date, visibility],
