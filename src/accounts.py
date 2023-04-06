@@ -194,23 +194,23 @@ class AccountController:
 
   def readAccount(id):
 
-    read_account = Account()
+    activeAccount = Account()
 
-    read_account.account_id = id
+    activeAccount.account_id = id
 
-    results = account_data_controller.read_account(read_account)
+    results = account_data_controller.read_account(activeAccount)
 
     if results[0] == True:
 
-      #print("THE ACCOUNT READ WAS {}".format(read_account), file=sys.stdout)
+      #print("THE ACCOUNT READ WAS {}".format(activeAccount), file=sys.stdout)
 
-      read_account.account_type = results[1]
-      read_account.username = results[2]
-      read_account.first_name = results[3]
-      read_account.last_name = results[4]
-      read_account.email = results[5]
+      activeAccount.account_type = results[1]
+      activeAccount.username = results[2]
+      activeAccount.first_name = results[3]
+      activeAccount.last_name = results[4]
+      activeAccount.email = results[5]
 
-      return read_account
+      return activeAccount
     
     else:
 

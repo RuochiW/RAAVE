@@ -9,6 +9,7 @@ app.secret_key = 'super secret key'
 from src import accounts
 from src import events
 from data.data_controller import account_data_controller
+from data.data_controller import event_data_controller
 from data.authentication import user_authentication
 
 from data import tables
@@ -82,7 +83,7 @@ def login():
             #end testing
 
             print("Server Sees Logged In. accountID is: {}".format(loginAtempt[1]), file=sys.stdout)
-            return render_template('event_input.html')
+            return render_template('base.html')
 
         else: 
   
@@ -129,6 +130,7 @@ def create_account():
 
     return render_template('create_account.html')
 
+
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
      
@@ -136,21 +138,43 @@ def sign_out():
 
      return redirect(url_for('index'))
 
-@app.rout('/NavCreateEvent', methods=['GET', 'POST'])
+
+
+@app.route('/NavCreateEvent', methods=['GET', 'POST'])
 def NavCreateEvent():
 
-    return redirect(url_for('create_event'))
+    return render_template('create_event.html')
     
-@app.route('/createEvent')
+
+    
+@app.route('/createEvent', methods=['GET', 'POST'])
 def createEvent():
     if request.method == 'POST':
 
         #handle submit for create event
+        newEvent = events.Event()
 
-    
+        newEvent.name = request.form['event_name']
+        newEvent.category = request.form['category']
+        newEvent.start_date = request.form['start_date']
+        newEvent.end_date = request.form['end_date']
+        newEvent.visibility = request.form['visibility']
 
+        result = event_data_controller.write_event(newEvent)        
+        
+        print("DB Write Attempt...", file=sys.stdout) #Debugging: sql error to 
 
+        if result[0] == True:
+            flash('Event Succesfully created.')
+            print("DB Write Event Successful", file=sys.stdout) #Debugging: sql error to 
+        
+        else: 
 
+            print("DB Error: {}", result[1], file=sys.stdout) #Debugging: sql error to terminal
+            flash('There was an error creating your event. Please try again.')
+        
+
+        return render_template('base.html')
 
 
 if __name__ == '__main__':
