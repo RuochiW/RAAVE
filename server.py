@@ -5,9 +5,11 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from data.authentication.user_authentication import user_login
 from data.data_controller.account_data_controller import write_account
 from data.data_controller.event_data_controller import write_event
+from data.data_controller.category_data_controller import write_category 
 from src.account_controller import AccountController, read_user_account
 from src.accounts import Account
 from src.events import Event
+from src.categories import Category
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -68,10 +70,10 @@ def login():
         if login_attempt[0]:
 
             # set activeUser's attributes to the database values
-            ac_controller.activeUser = read_user_account(login_attempt[1])
+            ac_controller.active_user = read_user_account(login_attempt[1])
 
-            print("Account logged in is: {}".format(ac_controller.activeUser), file=sys.stdout)
-            print("Account Type is: {}".format(ac_controller.activeUser.account_type), file=sys.stdout)
+            print("Account logged in is: {}".format(ac_controller.active_user), file=sys.stdout)
+            print("Account Type is: {}".format(ac_controller.active_user.account_type), file=sys.stdout)
 
             # testing get all subs
             # allSubs = AcController.getSubscriptions()
@@ -93,6 +95,7 @@ def login():
         print("Test Point 1", sys.stdout)
         user = request.args.get('username')
         return redirect(url_for('success1', name=user))
+
 
 
 # handles create account form submission
@@ -130,21 +133,55 @@ def create_account():
 # handles log out button
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
-    ac_controller.activeUser = None
+    ac_controller.active_user = None
 
     return redirect(url_for('index'))
 
 
-# handles navigation to Create Event page
+# handles navigation to the home page
 @app.route('/home', methods=['GET', 'POST'])
 def returnHome():
     return render_template('base.html')
 
 
-# handles navigation to the home page
+# handles navigation to the create category page
+@app.route('/NavCreateCat', methods=['GET', 'POST'])
+def NavCreateCat():
+    return render_template('create_category.html')
+
+# handles navigation to the create event page
 @app.route('/NavCreateEvent', methods=['GET', 'POST'])
 def NavCreateEvent():
     return render_template('create_event.html')
+
+# handles submission of create category form
+@app.route('/createCategory', methods=['GET', 'POST'])
+def createCategory():
+    if request.method == 'POST':
+
+        # handle submit for create category
+        new_cat = Category()
+
+        new_cat.name = request.form['cat_name']
+        new_cat.description = request.form['desc']
+        new_cat.category_type = request.form['type']
+        new_cat.owner = ac_controller.active_user.account_id
+        new_cat.visibility = request.form['visibility']
+
+        result = write_category(new_cat)
+
+        print("DB return is: ".format(result[0]), file=sys.stdout)  # Debugging: sql error to terminal
+
+        if result[0]:
+            flash('Category Succesfully created')
+            print("DB Write Category Successful", file=sys.stdout)  # Debugging: sql error to terminal
+
+        else:
+
+            print("DB Error: {}", result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash('There was an error creating your Category. Please try again.')
+
+        return render_template('base.html')
 
 
 # handles submission of create event form

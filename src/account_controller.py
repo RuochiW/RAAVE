@@ -3,7 +3,7 @@
 
 
 # import pydoc
-# import sys
+import sys
 
 from data.data_controller.account_data_controller import write_account, read_account
 from data.data_controller.category_data_controller import read_all_category
@@ -50,7 +50,7 @@ def read_user_account(account_id):
 
     if result[0]:
 
-        # print("THE ACCOUNT READ WAS {}".format(active_account), file=sys.stdout)
+        print("THE ACCOUNT READ WAS {}".format(active_account), file=sys.stdout)
 
         active_account.account_type = result[1]
         active_account.username = result[2]
