@@ -5,10 +5,6 @@
 import pydoc
 import sys
 
-
-
-
-
 from data.data_controller import account_data_controller
 #from data.data_controller import category_data_controller
 #from data.data_controller import subscription_data_controller
@@ -40,9 +36,43 @@ class Account:
   Methods
   -------
   getaccount_id():
-      returns the account_id
+      returns the account_id field
 
-  !Continue adding methods..
+  getaccount_type(self):
+    returns the account_type field
+
+  setaccount_type(self, account_type):
+    sets the account_type field
+
+  getUsername(self):
+    returns the username field
+  
+  setUsername(self, uname):
+   sets the username field
+
+  getPassword(self):
+    returns the password field
+
+  setPassword(self, password):
+    sets the password field
+
+  getfirst_name(self):
+   returns the first_name field
+
+  setfirst_name(self, fname):
+    sets the first_name field
+
+  getlast_name(self):
+    returns the last_name field
+
+  setlast_name(self, lname): 
+    sets the last_name field
+
+  getEmail(self):
+    returns the email field
+
+  setEmail(self, email):
+    sets the email field
   
   """
   account_id = int()
@@ -121,7 +151,8 @@ class Account:
 #Account Controller
 class AccountController: 
   """
-  A class to controller account objects
+  A controller class for account objects, in particular the activeUser object 
+  which represents the currently logged in user in a session
   
   ...
   Attributes
@@ -134,10 +165,25 @@ class AccountController:
   createAccount():
       creates a new account object and calls function to update the database
 
-  
+  updateAccount():
+      updates the activeUser information and writes the new values to the database
 
-  !Continue adding methods..
+  readAccount(): 
+      calls the account_data_controller to read the database, and sets
+      the activeUser to the returned values 
+
+  deleteAccount():
+      sets the active user to null (execpt for id) and then updates the
+      database with the null values
   
+  getAllCat():
+      calls the database to get a list of all categories belonging to this user
+      *note, requires categories.py functions that are not functioning
+
+  getSubscriptions():
+      calls the database to get a list of all categories the activeUser is subscribed to
+      *note, requires categories.py functions that are not functioning
+      
   """
   activeUser = Account()
 
@@ -214,7 +260,7 @@ class AccountController:
     
     else:
 
-      print("readAccount FAILED!!")
+      print("readAccount failed")
       return None
 
 
@@ -259,27 +305,4 @@ class AccountController:
 
     return results
 """
-
-
-#NO LONGER NEEDED. WILL PROBABLY REMOVE
-# class ViewAccountController:
-
-  # def login(uname, passw): 
-
-  #   tempAcc = Account
-
-  #   tempAcc.username = uname
-  #   tempAcc.password = passw
-
-  #   print("Accessed Login Function...")
-
-  #   #Uncomment when linked to DB functions
-  #   if data.readAccount(tempAcc):
-
-  #     #login successful 
-  #     return True
-  #   else: 
-  #     return None
-
-  #   return True
 
