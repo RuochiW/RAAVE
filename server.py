@@ -1,6 +1,5 @@
 # Written by Austin Shouli
 import sys
-import os
 from flask import Flask, render_template, redirect, url_for, request, flash
 
 from data.authentication.user_authentication import user_login
@@ -10,8 +9,9 @@ from src.account_controller import AccountController, read_user_account
 from src.accounts import Account
 from src.events import Event
 
-app = Flask(__name__, root_path=os.path.dirname(__file__), static_folder='server/static',
-            template_folder='server/templates')
+app = Flask(__name__)
+# root_path='server', static_folder='server/static',
+#             template_folder='server/templates'
 
 app.secret_key = 'super secret key'
 
