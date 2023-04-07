@@ -6,8 +6,8 @@ import pydoc
 import sys
 
 from data.data_controller import account_data_controller
-#from data.data_controller import category_data_controller
-#from data.data_controller import subscription_data_controller
+from data.data_controller import category_data_controller
+from data.data_controller import subscription_data_controller
 
 
 #Accounts Class
@@ -162,13 +162,13 @@ class AccountController:
 
   Methods
   -------
-  createAccount():
+  createAccount(aType, uname, passw, fname, lname, email):
       creates a new account object and calls function to update the database
 
-  updateAccount():
+  updateAccount(id, aType, uname, passw, fname, lname, email):
       updates the activeUser information and writes the new values to the database
 
-  readAccount(): 
+  readAccount(id): 
       calls the account_data_controller to read the database, and sets
       the activeUser to the returned values 
 
@@ -177,7 +177,7 @@ class AccountController:
       database with the null values
   
   getAllCat():
-      calls the database to get a list of all categories belonging to this user
+      calls the database to get a list of all categories belonging to the activeUser
       *note, requires categories.py functions that are not functioning
 
   getSubscriptions():
@@ -285,24 +285,32 @@ class AccountController:
       else: 
         return 0
 
-#Cannot test these functions until categories code is completed / debugged
-"""
-  #Note: can't test until categories code is completed / debugged
+
   def getAllCat():
 
-    #results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
+    results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
+    
+    if results[0] == False:
 
-    results = None
-    print("getAllcatResults are: {}".format(results), file=sys.stdout)
-    return results
+      print("Unable to get all categories. {}".format(results[1]))
+      return -1
+    else: 
+
+      #print("getAllcatResults are: {}".format(results), file=sys.stdout)
+      return results[:1]
 
 
-  #Note: can't test until categories code is completed / debugged
   def getSubscriptions():
 
     results = subscription_data_controller.read_all_subscription(AccountController.activeUser.account_id)
-    print("Get All Subscription Results are: {}".format(results), file=sys.stdout)
 
-    return results
-"""
+    if results[0] == False:
 
+      print("Unable to get subscriptions. {}".format(results[1]))
+      return -1
+    else: 
+
+      #print("Get All Subscription Results are: {}".format(results), file=sys.stdout)
+      return results[:1]
+
+  
