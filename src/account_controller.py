@@ -15,12 +15,12 @@ from src.accounts import Account
 
 
 def create_account(username, password, first_name, last_name, email):
-    # first update 'active' account object
+    """Writes a new account object to the database"""
     update_account(None, username, password, first_name, last_name, email)
 
 
 def update_account(account_type, username, password, first_name, last_name, email):
-    # first update 'active' account object
+    """updates the active user's information in the database"""
     AccountController.active_user.set_account_type(account_type)
     AccountController.active_user.set_username(username)
     AccountController.active_user.set_password(password)
@@ -40,6 +40,8 @@ def update_account(account_type, username, password, first_name, last_name, emai
 
 
 def read_user_account(account_id):
+    """calls the account_data_controller to read the database, and sets
+        the active_account to the returned values"""
     active_account = Account()
 
     active_account.account_id = account_id
@@ -65,6 +67,8 @@ def read_user_account(account_id):
 
 
 def delete_account():
+    """sets the active_user to null (except for id) and then updates the
+        database with the null values"""
     # first update 'active' account object
     AccountController.active_user.set_account_type(None)
     AccountController.active_user.set_username(None)
@@ -86,6 +90,8 @@ def delete_account():
 
 
 def get_all_category():
+    """calls the account_data_controller to read the database, and sets
+        the active_account to the returned values"""
     result = read_all_category(AccountController.active_user.account_id)
 
     if not result[0]:
@@ -99,6 +105,7 @@ def get_all_category():
 
 
 def get_subscriptions():
+    """gets a list of all categories the activeUser subscribes to"""
     result = read_all_subscription(AccountController.active_user.account_id)
 
     if not result[0]:
@@ -150,6 +157,7 @@ class AccountController:
     active_user = Account()
 
     def __init__(self, active_user=None):
+        """Initializes an account object that represents the user currently logged in to the session"""
         self.active_user = active_user
 
-    # not needed. Use updateAccount instead
+
