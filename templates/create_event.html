@@ -24,14 +24,13 @@
     {% block content %}
     <body>
 
-            
-        <div class="login">
+
 
         <div class="container">
                 <h1>Create Event</h1>
-        </div >
+        
 
-            <form name="CreateEvent" action="http://localhost:5000/createEvent" method="post" class="login_fields">
+            <form name="CreateEvent" action="{{ url_for('createEvent') }}" method="post" class="login_fields">
 
                 <div class="container">
 
@@ -81,9 +80,6 @@
                 </div>
                 <br>
 
-                <div class="container">
-                   
-                </div>
                 <br>
                
             </form>

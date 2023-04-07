@@ -29,7 +29,8 @@
             {% endwith %}
 
                 
-            <form name="login" class="login_fields" action="http://localhost:5000/login" method="post">
+            <!-- <form name="login" class="login_fields" action="http://localhost:3000/login" method="post"> -->
+            <form name="login" class="login_fields" action="{{ url_for('login') }}" method="post">
 
                 <div class="text_field">Username: <input type="text" name="username"></div>
 
