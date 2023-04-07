@@ -43,18 +43,13 @@ def home_view():
 def event(usr):
     return f"<h1>Post successful {usr}!</h1>"
 
-
+#loads login page on application launch
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-#remove this
-@app.route('/success/<name>')
-def success(name):
-    return 'welcome %s' % name
-
-
+#handles submission of login form
 @app.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -97,13 +92,11 @@ def login():
         return redirect(url_for('success1', name=user))
 
 
-
+#handles create account form submission
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
     if request.method == 'POST':
 
-
-        
         #try to create account in DB. 
         newAccount = accounts.Account()
         newAccount.username = request.form['username']
@@ -131,6 +124,7 @@ def create_account():
     return render_template('create_account.html')
 
 
+#handles log out button
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
      
@@ -139,14 +133,14 @@ def sign_out():
      return redirect(url_for('index'))
 
 
-
+#handles navigation to Create Event page
 @app.route('/NavCreateEvent', methods=['GET', 'POST'])
 def NavCreateEvent():
 
     return render_template('create_event.html')
     
 
-    
+#handles submission of create event form 
 @app.route('/createEvent', methods=['GET', 'POST'])
 def createEvent():
     if request.method == 'POST':
@@ -161,12 +155,10 @@ def createEvent():
         newEvent.visibility = request.form['visibility']
 
         result = event_data_controller.write_event(newEvent)        
-        
-        print("DB Write Attempt...", file=sys.stdout) #Debugging: sql error to 
 
         if result[0] == True:
             flash('Event Succesfully created.')
-            print("DB Write Event Successful", file=sys.stdout) #Debugging: sql error to 
+            print("DB Write Event Successful", file=sys.stdout) #Debugging: sql error to terminal
         
         else: 
 
@@ -177,6 +169,7 @@ def createEvent():
         return render_template('base.html')
 
 
+#sets host port and debug mode
 if __name__ == '__main__':
     app.run(host="localhost", port=3000, debug=True)
 

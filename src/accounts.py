@@ -17,7 +17,7 @@ from data.data_controller import account_data_controller
 #Accounts Class
 class Account:
   """
-  A class to represent an user's account
+  A class to represent a user's account
   
   ...
   Attributes
