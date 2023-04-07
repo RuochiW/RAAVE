@@ -134,6 +134,13 @@ def sign_out():
 
 
 #handles navigation to Create Event page
+@app.route('/home', methods=['GET', 'POST'])
+def returnHome():
+
+    return render_template('base.html')
+    
+
+#handles navigation to the home page
 @app.route('/NavCreateEvent', methods=['GET', 'POST'])
 def NavCreateEvent():
 
