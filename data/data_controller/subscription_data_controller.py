@@ -6,14 +6,13 @@ import sqlite3
 
 from data.log.error_log import logger
 from data.tables import db_path
-
-from src import categories
-from src import accounts
+from src.accounts import Account
+from src.categories import Course
 
 
 def write_subscription(account_obj, course_obj):
     try:
-        if isinstance(account_obj, accounts.Account) and isinstance(course_obj, categories.Course):
+        if isinstance(account_obj, Account) and isinstance(course_obj, Course):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute("INSERT INTO raave_subscription (course, subscriber) VALUES (?, ?)",
@@ -32,7 +31,7 @@ def write_subscription(account_obj, course_obj):
 
 def read_all_subscription(obj):
     try:
-        if isinstance(obj, accounts.Account):
+        if isinstance(obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute("SELECT course FROM raave_subscription WHERE subscriber = ?", (obj.account_id,))
@@ -46,7 +45,7 @@ def read_all_subscription(obj):
                 e = 'No subscribed courses found for the specified account.'
                 logger.error("An error occurred: %s", e)
                 return [False, e]
-        elif isinstance(obj, categories.Course):
+        elif isinstance(obj, Course):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute("SELECT subscriber FROM raave_subscription WHERE subscriber = ?", (obj.course_id,))

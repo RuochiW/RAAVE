@@ -6,15 +6,14 @@ import sqlite3
 
 from data.log.error_log import logger
 from data.tables import db_path
-
-from src import notifications
-from src import events
-from src import accounts
+from src.accounts import Account
+from src.events import Event
+from src.notifications import Notification
 
 
 def write_notification(notification_obj):
     try:
-        if isinstance(notification_obj, notifications.Notification):
+        if isinstance(notification_obj, Notification):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             if notification_obj.notify_id is None:
@@ -45,7 +44,7 @@ def write_notification(notification_obj):
 
 def read_notification(notification_obj):
     try:
-        if isinstance(notification_obj, notifications.Notification):
+        if isinstance(notification_obj, Notification):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT notify_id, event, account, notify_date, info FROM raave_notification
@@ -71,7 +70,7 @@ def read_notification(notification_obj):
 
 def read_all_notification(obj):
     try:
-        if isinstance(obj, events.Event):
+        if isinstance(obj, Event):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT notify_id FROM raave_notification WHERE event = ?''', (obj.event_id,))
@@ -85,7 +84,7 @@ def read_all_notification(obj):
                 e = 'No notifications found for the specified event.'
                 logger.error("An error occurred: %s", e)
                 return [False, e]
-        elif isinstance(obj, accounts.Account):
+        elif isinstance(obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT notify_id FROM raave_notification WHERE account = ?''', (obj.account_id,))

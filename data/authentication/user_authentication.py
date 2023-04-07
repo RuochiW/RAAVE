@@ -4,15 +4,14 @@
 
 import sqlite3
 
+from src.accounts import Account
 from data.log.error_log import logger
 from data.tables import db_path
-
-from src import accounts
 
 
 def user_login(account_obj):
     try:
-        if isinstance(account_obj, accounts.Account):
+        if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT account_id FROM raave_account WHERE username = ? AND password = ?''',

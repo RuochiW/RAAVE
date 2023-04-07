@@ -12,7 +12,7 @@ class Notification:
 
     # removed notification ID param due to it being
     # set in the initial constructor
-    def __init__(self, event, account, notify_date, info):
+    def __init__(self, notify_id, event, account, notify_date, info):
 
         # make sure all inputs are valid
         if not isinstance(event, int):
@@ -26,7 +26,7 @@ class Notification:
             raise ValueError("Info must be a string less than 1000 characters long")
 
         # if valid, initialize
-        self.notify_id = Notification.genNoteID()
+        self.notify_id = notify_id
         self.event = event
         self.account = account
         self.notify_date = notify_date
@@ -35,57 +35,67 @@ class Notification:
     # methods for notification class
 
     # Generate and get methods for the notification ID
-    @classmethod
-    def genNoteID(cls):
-        cls.id_count += 1  # Increment ID counter for each new object
-        return f"{cls.id_count}"  # Use ID counter to generate unique ID
 
-    def getNoteID(self):
+    def get_notify_id(self):
         return self.notify_id
 
     # grabs the event ID passed to it
-    def getEventID(self):
+    def get_event_id(self):
         return self.event
 
     # grabs the account ID of the user
-    def getAccountID(self):
+    def get_account_id(self):
         return self.account
 
     # grabs the date
-    def getDate(self):
+    def get_date(self):
         return self.notify_date
 
     # grabs the info
-    def getInfo(self):
+    def get_info(self):
         return self.info
 
     # if event id is an int, set event id
-    def setEventID(self, eventID):
-        if isinstance(eventID, int):
-            self.event = eventID
+    def set_event(self, event):
+        if isinstance(event, int):
+            self.event = event
         else:
             raise TypeError("Event ID must be an integer")
 
     # if account id is an int, set account id
-    def setAccountID(self, accountID):
-        if isinstance(accountID, int):
-            self.account = accountID
+    def set_account(self, account):
+        if isinstance(account, int):
+            self.account = account
         else:
             raise TypeError("Account ID must be an integer")
 
     # if date is a string with form "yyyy-mm-dd", set date
-    def setDate(self, date):
+    def set_date(self, date):
         if isinstance(date, str) and len(date) == 10:
             self.notify_date = date
         else:
             raise ValueError("Date must be a string in format yyyy-mm-dd")
 
     # if info is a string and under 1000 characters, set info
-    def setInfo(self, info):
+    def set_info(self, info):
         if isinstance(info, str) and len(info) < 1000:
             self.info = info
         else:
             raise ValueError("Info must be a string less than 1000 characters long")
+
+
+def read_user_notification(notify_id):
+    notification = Notification("", "", 0, "", "")
+    notification.notify_id = notify_id
+    result = read_notification(notification)
+    if result[0]:
+        # update the notification object with the retrieved data
+        notification.nType = result[1]
+        notification.eventID = result[2]
+        notification.accountID = result[3]
+        notification.date = result[4]
+        notification.info = result[5]
+    return notification
 
 
 class NotificationController:
@@ -93,15 +103,15 @@ class NotificationController:
         self.notification = []
 
     # create a new notification object
-    def createNotification(self, eventID, accountID, date, info):
-        newNotification = Notification(eventID, accountID, date, info)
-        result = write_notification(newNotification)
+    def create_notification(self, event, account, date, info):
+        notification = Notification(None, event, account, date, info)
+        result = write_notification(notification)
         if result[0]:
-            self.notification.append(newNotification)
+            self.notification.append(notification)
         return result
 
     # update an existing notification in the database
-    def updateNotification(self, notification):
+    def update_notification(self, notification):
         result = write_notification(notification)
         if result[0]:
             count = self.notification.index(notification)
@@ -109,24 +119,12 @@ class NotificationController:
         return result
 
     # Read a notification from the database
-    def readNotification(self, notificationID):
-        notification = Notification("", 0, "", "")
-        notification.notificationID = notificationID
-        result = read_notification(notification)
-        if result[0]:
-            # update the notification object with the retrieved data
-            notification.nType = result[1]
-            notification.eventID = result[2]
-            notification.accountID = result[3]
-            notification.date = result[4]
-            notification.info = result[5]
-        return result, notification
 
     # deletes a specific notification based on it's ID
-    def deleteNotification(self, notificationID):
-        notification = Notification("", 0, "", "")
-        notification.notificationID = notificationID
-        for n in self.notification:
-            if n.notificationID == notificationID:
-                self.notification.remove(n)
+    def delete_notification(self, notify_id):
+        notification = Notification("", "", 0, "", "")
+        notification.notify_id = notify_id
+        for notification in self.notification:
+            if notification.notify_id == notify_id:
+                self.notification.remove(notification)
                 break

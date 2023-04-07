@@ -4,15 +4,14 @@
 
 import sqlite3
 
+from src.accounts import Account
 from data.log.error_log import logger
 from data.tables import db_path
-
-from src import accounts
 
 
 def read_all_user_calendar(account_obj):
     try:
-        if isinstance(account_obj, accounts.Account):
+        if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             # TODO
@@ -22,10 +21,12 @@ def read_all_user_calendar(account_obj):
                 # TODO
                 # time ordered list of list event that user have access
                 """
-                [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent],
+                [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, 
+                time_spent],
                  [event_id, category, event_type, name, start_date, end_date, visibility],
                  [event_id, category, event_type, name, start_date, end_date, visibility],
-                 [event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent]]
+                 [event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, 
+                 time_spent]]
                 """
                 user_calendar_data = []
                 conn.close()
@@ -46,20 +47,22 @@ def read_all_user_calendar(account_obj):
 
 def read_all_user_period_calendar(account_obj, start_date, end_date):
     try:
-        if isinstance(account_obj, accounts.Account):
+        if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             # TODO
-            c.execute("")
+            c.execute("", (start_date, end_date))
             result = c.fetchall()
             if result:
                 # TODO
                 # time ordered list of list event that user has in the period
                 """
-                [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent],
+                [[event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, 
+                time_spent],
                  [event_id, category, event_type, name, start_date, end_date, visibility],
                  [event_id, category, event_type, name, start_date, end_date, visibility],
-                 [event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent]]
+                 [event_id, category, event_type, name, start_date, end_date, visibility, weight, time_estimate, 
+                 time_spent]]
                 """
                 user_calendar_data = []
                 conn.close()
@@ -80,7 +83,7 @@ def read_all_user_period_calendar(account_obj, start_date, end_date):
 
 def read_all_user_category_calendar(account_obj):
     try:
-        if isinstance(account_obj, accounts.Account):
+        if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             # TODO
@@ -118,7 +121,7 @@ def read_all_user_category_calendar(account_obj):
 
 def read_all_user_course_calendar(account_obj):
     try:
-        if isinstance(account_obj, accounts.Account):
+        if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             # TODO

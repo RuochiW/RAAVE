@@ -65,10 +65,10 @@ def login():
 
 
             #set activeUser's attributes to the database values
-            AcController.activeUser = accounts.AccountController.readAccount(loginAtempt[1])
+            AcController.active_user = read_account()
 
-            print("Account logged in is: {}".format(AcController.activeUser), file=sys.stdout) 
-            print("Account Type is: {}".format(AcController.activeUser.account_type), file=sys.stdout) 
+            print("Account logged in is: {}".format(AcController.active_user), file=sys.stdout)
+            print("Account Type is: {}".format(AcController.active_user.account_type), file=sys.stdout)
 
             #testing get all subs
             # allSubs = AcController.getSubscriptions()
@@ -128,7 +128,7 @@ def create_account():
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
      
-     AcController.activeUser = None
+     AcController.active_user = None
 
      return redirect(url_for('index'))
 

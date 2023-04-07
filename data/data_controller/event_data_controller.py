@@ -6,14 +6,13 @@ import sqlite3
 
 from data.log.error_log import logger
 from data.tables import db_path
-
-from src import events
-from src import categories
+from src.categories import Category
+from src.events import Event, Deliverable
 
 
 def write_event(obj):
     try:
-        if isinstance(obj, events.Event):
+        if isinstance(obj, Event):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             if obj.event_id is None:
@@ -29,7 +28,7 @@ def write_event(obj):
                              visibility=? WHERE event_id=?''',
                           (obj.category, obj.event_type, obj.name, obj.start_date, obj.end_date, obj.visibility,
                            obj.event_id))
-        elif isinstance(obj, events.Deliverable):
+        elif isinstance(obj, Deliverable):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''INSERT OR REPLACE INTO raave_deliverable (deliverable_id, weight, time_estimate, time_spent) 
@@ -49,7 +48,7 @@ def write_event(obj):
 
 def read_event(event_obj):
     try:
-        if isinstance(event_obj, events.Event):
+        if isinstance(event_obj, Event):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT category, event_type, name, start_date, end_date, visibility
@@ -84,7 +83,7 @@ def read_event(event_obj):
 
 def read_all_event(category_obj):
     try:
-        if isinstance(category_obj, categories.Category):
+        if isinstance(category_obj, Category):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT event_id, name, start_date, end_date, visibility
