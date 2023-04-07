@@ -70,8 +70,8 @@ def login():
             # set activeUser's attributes to the database values
             ac_controller.activeUser = read_user_account(login_attempt[1])
 
-            print("Account logged in is: {}".format(ac_controller.activeUser), file=sys.stdout)
-            print("Account Type is: {}".format(ac_controller.activeUser.account_type), file=sys.stdout)
+            print("Account logged in is: {}".format(ac_controller.active_user), file=sys.stdout)
+            print("Account Type is: {}".format(ac_controller.active_user.account_type), file=sys.stdout)
 
             # testing get all subs
             # allSubs = AcController.getSubscriptions()
