@@ -1,87 +1,86 @@
-*{
-	margin: 0;
-	border: 0;
-	padding: 0;
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
 }
 
-html,body{
-	width: 100%;
-	height: 100%;
-  background: linear-gradient(to left, #212333, #432132);
+html, body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, #212333, #432132);
 }
 
-caption{
-	background: blue;
-	height: 3em;
-	line-height: 3em;
-	box-shadow: 3px 0 2px black;
-	color: white;
-  font-family: 'Josefin Sans', sans-serif;
+caption {
+    background: blue;
+    height: 3em;
+    line-height: 3em;
+    box-shadow: 3px 0 2px black;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-caption a{
-	color: white;
+caption a {
+    color: white;
 }
 
-table{
-	background: #ddd;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	font-size: 20px;
-	border-collapse: collapse;
-	box-shadow: 3px 3px 2px black;
+table {
+    background: #ddd;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    border-collapse: collapse;
+    box-shadow: 3px 3px 2px black;
 }
 
-table,th,tr {
-	text-align: center;
-	vertical-align: middle;
+table, th, tr {
+    text-align: center;
+    vertical-align: middle;
 }
 
-table thead th{
-	border: solid 1px white; 
-	width: 3em;
-	height: 2em;
-	font-weight: 900;
-  font-family: 'Josefin Sans', sans-serif;
+table thead th {
+    border: solid 1px white;
+    width: 3em;
+    height: 2em;
+    font-weight: 900;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-table tbody td{
-	border: solid 1px white;
-	height: 2.7em;
+table tbody td {
+    border: solid 1px white;
+    height: 2.7em;
 }
 
-a{
-	text-decoration: none;
-  font-family: 'Josefin Sans', sans-serif;
+a {
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-tbody a{
-	display: block;
-	height: 100%;
-	display:flex;
+tbody a {
+    display: block;
+    height: 100%;
 	align-items: center;
-	justify-content: center;
-	color: black;
-  
+    justify-content: center;
+    color: black;
+
 }
 
 
-tbody a:hover{
-	background: blue;
-	color: white;
+tbody a:hover {
+    background: blue;
+    color: white;
 }
 
-.null{
-	color: gray;
-  font-family: 'Josefin Sans', sans-serif;
+.null {
+    color: gray;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-.selected{
-	background: blue;
+.selected {
+    background: blue;
 }
 
-.selected a{
-	color: white;
+.selected a {
+    color: white;
 }
