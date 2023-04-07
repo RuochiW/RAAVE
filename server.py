@@ -157,7 +157,7 @@ def createEvent():
         result = event_data_controller.write_event(newEvent)        
 
         if result[0] == True:
-            flash('Event Succesfully created.')
+            flash('Event Succesfully created')
             print("DB Write Event Successful", file=sys.stdout) #Debugging: sql error to terminal
         
         else: 

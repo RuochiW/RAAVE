@@ -74,13 +74,15 @@
                
             </form>
 
-            {% with messages = get_flashed_messages() %}
-            {%  if  messages %}
-            {%  for  message  in  messages %} 
-            <p>{{ message }}</p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
+            <div class="container" style="width: 30%; position:fixed; left: 50%; transform: translate(-50%, 0);">
+                {% with messages = get_flashed_messages() %}
+                {%  if  messages %}
+                {%  for  message  in  messages %} 
+                <p style="text-align: center;">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
 
         </div>
 
