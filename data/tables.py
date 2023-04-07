@@ -50,6 +50,7 @@ def create_tables():
 
     data = [(1, 1, 'CSCI375', '375 etc, etc'),
             (1, 1, 'CSCI370', '370 etc, etc'),
+            (1, 1, 'Gym', 'Gym etc, etc'),
             (3, 0, 'Gym', 'Gym plan etc, etc')]
     c.executemany("INSERT INTO raave_category (owner, category_type, name, description) VALUES (?, ?, ?, ?)", data)
 

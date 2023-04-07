@@ -5,17 +5,15 @@
 import pydoc
 import sys
 
-from data.data_controller.account_data_controller import write_account, read_account
-
-
-#from data.data_controller import category_data_controller
-#from data.data_controller import subscription_data_controller
+from data.data_controller import account_data_controller
+from data.data_controller import category_data_controller
+from data.data_controller import subscription_data_controller
 
 
 #Accounts Class
 class Account:
   """
-  A class to represent an user's account
+  A class to represent a user's account
   
   ...
   Attributes
@@ -38,9 +36,43 @@ class Account:
   Methods
   -------
   getaccount_id():
-      returns the account_id
+      returns the account_id field
 
-  !Continue adding methods..
+  getaccount_type(self):
+    returns the account_type field
+
+  setaccount_type(self, account_type):
+    sets the account_type field
+
+  getUsername(self):
+    returns the username field
+  
+  setUsername(self, uname):
+   sets the username field
+
+  getPassword(self):
+    returns the password field
+
+  setPassword(self, password):
+    sets the password field
+
+  getfirst_name(self):
+   returns the first_name field
+
+  setfirst_name(self, fname):
+    sets the first_name field
+
+  getlast_name(self):
+    returns the last_name field
+
+  setlast_name(self, lname): 
+    sets the last_name field
+
+  getEmail(self):
+    returns the email field
+
+  setEmail(self, email):
+    sets the email field
   
   """
   account_id = int()
@@ -119,7 +151,8 @@ class Account:
 #Account Controller
 class AccountController: 
   """
-  A class to controller account objects
+  A controller class for account objects, in particular the activeUser object 
+  which represents the currently logged in user in a session
   
   ...
   Attributes
@@ -129,13 +162,28 @@ class AccountController:
 
   Methods
   -------
-  createAccount():
+  createAccount(aType, uname, passw, fname, lname, email):
       creates a new account object and calls function to update the database
 
-  
+  updateAccount(id, aType, uname, passw, fname, lname, email):
+      updates the activeUser information and writes the new values to the database
 
-  !Continue adding methods..
+  readAccount(id): 
+      calls the account_data_controller to read the database, and sets
+      the activeUser to the returned values 
+
+  deleteAccount():
+      sets the active user to null (execpt for id) and then updates the
+      database with the null values
   
+  getAllCat():
+      calls the database to get a list of all categories belonging to the activeUser
+      *note, requires categories.py functions that are not functioning
+
+  getSubscriptions():
+      calls the database to get a list of all categories the activeUser is subscribed to
+      *note, requires categories.py functions that are not functioning
+      
   """
   activeUser = Account()
 
@@ -155,7 +203,7 @@ class AccountController:
     AccountController.activeUser.setlast_name(lname)
     AccountController.activeUser.setEmail(email)
 
-    results = write_account(AccountController.activeUser)
+    results = account_data_controller.write_account(AccountController.activeUser)
 
     #then call writeDB to update in DB
     if results[0] == False:
@@ -179,7 +227,7 @@ class AccountController:
     AccountController.activeUser.setEmail(email)
 
     #then call writeDB to update in DB
-    results = write_account(AccountController.activeUser)
+    results = account_data_controller.write_account(AccountController.activeUser)
 
     if results[0] == False:
 
@@ -192,27 +240,27 @@ class AccountController:
 
   def readAccount(id):
 
-    account_r = Account()
+    activeAccount = Account()
 
-    account_r.account_id = id
+    activeAccount.account_id = id
 
-    results = read_account(account_r)
+    results = account_data_controller.read_account(activeAccount)
 
     if results[0] == True:
 
-      #print("THE ACCOUNT READ WAS {}".format(read_account), file=sys.stdout)
+      #print("THE ACCOUNT READ WAS {}".format(activeAccount), file=sys.stdout)
 
-      account_r.account_type = results[1]
-      account_r.username = results[2]
-      account_r.first_name = results[3]
-      account_r.last_name = results[4]
-      account_r.email = results[5]
+      activeAccount.account_type = results[1]
+      activeAccount.username = results[2]
+      activeAccount.first_name = results[3]
+      activeAccount.last_name = results[4]
+      activeAccount.email = results[5]
 
-      return account_r
+      return activeAccount
     
     else:
 
-      print("readAccount FAILED!!")
+      print("readAccount failed")
       return None
 
 
@@ -228,7 +276,7 @@ class AccountController:
 
       #then call writeDB to update in DB
 
-      results = write_account(AccountController.activeUser)
+      results = account_data_controller.write_account(AccountController.activeUser)
 
       if results[0] == False:
 
@@ -237,47 +285,32 @@ class AccountController:
       else: 
         return 0
 
-#Cannot test these functions until categories code is completed / debugged
-"""
-  #Note: can't test until categories code is completed / debugged
+
   def getAllCat():
 
-    #results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
+    results = category_data_controller.read_all_category(AccountController.activeUser.account_id)
+    
+    if results[0] == False:
 
-    results = None
-    print("getAllcatResults are: {}".format(results), file=sys.stdout)
-    return results
+      print("Unable to get all categories. {}".format(results[1]))
+      return -1
+    else: 
+
+      #print("getAllcatResults are: {}".format(results), file=sys.stdout)
+      return results[:1]
 
 
-  #Note: can't test until categories code is completed / debugged
   def getSubscriptions():
 
     results = subscription_data_controller.read_all_subscription(AccountController.activeUser.account_id)
-    print("Get All Subscription Results are: {}".format(results), file=sys.stdout)
 
-    return results
-"""
+    if results[0] == False:
 
+      print("Unable to get subscriptions. {}".format(results[1]))
+      return -1
+    else: 
 
-#NO LONGER NEEDED. WILL PROBABLY REMOVE
-# class ViewAccountController:
+      #print("Get All Subscription Results are: {}".format(results), file=sys.stdout)
+      return results[:1]
 
-  # def login(uname, passw): 
-
-  #   tempAcc = Account
-
-  #   tempAcc.username = uname
-  #   tempAcc.password = passw
-
-  #   print("Accessed Login Function...")
-
-  #   #Uncomment when linked to DB functions
-  #   if data.readAccount(tempAcc):
-
-  #     #login successful 
-  #     return True
-  #   else: 
-  #     return None
-
-  #   return True
-
+  
