@@ -10,7 +10,7 @@ from data.tables import db_path
 from src import accounts
 
 
-def login(account_obj):
+def user_login(account_obj):
     try:
         if isinstance(account_obj, accounts.Account):
             conn = sqlite3.connect(db_path)
