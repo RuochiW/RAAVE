@@ -1,97 +1,90 @@
-<!-- Written by Austin Shouli -->
+ <!-- Written by Austin Shouli -->
 
 
-{% extends "base.html" %}
+ {% extends "base.html" %}
 
 <!doctype html>
 
 
 <head><title>Create Event</title>
-    <meta charset=utf-8>
-</head>
+    <meta charset=utf-8> </head>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='../css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/main.css') }}">
 
-{% block content %}
-<body>
-
-
-<div class="container">
-    <h1>Create Event</h1>
+    {% block content %}
+    <body>
 
 
-    <form name="CreateEvent" action="{{ url_for('createEvent') }}" method="post" class="login_fields">
 
         <div class="container">
+                <h1>Create Event</h1>
 
-            <label>Event Name: </label>
-            <label>
-                <input type="text" class="form-control" name="event_name" placeholder="Enter a Event Name">
-            </label>
+
+            <form name="CreateEvent" action="{{ url_for('createEvent') }}" method="post" class="login_fields">
+
+                <div class="container">
+
+                    <label>Event Name: </label>
+                    <input type="text" class="form-control" name="event_name" placeholder="Enter a Event Name">
+                </div>
+                <br>
+
+                <div class="container">
+                    <label>Start Date: </label>
+                    <input type="datetime-local" class="form-control" name="start_date">
+                </div>
+                <br>
+
+                <div class="container">
+                    <label>End Date:  </label>
+                    <input type="datetime-local" class="form-control" name="end_date">
+                </div>
+                <br>
+
+                <div class="container">
+                    <label>Category: </label>
+
+                        <select name="category" class="form-control" id="category">
+                            <option value="1">CSCI375</option>
+                            <option value="2">CSCI370</option>
+                            <option value="3">GYM</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="container">
+                    <label>Visibility: </label>
+
+                        <select name="visibility" class="form-control" id="visibility">
+                            <option value="0">Public</option>
+                            <option value="1">Private</option>
+                    </select>
+                </div>
+
+                </div>
+                <br>
+
+                <div class="container">
+                    <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                    <button type="reset" class="btn btn-danger" value="Reset">Reset</button>
+                </div>
+                <br>
+
+                <br>
+
+            </form>
+
+            <div class="container" style="width: 30%; position:fixed; left: 50%; transform: translate(-50%, 0);">
+                {% with messages = get_flashed_messages() %}
+                {%  if  messages %}
+                {%  for  message  in  messages %}
+                <p style="text-align: center;">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+
         </div>
-        <br>
 
-        <div class="container">
-            <label>Start Date: </label>
-            <label>
-                <input type="datetime-local" class="form-control" name="start_date">
-            </label>
-        </div>
-        <br>
-
-        <div class="container">
-            <label>End Date: </label>
-            <label>
-                <input type="datetime-local" class="form-control" name="end_date">
-            </label>
-        </div>
-        <br>
-
-        <div class="container">
-            <label>Category: </label>
-
-            <label for="category"></label><select name="category" class="form-control" id="category">
-            <option value="1">CSCI375</option>
-            <option value="2">CSCI370</option>
-            <option value="3">GYM</option>
-        </select>
-        </div>
-        <br>
-
-        <div class="container">
-            <label>Visibility: </label>
-
-            <label for="visibility"></label><select name="visibility" class="form-control" id="visibility">
-            <option value="0">Public</option>
-            <option value="1">Private</option>
-        </select>
-        </div>
-
-
-        <br>
-
-        <div class="container">
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
-            <button type="reset" class="btn btn-danger" value="Reset">Reset</button>
-        </div>
-        <br>
-
-        <br>
-
-    </form>
-
-    <div class="container" style="width: 30%; position:fixed; left: 50%; transform: translate(-50%, 0);">
-        {% with messages = get_flashed_messages() %}
-        {% if  messages %}
-        {% for  message  in  messages %}
-        <p style="text-align: center;">{{ message }}</p>
-        {% end-for %}
-        {% endif %}
-        {% endwith %}
-    </div>
-
-</div>
-
-</body>
-{% endblock %}
-        
+    </body>
+    {% endblock %}

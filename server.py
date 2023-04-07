@@ -10,9 +10,6 @@ from src.accounts import Account
 from src.events import Event
 
 app = Flask(__name__)
-# root_path='server', static_folder='server/static',
-#             template_folder='server/templates'
-
 app.secret_key = 'super secret key'
 
 # from data import tables
@@ -20,7 +17,7 @@ app.secret_key = 'super secret key'
 # tables.create_tables()
 
 
-account_controller = AccountController()
+ac_controller = AccountController()
 
 
 # renders a super simple calendar
@@ -71,13 +68,13 @@ def login():
         if login_attempt[0]:
 
             # set activeUser's attributes to the database values
-            account_controller.active_user = read_user_account(login_attempt[1])
+            ac_controller.activeUser = read_user_account(login_attempt[1])
 
-            print("Account logged in is: {}".format(account_controller.active_user), file=sys.stdout)
-            print("Account Type is: {}".format(account_controller.active_user.account_type), file=sys.stdout)
+            print("Account logged in is: {}".format(ac_controller.activeUser), file=sys.stdout)
+            print("Account Type is: {}".format(ac_controller.activeUser.account_type), file=sys.stdout)
 
             # testing get all subs
-            # allSubs = account_controller.getSubscriptions()
+            # allSubs = AcController.getSubscriptions()
 
             # print("All Subs are: {}".format(*allSubs), file=sys.stdout)
 
@@ -108,8 +105,8 @@ def create_account():
         new_account.username = request.form['username']
         new_account.password = request.form['password']
         new_account.account_type = request.form['type']
-        new_account.first_name = request.form['first_name']
-        new_account.last_name = request.form['last_name']
+        new_account.first_name = request.form['fname']
+        new_account.last_name = request.form['lname']
         new_account.email = request.form['email']
 
         result = write_account(new_account)
@@ -118,7 +115,7 @@ def create_account():
         # print("Result of write is: " + {result[0]} + result[1])
 
         if result[0]:
-            flash('Account successfully created. Please log in')
+            flash('Account Succesfully created. Please log in')
 
         else:
 
@@ -133,7 +130,7 @@ def create_account():
 # handles log out button
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
-    account_controller.active_user = None
+    ac_controller.activeUser = None
 
     return redirect(url_for('index'))
 
@@ -167,7 +164,7 @@ def createEvent():
         result = write_event(new_event)
 
         if result[0]:
-            flash('Event successfully created')
+            flash('Event Succesfully created')
             print("DB Write Event Successful", file=sys.stdout)  # Debugging: sql error to terminal
 
         else:
