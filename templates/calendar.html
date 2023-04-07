@@ -5,7 +5,11 @@
 {% block content %}
 <table summary="a calendar">
 	<caption>
-		<a href="#" rel="prev">&lt</a> March 2017 <a href="#" rel="next">&gt</a>
+		<a href="#" rel="prev">&lt</a>
+			<script>
+				document.write(new Date().toLocaleString('en-us', {month: 'long', year: 'numeric'}));
+			</script>
+		<a href="#" rel="next">&gt</a>
 	</caption>
 
 	<thead>
