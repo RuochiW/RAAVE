@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+<!doctype html>
+
+
+<head><title>Create Event</title>
+    <meta charset=utf-8> </head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/main.css') }}">
+
+    {% block content %}
+<body>
+
+    <!--Create event form-->
+    <br>
+    <form name="createCategory" action="{{ url_for('createCategory') }}" method="POST">
+        <div class="container">
+          <label for="Category">Category Name:</label>
+          <input type="text" class="form-control" id="Category" placeholder="Enter category name" name="cat_name">
+        </div>
+        <br>
+
+        <div class="container">
+          <label for="Category">Description: </label>
+          <input type="text" class="form-control" id="Category" placeholder="Enter category name" name="desc">
+        </div>
+        <br>
+
+        <!-- <div class="container">
+          <label for="Section">Section #:</label>
+          <input type="number" class="form-control" id="Section">
+        </div>
+        <br> -->
+
+        <!-- <div class="container">
+            <label for="info">Any additional Info:</label>
+            <textarea class="form-control" id="info" rows="3"></textarea>
+        </div>
+        <br> -->
+
+        <div class="container">
+            <select class="custom-select" name="type">
+                <option selected>Category Type: </option>
+                <option value="1" selected="selected">Category</option>
+                <option value="2">Course</option>
+            </select>
+        </div>
+        <br>
+
+        <div class="container">
+          <label>Visibility: </label>
+
+              <select name="visibility" class="form-control" id="visibility">
+                  <option value="0" selected="selected">Public</option>
+                  <option value="1">Private</option>
+          </select>
+      </div>
+      <br>
+
+        <div class="container">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+
+    </form>
+
+    <div class="container" style="width: 30%; position:fixed; left: 50%; transform: translate(-50%, 0);">
+      {% with messages = get_flashed_messages() %}
+      {%  if  messages %}
+      {%  for  message  in  messages %}
+      <p style="text-align: center;">{{ message }}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+  </div>
+
+
+</body>
+{% endblock %}
+</html>
