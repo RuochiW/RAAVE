@@ -1,5 +1,14 @@
 """
-@RW
+Author: Ruochi Wang
+Date: April 8th, 2023
+Purpose: A script that logging the error
+License: MIT License (or whichever license you choose to use)
+Dependencies: logging, os
+
+To install the required dependencies, run the following command:
+
+pip install logging, os
+
 """
 
 import logging
