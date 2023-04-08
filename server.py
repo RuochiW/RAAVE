@@ -1,4 +1,4 @@
-# Written by Austin Shouli
+# Written by Austin Shouli, Ethan Ondzik
 import sys
 from flask import Flask, render_template, redirect, url_for, request, flash
 
@@ -8,6 +8,9 @@ from data.data_controller.event_data_controller import write_event
 from src.account_controller import AccountController, read_user_account
 from src.accounts import Account
 from src.events import Event
+from src.categories import Category
+from data.data_controller import category_data_controller
+from data.data_controller.event_data_controller import read_all_event
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -19,6 +22,28 @@ app.secret_key = 'super secret key'
 
 ac_controller = AccountController()
 
+@app.route('/login/calendar/view_events/<usr_evts>')
+def view_events(usr_evts):
+    if usr_evts is None:
+        return "FAILURE"
+    else:
+        return f"{usr_evts}"
+
+
+#TODO need to get the actual account_id of the logged in user
+@app.route('/login/calendar/', methods=['POST', 'GET'])
+def user_events():
+
+    cats = category_data_controller.read_all_category(ac_controller.active_user)
+    #id = ac_controller.active_user.account_id
+    id = 1 #test value
+    c = Category(id)
+    events = read_all_event(c)
+
+    if request.method == 'GET':
+        return redirect(url_for('view_events', usr_evts=events))
+    else:
+        return redirect('calendar')
 
 # renders a super simple calendar
 @app.route('/calendar')
