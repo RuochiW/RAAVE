@@ -92,7 +92,8 @@ def read_all_event(category_obj):
             if result:
                 event_data = [list(t) for t in result]
                 conn.close()
-                return [True, event_data]
+                bool_true = [True]
+                return bool_true.extend(event_data)
             else:
                 conn.close()
                 e = 'No events found for the category.'

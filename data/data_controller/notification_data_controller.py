@@ -78,7 +78,8 @@ def read_all_notification(obj):
             if result:
                 notify_data = [list(t) for t in result]
                 conn.close()
-                return [True, notify_data]
+                bool_true = [True]
+                return bool_true.extend(notify_data)
             else:
                 conn.close()
                 e = 'No notifications found for the specified event.'

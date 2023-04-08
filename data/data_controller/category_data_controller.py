@@ -90,7 +90,8 @@ def read_all_category(account_obj):
             if result:
                 categories_data = [list(t) for t in result]
                 conn.close()
-                return [True, categories_data]
+                bool_true = [True]
+                return bool_true.extend(categories_data)
             else:
                 conn.close()
                 e = 'No categories found for the specified account.'
