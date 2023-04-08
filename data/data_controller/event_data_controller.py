@@ -90,9 +90,9 @@ def read_all_event(category_obj):
                                  FROM raave_event WHERE category = ?''', (category_obj.category_id,))
             result = c.fetchall()
             if result:
-                event_data = [item for sublist in result for item in sublist]
+                event_data = [list(t) for t in result]
                 conn.close()
-                return [True] + event_data
+                return [True, event_data]
             else:
                 conn.close()
                 e = 'No events found for the category.'
