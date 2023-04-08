@@ -36,9 +36,9 @@ def view_events():
         
 
         demo_data = (
-            ("1", "2", "0", "A1", "1", "2023-09-15 10:30:00", "2023-09-15 12:00:00"),
-            ("1", "1", "0", "Wash Car", "1", "2023-09-15 14:30:00", "2023-09-15 15:15:00"),
-            ("1", "1", "0", "Work Out", "1", "2023-09-15 20:00:00", "2023-09-15 20:45:00")            
+            ("1", "2", "0", "A1", "1", "2023-04-15 10:30:00", "2023-04-15 12:00:00"),
+            ("1", "1", "0", "Wash Car", "1", "2023-04-15 14:30:00", "2023-04-15 15:15:00"),
+            ("1", "1", "0", "Work Out", "1", "2023-04-15 20:00:00", "2023-04-15 20:45:00")
         )
         
         return render_template('table.html', headings=headers, data=demo_data)
@@ -50,8 +50,8 @@ def view_events():
 @app.route('/login/calendar/', methods=['POST', 'GET'])
 def user_events():
 
-    id = ac_controller.active_user.account_id #acc_id of the currently logged in user
-    c = Category(id)
+    c_id = ac_controller.active_user.account_id #acc_id of the currently logged in user
+    c = Category(c_id)
     events = read_all_event(c)
 
     if request.method == 'GET':

@@ -6,7 +6,7 @@ Contents: Event and deliverable base classes and event controller class
 
 from data.data_controller.event_data_controller import write_event, read_event
 from data.data_controller.notification_data_controller import read_all_notification
-from src.events import Event
+from src.events import Event, Deliverable
 
 
 def create_event():
