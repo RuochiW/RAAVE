@@ -13,7 +13,7 @@ from src.categories import Category
 from data.data_controller import category_data_controller
 from data.data_controller.event_data_controller import read_all_event
 from data.data_controller import calendar_data_controller
-from tabulate import tabulate #for auto creating tables from a list
+
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -22,18 +22,28 @@ app.secret_key = 'super secret key'
 ac_controller = AccountController()
 
 
+
 #ls has major formatting issues
 @app.route('/login/calendar/view_events/')
 def view_events():
 
     if request.args.get('event_list') is None:
-        return redirect('#')
+        return redirect('calendar')
     else:
-        headers = ["Event ID", "Event Type", "Visibility" "Name", "Category", "Start Date", "End Date"]
+        headers = ("Event ID", "Event Type", "Visibility", "Name", "Category", "Start Date", "End Date")
         ls = request.args.getlist('event_list')
-        tab = tabulate(ls, tablefmt='html')
+        ls.pop(0)
         
-        return f"{tab}"
+
+        demo_data = (
+            ("1", "2", "0", "A1", "1", "2023-09-15 10:30:00", "2023-09-15 12:00:00"),
+            ("1", "1", "0", "Wash Car", "1", "2023-09-15 14:30:00", "2023-09-15 15:15:00"),
+            ("1", "1", "0", "Work Out", "1", "2023-09-15 20:00:00", "2023-09-15 20:45:00")            
+        )
+        
+        return render_template('table.html', headings=headers, data=demo_data)
+        #return f"{ls[0]},\n{ls[1]},\n{ls[2]}, \t {len(ls)}"
+        #can access ls row by row but it is filled with whitespaces
 
 
 
@@ -41,9 +51,7 @@ def view_events():
 def user_events():
 
     id = ac_controller.active_user.account_id #acc_id of the currently logged in user
-
     c = Category(id)
-
     events = read_all_event(c)
 
     if request.method == 'GET':
@@ -57,25 +65,12 @@ def show_calendar():
     return render_template('calendar.html')
 
 
-@app.route('/event_input', methods=["POST", "GET"])
-def event_input():
-    if request.method == "POST":
-        user = request.form["nm"]
-
-        return redirect(url_for("event", usr=user))
-    else:
-        return render_template('event_input.html')
-
-
 # clicking on view calendar in navbar will render a calendar
 @app.route('/home')
 def home_view():
     return render_template('base.html')
 
 
-@app.route("/event_input/<usr>")
-def event(usr):
-    return f"<h1>Post successful {usr}!</h1>"
 
 
 # loads login page on application launch
