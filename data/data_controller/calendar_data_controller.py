@@ -41,7 +41,9 @@ def read_all_user_category_calendar(account_obj):
         if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
-            c.execute('''SELECT e.event_id, e.category, e.event_type, e.name, e.start_date, e.end_date, e.visibility
+            c.execute('''SELECT e.event_id, e.category, e.event_type, e.name, 
+                         strftime('%Y-%m-%d %H:%M', e.start_date) AS start_date,
+                         strftime('%Y-%m-%d %H:%M', e.end_date) AS end_date, e.visibility
                          FROM raave_event AS e
                          JOIN raave_category AS c ON e.category = c.category_id
                          WHERE c.owner = ?
@@ -72,7 +74,9 @@ def read_all_user_course_calendar(account_obj):
         if isinstance(account_obj, Account):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
-            c.execute('''SELECT d.deliverable_id, r.course_id, e.event_type, e.name, e.start_date, e.end_date, 
+            c.execute('''SELECT d.deliverable_id, r.course_id, e.event_type, e.name,
+                         strftime('%Y-%m-%d %H:%M', e.start_date) AS start_date,
+                         strftime('%Y-%m-%d %H:%M', e.end_date) AS end_date, 
                          e.visibility, d.weight, d.time_estimate, d.time_spent
                          FROM raave_event AS e
                          JOIN raave_category AS c ON e.category = c.category_id

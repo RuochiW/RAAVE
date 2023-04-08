@@ -47,7 +47,8 @@ def read_notification(notification_obj):
         if isinstance(notification_obj, Notification):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
-            c.execute('''SELECT notify_id, event, account, notify_date, info FROM raave_notification
+            c.execute('''SELECT notify_id, event, account, strftime('%Y-%m-%d %H:%M', notify_date) AS notify_date,info 
+                         FROM raave_notification
                          WHERE notify_id = ?''', (notification_obj.notify_id,))
             result = c.fetchall()
             if result:

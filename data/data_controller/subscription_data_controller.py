@@ -77,7 +77,8 @@ def read_all_subscribable():
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
         c.execute('''SELECT c.course_id, cat.owner, cat.name, cat.description, c.department, c.course, c.section,
-                     c.start_date, c.end_date
+                     strftime('%Y-%m-%d %H:%M', c.start_date) AS start_date,
+                     strftime('%Y-%m-%d %H:%M', c.end_date) AS end_date
                      FROM raave_course AS c 
                      JOIN raave_category AS cat ON c.course_id = cat.category_id
                      WHERE cat.category_type = 1 AND cat.visibility = 0;''')

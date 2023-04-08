@@ -58,7 +58,8 @@ def read_category(category_obj):
                 course_id = category_data[0]
                 bool_true = [True]
                 bool_true.extend(category_data)
-                c.execute('''SELECT department, course, section, start_date, end_date
+                c.execute('''SELECT department, course, section, strftime('%Y-%m-%d %H:%M', start_date) AS start_date,
+                             strftime('%Y-%m-%d %H:%M', end_date) AS end_date
                              FROM raave_course WHERE course_id = ?''', (course_id,))
                 course_result = c.fetchall()
                 if course_result:
