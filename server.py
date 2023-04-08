@@ -99,7 +99,7 @@ def login():
         if login_attempt[0]:
 
             # set activeUser's attributes to the database values
-            ac_controller.active_user = read_user_account(login_attempt[1])
+            ac_controller.active_user = read_user_account(login_attempt[1][0])
 
             print("Account logged in is: {}".format(ac_controller.active_user), file=sys.stdout)
             print("Account Type is: {}".format(ac_controller.active_user.account_type), file=sys.stdout)
