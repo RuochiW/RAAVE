@@ -1,0 +1,17 @@
+Rave Application Manual
+
+Use Of Product:
+    -The application was designed to simplify your life and keep you on track of all your due dates and appointments, with our application the user is able to easily:
+        -Create an account and sign in
+        -Create categories to distinguish between their events
+        -Create events and keep track of them
+        -View upcoming events on a calendar interface.
+        -Sign out
+    -After creating an account and signing in the user should see a menu bar at the top of their screen with various options that they can choose between depending on their needs, these buttons will bring you to their representative pages.
+
+Trouble Shooting:
+    -If the port issue arises, simply editing the code at the bottom of server.py to a port that is not being used should fix the issue.
+    -If the program does not run as expected, make sure to refer to the ReadMe to make sure all files and folders are included in your downloaded version, paying extra attention to the naming.
+
+Known Issues:
+    -Depending on the machine that runs the program, the ports needed might already be in use.
