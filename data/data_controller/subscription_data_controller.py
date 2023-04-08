@@ -35,11 +35,13 @@ def read_all_subscription(obj):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute("SELECT course FROM raave_subscription WHERE subscriber = ?", (obj.account_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                subscription_data = list(result)
+                subscription_data = [list(t) for t in result]
                 conn.close()
-                return [True] + subscription_data
+                bool_true = [True]
+                bool_true.extend(subscription_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No subscribed courses found for the specified account.'
@@ -49,11 +51,13 @@ def read_all_subscription(obj):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute("SELECT subscriber FROM raave_subscription WHERE subscriber = ?", (obj.course_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                subscription_data = list(result)
+                subscription_data = [list(t) for t in result]
                 conn.close()
-                return [True] + subscription_data
+                bool_true = [True]
+                bool_true.extend(subscription_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No subscriber account found for the specified course.'
@@ -77,11 +81,13 @@ def read_all_subscribable():
                      FROM raave_course AS c 
                      JOIN raave_category AS cat ON c.course_id = cat.category_id
                      WHERE cat.category_type = 1 AND cat.visibility = 0;''')
-        result = c.fetchone()
+        result = c.fetchall()
+        bool_true = [True]
         if result:
             subscribable_data = [list(t) for t in result]
-            bool_true = [True]
-            return bool_true.extend(subscribable_data)
+            conn.close()
+            bool_true.extend(subscribable_data)
+            return bool_true
         else:
             conn.close()
             e = 'No subscribed courses found for the specified account.'

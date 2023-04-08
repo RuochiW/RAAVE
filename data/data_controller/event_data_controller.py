@@ -53,20 +53,25 @@ def read_event(event_obj):
             c = conn.cursor()
             c.execute('''SELECT category, event_type, name, start_date, end_date, visibility
                                  FROM raave_event WHERE event_id = ?''', (event_obj.event_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                event_data = list(result)
+                event_data = [list(t) for t in result]
+                conn.close()
+                bool_true = [True]
                 deliverable_id = event_data[0]
                 c.execute('''SELECT weight, time_estimate, time_spent
                                      FROM raave_deliverable WHERE deliverable_id = ?''', (deliverable_id,))
-                deliverable_result = c.fetchone()
+                deliverable_result = c.fetchall()
                 if deliverable_result:
-                    deliverable_data = list(deliverable_result)
+                    deliverable_data = [list(t) for t in deliverable_result]
                     conn.close()
-                    return [True] + event_data + deliverable_data
+                    bool_true.extend(event_data)
+                    bool_true.extend(deliverable_data)
+                    return bool_true
                 else:
                     conn.close()
-                    return [True] + event_data
+                    bool_true.extend(event_data)
+                    return bool_true
             else:
                 conn.close()
                 e = 'Event not found.'
@@ -93,7 +98,8 @@ def read_all_event(category_obj):
                 event_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
-                return bool_true.extend(event_data)
+                bool_true.extend(event_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No events found for the category.'

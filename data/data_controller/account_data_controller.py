@@ -48,11 +48,13 @@ def read_account(account_obj):
             c = conn.cursor()
             c.execute('''SELECT account_type, username, first_name, last_name, email
                                  FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                account_data = list(result)
+                account_data = [list(t) for t in result]
                 conn.close()
-                return [True] + account_data
+                bool_true = [True]
+                bool_true.extend(account_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'Account not found.'
