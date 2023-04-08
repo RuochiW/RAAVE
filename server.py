@@ -1,4 +1,4 @@
-# Written by Austin Shouli
+# Written by Austin Shouli, Ethan Ondzik
 import sys
 from flask import Flask, render_template, redirect, url_for, request, flash
 
@@ -10,17 +10,46 @@ from src.account_controller import AccountController, read_user_account
 from src.accounts import Account
 from src.events import Event
 from src.categories import Category
+from data.data_controller import category_data_controller
+from data.data_controller.event_data_controller import read_all_event
+from data.data_controller import calendar_data_controller
+from tabulate import tabulate #for auto creating tables from a list
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 
-# from data import tables
-
-# tables.create_tables()
-
 
 ac_controller = AccountController()
 
+
+#ls has major formatting issues
+@app.route('/login/calendar/view_events/')
+def view_events():
+
+    if request.args.get('event_list') is None:
+        return redirect('#')
+    else:
+        headers = ["Event ID", "Event Type", "Visibility" "Name", "Category", "Start Date", "End Date"]
+        ls = request.args.getlist('event_list')
+        tab = tabulate(ls, tablefmt='html')
+        
+        return f"{tab}"
+
+
+
+@app.route('/login/calendar/', methods=['POST', 'GET'])
+def user_events():
+
+    id = ac_controller.active_user.account_id #acc_id of the currently logged in user
+
+    c = Category(id)
+
+    events = read_all_event(c)
+
+    if request.method == 'GET':
+        return redirect(url_for('view_events', event_list=events))
+    else:
+        return redirect('calendar')
 
 # renders a super simple calendar
 @app.route('/calendar')
@@ -83,6 +112,8 @@ def login():
             # end testing
 
             print("Server Sees Logged In. accountID is: {}".format(login_attempt[1]), file=sys.stdout)
+            #Added By: Ethan Ondzik
+            #ac_controller.active_user.account_id = int(login_attempt[1])
             return render_template('base.html')
 
         else:
