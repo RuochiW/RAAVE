@@ -13,38 +13,41 @@ from src.categories import Category
 from data.data_controller import category_data_controller
 from data.data_controller.event_data_controller import read_all_event
 from data.data_controller import calendar_data_controller
+from tabulate import tabulate #for auto creating tables from a list
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 
-# from data import tables
-
-# tables.create_tables()
-
 
 ac_controller = AccountController()
 
-@app.route('/login/calendar/view_events/<usr_evts>')
-def view_events(usr_evts):
-    if usr_evts is None:
-        return "FAILURE"
+
+#ls has major formatting issues
+@app.route('/login/calendar/view_events/')
+def view_events():
+
+    if request.args.get('event_list') is None:
+        return redirect('#')
     else:
-        return f"{usr_evts}"
+        headers = ["Event ID", "Event Type", "Visibility" "Name", "Category", "Start Date", "End Date"]
+        ls = request.args.getlist('event_list')
+        tab = tabulate(ls, tablefmt='html')
+        
+        return f"{tab}"
 
 
 
 @app.route('/login/calendar/', methods=['POST', 'GET'])
 def user_events():
 
-    cats = category_data_controller.read_all_category(ac_controller.active_user)
-    id = ac_controller.active_user.account_id
-    #id = 1 #test value
+    id = ac_controller.active_user.account_id #acc_id of the currently logged in user
+
     c = Category(id)
-    #events =  calendar_data_controller.read_all_user_calendar(ac_controller.active_user)
+
     events = read_all_event(c)
 
     if request.method == 'GET':
-        return redirect(url_for('view_events', usr_evts=events))
+        return redirect(url_for('view_events', event_list=events))
     else:
         return redirect('calendar')
 
