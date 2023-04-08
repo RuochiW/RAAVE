@@ -1,6 +1,12 @@
 # Author: Anandita Gupta
 # Contents: Category and Category controller class
 
+"""
+@Reference: Ethan
+@Editor: RW
+"""
+
+
 # from category_data_controller import *
 
 

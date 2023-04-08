@@ -10,11 +10,11 @@ def read_user_notification(notify_id):
     result = read_notification(notification)
     if result[0]:
         # update the notification object with the retrieved data
-        notification.nType = result[1]
-        notification.eventID = result[2]
-        notification.accountID = result[3]
-        notification.date = result[4]
-        notification.info = result[5]
+        notification.event = result[1]
+        notification.account = result[2]
+        notification.notify_date = result[3]
+        notification.info = result[4]
+
     return notification
 
 
