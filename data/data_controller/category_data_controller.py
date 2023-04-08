@@ -52,20 +52,23 @@ def read_category(category_obj):
             c = conn.cursor()
             c.execute('''SELECT category_type, owner, name, visibility, description
                          FROM raave_category WHERE category_id = ?''', (category_obj.category_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                category_data = list(result)
+                category_data = [list(t) for t in result]
                 course_id = category_data[0]
+                bool_true = [True]
+                bool_true.extend(category_data)
                 c.execute('''SELECT department, course, section, start_date, end_date
                              FROM raave_course WHERE course_id = ?''', (course_id,))
-                course_result = c.fetchone()
+                course_result = c.fetchall()
                 if course_result:
-                    course_data = list(course_result)
+                    course_data = [list(t) for t in course_result]
                     conn.close()
-                    return [True] + category_data + course_data
+                    bool_true.extend(course_data)
+                    return bool_true
                 else:
                     conn.close()
-                    return [True] + category_data
+                    return bool_true
             else:
                 conn.close()
                 e = 'Category not found.'
@@ -91,7 +94,8 @@ def read_all_category(account_obj):
                 categories_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
-                return bool_true.extend(categories_data)
+                bool_true.extend(categories_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No categories found for the specified account.'

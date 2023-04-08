@@ -21,7 +21,8 @@ def read_all_user_calendar(account_obj):
                 user_calendar = user_course_calendar + user_category_calendar
                 user_calendar.sort(key=lambda event: event['start_date'])
                 bool_true = [True]
-                return bool_true.extend(user_calendar)
+                bool_true.extend(user_calendar)
+                return bool_true
             else:
                 e = 'No user calendars found for the account.'
                 logger.error("An error occurred: %s", e)
@@ -50,7 +51,8 @@ def read_all_user_category_calendar(account_obj):
                 user_category_calendar_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
-                return bool_true.extend(user_category_calendar_data)
+                bool_true.extend(user_category_calendar_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No user category calendars found for the account.'
@@ -84,7 +86,8 @@ def read_all_user_course_calendar(account_obj):
                 user_course_calendar_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
-                return bool_true.extend(user_course_calendar_data)
+                bool_true.extend(user_course_calendar_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No user course calendars found for the account.'

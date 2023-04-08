@@ -49,11 +49,13 @@ def read_notification(notification_obj):
             c = conn.cursor()
             c.execute('''SELECT notify_id, event, account, notify_date, info FROM raave_notification
                          WHERE notify_id = ?''', (notification_obj.notify_id,))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                notification_data = list(result)
+                notification_data = [list(t) for t in result]
                 conn.close()
-                return [True] + notification_data
+                bool_true = [True]
+                bool_true.extend(notification_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'Notification not found.'
@@ -79,7 +81,8 @@ def read_all_notification(obj):
                 notify_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
-                return bool_true.extend(notify_data)
+                bool_true.extend(notify_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No notifications found for the specified event.'
@@ -93,7 +96,9 @@ def read_all_notification(obj):
             if result:
                 notify_data = [list(t) for t in result]
                 conn.close()
-                return [True, notify_data]
+                bool_true = [True]
+                bool_true.extend(notify_data)
+                return bool_true
             else:
                 conn.close()
                 e = 'No notifications found for the specified account.'
