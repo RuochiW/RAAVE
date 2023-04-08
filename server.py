@@ -12,6 +12,7 @@ from src.events import Event
 from src.categories import Category
 from data.data_controller import category_data_controller
 from data.data_controller.event_data_controller import read_all_event
+from data.data_controller import calendar_data_controller
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -31,14 +32,15 @@ def view_events(usr_evts):
         return f"{usr_evts}"
 
 
-#TODO need to get the actual account_id of the logged in user
+
 @app.route('/login/calendar/', methods=['POST', 'GET'])
 def user_events():
 
     cats = category_data_controller.read_all_category(ac_controller.active_user)
-    #id = ac_controller.active_user.account_id
-    id = 1 #test value
+    id = ac_controller.active_user.account_id
+    #id = 1 #test value
     c = Category(id)
+    #events =  calendar_data_controller.read_all_user_calendar(ac_controller.active_user)
     events = read_all_event(c)
 
     if request.method == 'GET':
@@ -107,6 +109,8 @@ def login():
             # end testing
 
             print("Server Sees Logged In. accountID is: {}".format(login_attempt[1]), file=sys.stdout)
+            #Added By: Ethan Ondzik
+            #ac_controller.active_user.account_id = int(login_attempt[1])
             return render_template('base.html')
 
         else:
