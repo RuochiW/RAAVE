@@ -80,8 +80,8 @@ def read_all_subscribable():
         result = c.fetchone()
         if result:
             subscribable_data = [list(t) for t in result]
-            conn.close()
-            return [True, subscribable_data]
+            bool_true = [True]
+            return bool_true.extend(subscribable_data)
         else:
             conn.close()
             e = 'No subscribed courses found for the specified account.'
