@@ -16,11 +16,13 @@ def user_login(account_obj):
             c = conn.cursor()
             c.execute('''SELECT account_id FROM raave_account WHERE username = ? AND password = ?''',
                       (account_obj.username, account_obj.password))
-            result = c.fetchone()
+            result = c.fetchall()
             if result:
-                account_id = list(result)
+                account_data_id = [list(t) for t in result]
                 conn.close()
-                return [True] + account_id
+                bool_true = [True]
+                bool_true.extend(account_data_id)
+                return bool_true
             else:
                 conn.close()
                 return [False, 'Account not found.']
