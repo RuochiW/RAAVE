@@ -52,11 +52,11 @@ def read_user_account(account_id):
 
         print("THE ACCOUNT READ WAS {}".format(active_account), file=sys.stdout)
 
-        active_account.account_type = result[1]
-        active_account.username = result[2]
-        active_account.first_name = result[3]
-        active_account.last_name = result[4]
-        active_account.email = result[5]
+        active_account.account_type = result[1][0]
+        active_account.username = result[1][1]
+        active_account.first_name = result[1][2]
+        active_account.last_name = result[1][3]
+        active_account.email = result[1][4]
 
         return active_account
 
