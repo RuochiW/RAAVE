@@ -76,9 +76,9 @@ def read_all_notification(obj):
             c.execute('''SELECT notify_id FROM raave_notification WHERE event = ?''', (obj.event_id,))
             result = c.fetchall()
             if result:
-                notify_data = [item for sublist in result for item in sublist]
+                notify_data = [list(t) for t in result]
                 conn.close()
-                return [True] + notify_data
+                return [True, notify_data]
             else:
                 conn.close()
                 e = 'No notifications found for the specified event.'
@@ -90,9 +90,9 @@ def read_all_notification(obj):
             c.execute('''SELECT notify_id FROM raave_notification WHERE account = ?''', (obj.account_id,))
             result = c.fetchall()
             if result:
-                notify_data = [item for sublist in result for item in sublist]
+                notify_data = [list(t) for t in result]
                 conn.close()
-                return [True] + notify_data
+                return [True, notify_data]
             else:
                 conn.close()
                 e = 'No notifications found for the specified account.'

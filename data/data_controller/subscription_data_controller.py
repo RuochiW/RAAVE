@@ -72,21 +72,16 @@ def read_all_subscribable():
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        # TODO
-        c.execute("")
+        c.execute('''SELECT c.course_id, cat.owner, cat.name, cat.description, c.department, c.course, c.section,
+                     c.start_date, c.end_date
+                     FROM raave_course AS c 
+                     JOIN raave_category AS cat ON c.course_id = cat.category_id
+                     WHERE cat.category_type = 1 AND cat.visibility = 0;''')
         result = c.fetchone()
         if result:
-            # TODO
-            # list of list subscribable course that user can subscribe
-            """
-            [[course_id, owner, name, description, department, course, section, start_date, end_date],
-             [course_id, owner, name, description, department, course, section, start_date, end_date],
-             [course_id, owner, name, description, department, course, section, start_date, end_date],
-             [course_id, owner, name, description, department, course, section, start_date, end_date]]
-            """
-            subscribable_data = []
+            subscribable_data = [list(t) for t in result]
             conn.close()
-            return [True] + subscribable_data
+            return [True, subscribable_data]
         else:
             conn.close()
             e = 'No subscribed courses found for the specified account.'
