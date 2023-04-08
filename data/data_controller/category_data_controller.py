@@ -88,9 +88,9 @@ def read_all_category(account_obj):
             c.execute('''SELECT category_id, name FROM raave_category WHERE owner = ?''', (account_obj.account_id,))
             result = c.fetchall()
             if result:
-                categories_data = [item for sublist in result for item in sublist]
+                categories_data = [list(t) for t in result]
                 conn.close()
-                return [True] + categories_data
+                return [True, categories_data]
             else:
                 conn.close()
                 e = 'No categories found for the specified account.'

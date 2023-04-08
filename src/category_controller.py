@@ -1,5 +1,10 @@
 # Author: Anandita Gupta
 
+"""
+@Reference: Ethan
+@Editor: RW
+"""
+
 
 from data.data_controller.category_data_controller import write_category, read_category
 from src.categories import Category, Course
