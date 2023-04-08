@@ -51,16 +51,17 @@ def read_event(event_obj):
         if isinstance(event_obj, Event):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
-            c.execute('''SELECT category, event_type, name, start_date, end_date, visibility
-                                 FROM raave_event WHERE event_id = ?''', (event_obj.event_id,))
+            c.execute('''SELECT category, event_type, name, strftime('%Y-%m-%d %H:%M', start_date) AS start_date,
+                         strftime('%Y-%m-%d %H:%M', end_date) AS end_date, visibility
+                         FROM raave_event WHERE event_id = ?''', (event_obj.event_id,))
             result = c.fetchall()
             if result:
                 event_data = [list(t) for t in result]
                 conn.close()
                 bool_true = [True]
                 deliverable_id = event_data[0]
-                c.execute('''SELECT weight, time_estimate, time_spent
-                                     FROM raave_deliverable WHERE deliverable_id = ?''', (deliverable_id,))
+                c.execute('''SELECT weight, time_estimate, time_spent FROM raave_deliverable
+                             WHERE deliverable_id = ?''', (deliverable_id,))
                 deliverable_result = c.fetchall()
                 if deliverable_result:
                     deliverable_data = [list(t) for t in deliverable_result]
@@ -91,8 +92,9 @@ def read_all_event(category_obj):
         if isinstance(category_obj, Category):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
-            c.execute('''SELECT event_id, name, start_date, end_date, visibility
-                                 FROM raave_event WHERE category = ?''', (category_obj.category_id,))
+            c.execute('''SELECT event_id, name, strftime('%Y-%m-%d %H:%M', start_date) AS start_date,
+                         strftime('%Y-%m-%d %H:%M', end_date) AS end_date, visibility
+                         FROM raave_event WHERE category = ?''', (category_obj.category_id,))
             result = c.fetchall()
             if result:
                 event_data = [list(t) for t in result]

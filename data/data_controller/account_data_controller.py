@@ -47,7 +47,7 @@ def read_account(account_obj):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
             c.execute('''SELECT account_type, username, first_name, last_name, email
-                                 FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
+                         FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
             result = c.fetchall()
             if result:
                 account_data = [list(t) for t in result]
