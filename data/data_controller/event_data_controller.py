@@ -1,5 +1,14 @@
 """
-@RW
+Author: Ruochi Wang
+Date: April 8, 2023
+Purpose: A script that logging the error
+License: MIT License
+Dependencies: sqlite3
+
+To install the required dependencies, run the following command:
+
+pip install sqlite3
+
 """
 
 import sqlite3
