@@ -1,6 +1,10 @@
 MIT License
 
-Copyright (c) 2023 RW
+Copyright (c) 2023 Ruochi Wang
+Copyright (c) 2023 Austin Shouli
+Copyright (c) 2023 Ethan Ondzik
+Copyright (c) 2023 Vladislav Mazur
+Copyright (c) 2023 Anandita Gupta
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
