@@ -39,7 +39,7 @@ def user_login(account_obj):
         [False, [error message]]
 
     Raises:
-        None
+        Exception: If an error occurs during the database transaction or any other error.
 
     """
 
@@ -96,7 +96,7 @@ def user_login(account_obj):
 
             return [False, e]
 
-    # If any other exceptions occur, log an error and return a list indicating an error occurred
+    # If any other exceptions occur
     except Exception as e:
 
         # Log the error

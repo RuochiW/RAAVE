@@ -125,7 +125,7 @@ def read_account(account_obj):
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception: If an error occurs during the database transaction or any other error.
 
     """
 
