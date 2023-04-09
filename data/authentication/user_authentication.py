@@ -57,31 +57,35 @@ def user_login(account_obj):
             c.execute('''SELECT account_id FROM raave_account WHERE username = ? AND password = ?''',
                       (account_obj.username, account_obj.password))
 
-            # Fetch the results of the query
+            # Get the result of the query
             result = c.fetchall()
 
-            # If the query returns any results, create a list of account IDs and return it
+            # Check if the query returns any results
             if result:
 
-                # Create a list of account IDs from the results of the SQL query
+                # Convert the tuples in the result to lists
                 account_data_id = [list(t) for t in result]
 
                 # Close the database connection
                 conn.close()
 
-                # Create a list containing True followed by the list of account IDs and return it
+                # Create a list containing True followed by the list of account IDs
                 bool_true = [True]
                 bool_true.extend(account_data_id)
 
                 return bool_true
 
-            # If the query returns no results, return a list indicating that the account was not found
+            # If the query returns no results
             else:
 
                 # Close the database connection
                 conn.close()
 
-                return [False, 'Account not found.']
+                # Log the error
+                e = 'Account not found.'
+                logger.error("An error occurred: %s", e)
+
+                return [False, e]
 
         # If account_obj is not an instance of the Account class
         else:

@@ -83,6 +83,7 @@ def write_account(account_obj):
                              WHERE account_id=?''',
                           (account_obj.account_type, account_obj.username, account_obj.password, account_obj.first_name,
                            account_obj.last_name, account_obj.email, account_obj.account_id))
+
                 # Commit the changes to the database
                 conn.commit()
 
@@ -110,28 +111,81 @@ def write_account(account_obj):
 
 
 def read_account(account_obj):
+    """
+    Reads an account object from the database.
+
+    Args:
+        account_obj: An Account object to read from the database.
+
+    Returns:
+        Success case: A list containing the boolean value True followed by the account data.
+        [True, [account_type, username, first_name, last_name, email]]
+
+        Fail case: A list containing the boolean value False followed by the error message.
+        [False, [error message]]
+
+    Raises:
+        Exception: If an error occurs during the database transaction.
+
+    """
+
+    # Attempt to read the account object from the database
     try:
+
+        # Check if account_obj is an instance of the Account class
         if isinstance(account_obj, Account):
+
+            # Connect to the database and create a cursor object
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
+
+            # Execute a SQL query to retrieve the account data from the database
             c.execute('''SELECT account_type, username, first_name, last_name, email
                          FROM raave_account WHERE account_id = ?''', (account_obj.account_id,))
+
+            # Get the result of the query
             result = c.fetchall()
+
+            # Check if the query returns any results
             if result:
+
+                # Convert the tuples in the result to lists
                 account_data = [list(t) for t in result]
+
+                # Close the database connection
                 conn.close()
+
+                # Create a list containing True followed by the list of account data
                 bool_true = [True]
                 bool_true.extend(account_data)
+
                 return bool_true
+
+            # If the query returns no results
             else:
+
+                # Close the database connection
                 conn.close()
+
+                # Log the error
                 e = 'Account not found.'
                 logger.error("An error occurred: %s", e)
+
                 return [False, e]
+
+        # If account_obj is not an instance of the Account class
         else:
+
+            # Log the error
             e = 'Invalid object type.'
             logger.error("An error occurred: %s", e)
+
             return [False, e]
+
+    # If any other exceptions occur, log an error and return a list indicating an error occurred
     except Exception as e:
+
+        # Log the error
         logger.error("An error occurred: %s", str(e))
+
         return [False, str(e)]
