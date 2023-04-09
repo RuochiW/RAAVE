@@ -17,7 +17,7 @@ import sqlite3
 # Import the Account class from the src.accounts module
 from src.accounts import Account
 
-# Import the Category and Course class from the src.accounts module
+# Import the Category and Course class from the src.categories module
 from src.categories import Category, Course
 
 # Import the logger object from the data.log.error_log module
@@ -35,9 +35,10 @@ def write_category(obj):
         obj: A Category or Course object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True and followed by the category ID when new account created.
+        Success case: A list containing the boolean value True and followed by the category ID when new category
+        created.
         [True]
-        [True, [account id]]
+        [True, [category ID]]
 
         Fail case: A list containing the boolean value False followed by the error message.
         [False, [error message]]
@@ -47,7 +48,7 @@ def write_category(obj):
 
     """
 
-    # Attempt to write the category object to the database
+    # Attempt to write the category or course object to the database
     try:
 
         # Check if obj is an instance of the Category class
@@ -112,7 +113,7 @@ def write_category(obj):
 
             return [True]
 
-        # If account_obj is not an instance of the Category or Course class
+        # If obj is not an instance of the Category or Course class
         else:
 
             # Log the error
@@ -135,7 +136,7 @@ def read_category(category_obj):
     Reads a category object from the database, along with its corresponding course object.
 
     Args:
-        category_obj: An instance of the Category class containing the category id.
+        category_obj: An instance of the Category class containing the category ID.
 
     Returns:
         Success case: A list containing the boolean value True followed by the category data and its corresponding
@@ -256,7 +257,7 @@ def read_all_category(account_obj):
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception: If an error occurs during the database transaction or any other error.
 
     """
 
