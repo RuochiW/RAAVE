@@ -43,6 +43,7 @@ def user_login(account_obj):
 
     """
 
+    # Attempt to read the account id from the database
     try:
 
         # Check if account_obj is an instance of the Account class
@@ -73,24 +74,28 @@ def user_login(account_obj):
                 bool_true.extend(account_data_id)
 
                 return bool_true
+
+            # If the query returns no results, return a list indicating that the account was not found
             else:
-                # If the query returns no results, return a list indicating that the account was not found
 
                 # Close the database connection
                 conn.close()
 
                 return [False, 'Account not found.']
-        else:
-            # If account_obj is not an instance of the Account class
-            # Log the error and return a list indicating an error occurred
 
+        # If account_obj is not an instance of the Account class
+        else:
+
+            # Log the error
             e = 'Invalid object type.'
             logger.error("An error occurred: %s", e)
 
             return [False, e]
-    except Exception as e:
-        # If any other exceptions occur, log an error and return a list indicating an error occurred
 
+    # If any other exceptions occur, log an error and return a list indicating an error occurred
+    except Exception as e:
+
+        # Log the error
         logger.error("An error occurred: %s", str(e))
 
         return [False, str(e)]
