@@ -1,7 +1,7 @@
 """
 Author: Ruochi Wang
 Date: April 8, 2023
-Purpose: A script that logging the error
+Purpose: Provide a simple and consistent way to login user by username and password
 License: MIT License
 Dependencies: sqlite3
 
@@ -29,7 +29,7 @@ def user_login(account_obj):
     Login the user with the given account object.
 
     Args:
-        account_obj (Account): An instance of the Account class containing the username and password.
+        account_obj: An instance of the Account class containing the username and password.
 
     Returns:
         Success case: A list containing the boolean value True followed by the account data ID.
@@ -69,7 +69,7 @@ def user_login(account_obj):
                 # Close the database connection
                 conn.close()
 
-                # Create a list containing True followed by the list of account IDs
+                # Create a list containing True followed by the list of account ID
                 bool_true = [True]
                 bool_true.extend(account_data_id)
 

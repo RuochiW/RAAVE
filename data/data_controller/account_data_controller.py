@@ -32,7 +32,7 @@ def write_account(account_obj):
         account_obj: An Account object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the account data ID when new account created.
+        Success case: A list containing the boolean value True and followed by the account ID when new account created.
         [True]
         [True, [account id]]
 
@@ -40,7 +40,7 @@ def write_account(account_obj):
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception: If an error occurs during the database transaction or any other error.
 
     """
 
@@ -54,7 +54,7 @@ def write_account(account_obj):
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
 
-            # If the account ID is not set, insert a new record
+            # If the account ID is not set
             if account_obj.account_id is None:
 
                 # Execute a SQL query to insert the account object to database
@@ -74,7 +74,7 @@ def write_account(account_obj):
 
                 return [True, account_id]
 
-            # If the account ID is set, update the existing record
+            # If the account ID is set
             else:
 
                 # Execute a SQL query to update the account object to database
@@ -101,7 +101,7 @@ def write_account(account_obj):
 
             return [False, e]
 
-    # If any other exceptions occur, log an error and return a list indicating an error occurred
+    # If any other exceptions occur
     except Exception as e:
 
         # Log the error
@@ -182,7 +182,7 @@ def read_account(account_obj):
 
             return [False, e]
 
-    # If any other exceptions occur, log an error and return a list indicating an error occurred
+    # If any other exceptions occur
     except Exception as e:
 
         # Log the error

@@ -119,7 +119,7 @@ def read_all_user_category_calendar(account_obj):
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception: If an error occurs during the database transaction or any other error.
 
     """
 
@@ -206,7 +206,7 @@ def read_all_user_course_calendar(account_obj):
             [False, [error message]]
 
         Raises:
-            Exception: If an error occurs during the database transaction.
+            Exception: If an error occurs during the database transaction or any other error.
 
         """
 
