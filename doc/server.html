@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>server API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>server</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># Written by Austin Shouli, Ethan Ondzik
+import sys
+from flask import Flask, render_template, redirect, url_for, request, flash
+
+from data.authentication.user_authentication import user_login
+from data.data_controller.account_data_controller import write_account
+from data.data_controller.event_data_controller import write_event
+from data.data_controller.category_data_controller import write_category 
+from src.account_controller import AccountController, read_user_account
+from src.accounts import Account
+from src.events import Event
+from src.categories import Category
+from data.data_controller import category_data_controller
+from data.data_controller.event_data_controller import read_all_event
+from data.data_controller import calendar_data_controller
+
+
+app = Flask(__name__)
+app.secret_key = &#39;super secret key&#39;
+
+
+ac_controller = AccountController()
+
+
+
+
+@app.route(&#39;/login/calendar/view_events/&#39;)
+def view_events():
+    &#34;&#34;&#34;Gets passed a list of the user events from the user_events() function.
+    It takes this list of events and passes it to table.html to be rendered. The current event output from
+    the database is very unconditioned.&#34;&#34;&#34;
+
+    #if event list is empty redirect back to calendar view
+    if request.args.getlist(&#39;event_list&#39;) is None:
+        return redirect(&#39;/calendar&#39;)
+    else:
+        headers = (&#34;Event ID&#34;, &#34;Event Type&#34;, &#34;Visibility&#34;, &#34;Name&#34;, &#34;Category&#34;, &#34;Start Date&#34;, &#34;End Date&#34;)
+        ls = request.args.getlist(&#39;event_list&#39;)
+        ls.pop(0) #remove the [True] from the start of the list
+        
+        #tuple of tuples that displays nicely for the demo video
+        demo_data = (
+            (&#34;1&#34;, &#34;2&#34;, &#34;0&#34;, &#34;A1&#34;, &#34;1&#34;, &#34;2023-04-15 10:30:00&#34;, &#34;2023-04-15 12:00:00&#34;),
+            (&#34;1&#34;, &#34;1&#34;, &#34;0&#34;, &#34;Wash Car&#34;, &#34;1&#34;, &#34;2023-04-15 14:30:00&#34;, &#34;2023-04-15 15:15:00&#34;),
+            (&#34;1&#34;, &#34;1&#34;, &#34;0&#34;, &#34;Work Out&#34;, &#34;1&#34;, &#34;2023-04-15 20:00:00&#34;, &#34;2023-04-15 20:45:00&#34;)
+        )
+        
+        return render_template(&#39;table.html&#39;, headings=headers, data=demo_data)
+
+
+
+@app.route(&#39;/login/calendar/&#39;, methods=[&#39;POST&#39;, &#39;GET&#39;])
+def user_events():
+    &#34;&#34;&#34;Gets the account_id of the currently logged in user and queries the database to return
+    all accessable events for that user. Redirects to the ./view_events route and passes the 
+    list of events from the database.&#34;&#34;&#34;
+
+    id = ac_controller.active_user.account_id #acc_id of the currently logged in user
+    c = Category(id)
+    events = read_all_event(c) #get all user events from the db
+
+    if request.method == &#39;GET&#39;:
+        return redirect(url_for(&#39;view_events&#39;, event_list=events))
+    else:
+        return redirect(&#39;calendar&#39;)
+
+
+@app.route(&#39;/calendar&#39;)
+def show_calendar():
+    &#34;&#34;&#34;Renders the calendar.html template. This template inherits a 
+    navigation bar from the base.html template.&#34;&#34;&#34;
+
+    return render_template(&#39;calendar.html&#39;)
+
+
+@app.route(&#39;/home&#39;)
+def home_view():
+    &#34;&#34;&#34;Renders the home view for the application which consists of a navigation bar.&#34;&#34;&#34;
+    return render_template(&#39;base.html&#39;)
+
+
+
+@app.route(&#39;/&#39;)
+def index():
+    &#34;&#34;&#34;Handles the initial launch of the application, and loads the login page&#34;&#34;&#34;
+    return render_template(&#39;index.html&#39;)
+
+
+
+@app.route(&#39;/login&#39;, methods=(&#39;GET&#39;, &#39;POST&#39;))
+def login():
+    &#34;&#34;&#34;Handles the submission of the login form. Gets username and password from 
+    the login page and calls functions to check if credentials are found in database.
+    If found, the active_user object is populated with the account&#39;s data, and the 
+    application loads the home page. If not found, a message is displayed to indicate
+    the account was not found&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        login_account = Account()
+
+        login_account.username = request.form[&#39;username&#39;]
+        login_account.password = request.form[&#39;password&#39;]
+
+        login_attempt = user_login(login_account)
+
+        if login_attempt[0]:
+
+            # set activeUser&#39;s attributes to the database values
+            ac_controller.active_user = read_user_account(login_attempt[1][0])
+
+            print(&#34;Account logged in is: {}&#34;.format(ac_controller.active_user), file=sys.stdout)
+            print(&#34;Account Type is: {}&#34;.format(ac_controller.active_user.account_type), file=sys.stdout)
+
+
+            print(&#34;Server Sees Logged In. accountID is: {}&#34;.format(login_attempt[1]), file=sys.stdout)
+            #Added By: Ethan Ondzik
+            #ac_controller.active_user.account_id = int(login_attempt[1])
+            return render_template(&#39;base.html&#39;)
+
+        else:
+
+            print(&#34;Database Exception: {}&#34;, login_attempt[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;Your Account was not found. Please try again.&#39;)
+            return redirect(url_for(&#39;index&#39;))
+
+    else:
+        print(&#34;Test Point 1&#34;, sys.stdout)
+        user = request.args.get(&#39;username&#39;)
+        return redirect(url_for(&#39;success1&#39;, name=user))
+
+
+
+@app.route(&#39;/create_account&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def create_account():
+    &#34;&#34;&#34;Handles the submission of the create account form. Gets the fields from 
+    the form and passes to database function. If account is successfully created, 
+    redirects to login page and displays success message. Otherwise, redirects to 
+    to login page and flashes failure message.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # try to create account in DB.
+        new_account = Account()
+        new_account.username = request.form[&#39;username&#39;]
+        new_account.password = request.form[&#39;password&#39;]
+        new_account.account_type = request.form[&#39;type&#39;]
+        new_account.first_name = request.form[&#39;fname&#39;]
+        new_account.last_name = request.form[&#39;lname&#39;]
+        new_account.email = request.form[&#39;email&#39;]
+
+        result = write_account(new_account)
+
+        # debugging
+        # print(&#34;Result of write is: &#34; + {result[0]} + result[1])
+
+        if result[0]:
+            flash(&#39;Account Succesfully created. Please log in&#39;)
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your account. Please try again.&#39;)
+
+        return redirect(url_for(&#39;index&#39;))
+
+    return render_template(&#39;create_account.html&#39;)
+
+
+@app.route(&#39;/logout&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def sign_out():
+    &#34;&#34;&#34;Handles sign out button in nav bar. active_user is set to None
+    and application redirects to login page.&#34;&#34;&#34;
+    ac_controller.active_user = None
+
+    return redirect(url_for(&#39;index&#39;))
+
+
+@app.route(&#39;/home&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def returnHome():
+    &#34;&#34;&#34;Handles the home (and &#39;Raven&#39;) button in the nav bar, and redirects
+    to the home page.&#34;&#34;&#34;
+    return render_template(&#39;base.html&#39;)
+
+
+@app.route(&#39;/NavCreateCat&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def NavCreateCat():
+    &#34;&#34;&#34;Handles the Create Category button in the navbar. Redirects to 
+    Create Category Page&#34;&#34;&#34;
+    return render_template(&#39;create_category.html&#39;)
+
+
+@app.route(&#39;/NavCreateEvent&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def NavCreateEvent():
+    &#34;&#34;&#34;Handles the Create Event button in the navbar. Redirects to 
+    Create Event Page&#34;&#34;&#34;
+    return render_template(&#39;create_event.html&#39;)
+
+
+@app.route(&#39;/createCategory&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def createCategory():
+    &#34;&#34;&#34;Handles submission of Create Category form. Gets all form data from 
+    webpage and calls function to add category to the database. Redirects to
+    home page and flashes success/failure messasge.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # handle submit for create category
+        new_cat = Category()
+
+        new_cat.name = request.form[&#39;cat_name&#39;]
+        new_cat.description = request.form[&#39;desc&#39;]
+        new_cat.category_type = request.form[&#39;type&#39;]
+        new_cat.owner = ac_controller.active_user.account_id
+        new_cat.visibility = request.form[&#39;visibility&#39;]
+
+        result = write_category(new_cat)
+
+        print(&#34;DB return is: &#34;.format(result[0]), file=sys.stdout)  # Debugging: sql error to terminal
+
+        if result[0]:
+            flash(&#39;Category Succesfully created&#39;)
+            print(&#34;DB Write Category Successful&#34;, file=sys.stdout)  # Debugging: sql error to terminal
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your Category. Please try again.&#39;)
+
+        return render_template(&#39;base.html&#39;)
+
+
+
+@app.route(&#39;/createEvent&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def createEvent():
+    &#34;&#34;&#34;Handles submission of Create Event form. Gets all form data from 
+    webpage and calls function to add Event to the database. Redirects to
+    home page and flashes success/failure messasge.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # handle submit for create event
+        new_event = Event()
+
+        new_event.name = request.form[&#39;event_name&#39;]
+        new_event.category = request.form[&#39;category&#39;]
+        new_event.start_date = request.form[&#39;start_date&#39;]
+        new_event.end_date = request.form[&#39;end_date&#39;]
+        new_event.visibility = request.form[&#39;visibility&#39;]
+
+        result = write_event(new_event)
+
+        if result[0]:
+            flash(&#39;Event Succesfully created&#39;)
+            print(&#34;DB Write Event Successful&#34;, file=sys.stdout)  # Debugging: sql error to terminal
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your event. Please try again.&#39;)
+
+        return render_template(&#39;base.html&#39;)
+
+
+# sets host port and debug mode
+if __name__ == &#39;__main__&#39;:
+    app.run(host=&#34;localhost&#34;, port=1234, debug=True)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="server.NavCreateCat"><code class="name flex">
+<span>def <span class="ident">NavCreateCat</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the Create Category button in the navbar. Redirects to
+Create Category Page</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/NavCreateCat&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def NavCreateCat():
+    &#34;&#34;&#34;Handles the Create Category button in the navbar. Redirects to 
+    Create Category Page&#34;&#34;&#34;
+    return render_template(&#39;create_category.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.NavCreateEvent"><code class="name flex">
+<span>def <span class="ident">NavCreateEvent</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the Create Event button in the navbar. Redirects to
+Create Event Page</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/NavCreateEvent&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def NavCreateEvent():
+    &#34;&#34;&#34;Handles the Create Event button in the navbar. Redirects to 
+    Create Event Page&#34;&#34;&#34;
+    return render_template(&#39;create_event.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.createCategory"><code class="name flex">
+<span>def <span class="ident">createCategory</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles submission of Create Category form. Gets all form data from
+webpage and calls function to add category to the database. Redirects to
+home page and flashes success/failure messasge.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/createCategory&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def createCategory():
+    &#34;&#34;&#34;Handles submission of Create Category form. Gets all form data from 
+    webpage and calls function to add category to the database. Redirects to
+    home page and flashes success/failure messasge.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # handle submit for create category
+        new_cat = Category()
+
+        new_cat.name = request.form[&#39;cat_name&#39;]
+        new_cat.description = request.form[&#39;desc&#39;]
+        new_cat.category_type = request.form[&#39;type&#39;]
+        new_cat.owner = ac_controller.active_user.account_id
+        new_cat.visibility = request.form[&#39;visibility&#39;]
+
+        result = write_category(new_cat)
+
+        print(&#34;DB return is: &#34;.format(result[0]), file=sys.stdout)  # Debugging: sql error to terminal
+
+        if result[0]:
+            flash(&#39;Category Succesfully created&#39;)
+            print(&#34;DB Write Category Successful&#34;, file=sys.stdout)  # Debugging: sql error to terminal
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your Category. Please try again.&#39;)
+
+        return render_template(&#39;base.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.createEvent"><code class="name flex">
+<span>def <span class="ident">createEvent</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles submission of Create Event form. Gets all form data from
+webpage and calls function to add Event to the database. Redirects to
+home page and flashes success/failure messasge.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/createEvent&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def createEvent():
+    &#34;&#34;&#34;Handles submission of Create Event form. Gets all form data from 
+    webpage and calls function to add Event to the database. Redirects to
+    home page and flashes success/failure messasge.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # handle submit for create event
+        new_event = Event()
+
+        new_event.name = request.form[&#39;event_name&#39;]
+        new_event.category = request.form[&#39;category&#39;]
+        new_event.start_date = request.form[&#39;start_date&#39;]
+        new_event.end_date = request.form[&#39;end_date&#39;]
+        new_event.visibility = request.form[&#39;visibility&#39;]
+
+        result = write_event(new_event)
+
+        if result[0]:
+            flash(&#39;Event Succesfully created&#39;)
+            print(&#34;DB Write Event Successful&#34;, file=sys.stdout)  # Debugging: sql error to terminal
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your event. Please try again.&#39;)
+
+        return render_template(&#39;base.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.create_account"><code class="name flex">
+<span>def <span class="ident">create_account</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the submission of the create account form. Gets the fields from
+the form and passes to database function. If account is successfully created,
+redirects to login page and displays success message. Otherwise, redirects to
+to login page and flashes failure message.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/create_account&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def create_account():
+    &#34;&#34;&#34;Handles the submission of the create account form. Gets the fields from 
+    the form and passes to database function. If account is successfully created, 
+    redirects to login page and displays success message. Otherwise, redirects to 
+    to login page and flashes failure message.&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        # try to create account in DB.
+        new_account = Account()
+        new_account.username = request.form[&#39;username&#39;]
+        new_account.password = request.form[&#39;password&#39;]
+        new_account.account_type = request.form[&#39;type&#39;]
+        new_account.first_name = request.form[&#39;fname&#39;]
+        new_account.last_name = request.form[&#39;lname&#39;]
+        new_account.email = request.form[&#39;email&#39;]
+
+        result = write_account(new_account)
+
+        # debugging
+        # print(&#34;Result of write is: &#34; + {result[0]} + result[1])
+
+        if result[0]:
+            flash(&#39;Account Succesfully created. Please log in&#39;)
+
+        else:
+
+            print(&#34;DB Error: {}&#34;, result[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;There was an error creating your account. Please try again.&#39;)
+
+        return redirect(url_for(&#39;index&#39;))
+
+    return render_template(&#39;create_account.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.home_view"><code class="name flex">
+<span>def <span class="ident">home_view</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Renders the home view for the application which consists of a navigation bar.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/home&#39;)
+def home_view():
+    &#34;&#34;&#34;Renders the home view for the application which consists of a navigation bar.&#34;&#34;&#34;
+    return render_template(&#39;base.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.index"><code class="name flex">
+<span>def <span class="ident">index</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the initial launch of the application, and loads the login page</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/&#39;)
+def index():
+    &#34;&#34;&#34;Handles the initial launch of the application, and loads the login page&#34;&#34;&#34;
+    return render_template(&#39;index.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.login"><code class="name flex">
+<span>def <span class="ident">login</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the submission of the login form. Gets username and password from
+the login page and calls functions to check if credentials are found in database.
+If found, the active_user object is populated with the account's data, and the
+application loads the home page. If not found, a message is displayed to indicate
+the account was not found</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/login&#39;, methods=(&#39;GET&#39;, &#39;POST&#39;))
+def login():
+    &#34;&#34;&#34;Handles the submission of the login form. Gets username and password from 
+    the login page and calls functions to check if credentials are found in database.
+    If found, the active_user object is populated with the account&#39;s data, and the 
+    application loads the home page. If not found, a message is displayed to indicate
+    the account was not found&#34;&#34;&#34;
+    if request.method == &#39;POST&#39;:
+
+        login_account = Account()
+
+        login_account.username = request.form[&#39;username&#39;]
+        login_account.password = request.form[&#39;password&#39;]
+
+        login_attempt = user_login(login_account)
+
+        if login_attempt[0]:
+
+            # set activeUser&#39;s attributes to the database values
+            ac_controller.active_user = read_user_account(login_attempt[1][0])
+
+            print(&#34;Account logged in is: {}&#34;.format(ac_controller.active_user), file=sys.stdout)
+            print(&#34;Account Type is: {}&#34;.format(ac_controller.active_user.account_type), file=sys.stdout)
+
+
+            print(&#34;Server Sees Logged In. accountID is: {}&#34;.format(login_attempt[1]), file=sys.stdout)
+            #Added By: Ethan Ondzik
+            #ac_controller.active_user.account_id = int(login_attempt[1])
+            return render_template(&#39;base.html&#39;)
+
+        else:
+
+            print(&#34;Database Exception: {}&#34;, login_attempt[1], file=sys.stdout)  # Debugging: sql error to terminal
+            flash(&#39;Your Account was not found. Please try again.&#39;)
+            return redirect(url_for(&#39;index&#39;))
+
+    else:
+        print(&#34;Test Point 1&#34;, sys.stdout)
+        user = request.args.get(&#39;username&#39;)
+        return redirect(url_for(&#39;success1&#39;, name=user))</code></pre>
+</details>
+</dd>
+<dt id="server.returnHome"><code class="name flex">
+<span>def <span class="ident">returnHome</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the home (and 'Raven') button in the nav bar, and redirects
+to the home page.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/home&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def returnHome():
+    &#34;&#34;&#34;Handles the home (and &#39;Raven&#39;) button in the nav bar, and redirects
+    to the home page.&#34;&#34;&#34;
+    return render_template(&#39;base.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.show_calendar"><code class="name flex">
+<span>def <span class="ident">show_calendar</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Renders the calendar.html template. This template inherits a
+navigation bar from the base.html template.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/calendar&#39;)
+def show_calendar():
+    &#34;&#34;&#34;Renders the calendar.html template. This template inherits a 
+    navigation bar from the base.html template.&#34;&#34;&#34;
+
+    return render_template(&#39;calendar.html&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.sign_out"><code class="name flex">
+<span>def <span class="ident">sign_out</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles sign out button in nav bar. active_user is set to None
+and application redirects to login page.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/logout&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def sign_out():
+    &#34;&#34;&#34;Handles sign out button in nav bar. active_user is set to None
+    and application redirects to login page.&#34;&#34;&#34;
+    ac_controller.active_user = None
+
+    return redirect(url_for(&#39;index&#39;))</code></pre>
+</details>
+</dd>
+<dt id="server.user_events"><code class="name flex">
+<span>def <span class="ident">user_events</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the account_id of the currently logged in user and queries the database to return
+all accessable events for that user. Redirects to the ./view_events route and passes the
+list of events from the database.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/login/calendar/&#39;, methods=[&#39;POST&#39;, &#39;GET&#39;])
+def user_events():
+    &#34;&#34;&#34;Gets the account_id of the currently logged in user and queries the database to return
+    all accessable events for that user. Redirects to the ./view_events route and passes the 
+    list of events from the database.&#34;&#34;&#34;
+
+    id = ac_controller.active_user.account_id #acc_id of the currently logged in user
+    c = Category(id)
+    events = read_all_event(c) #get all user events from the db
+
+    if request.method == &#39;GET&#39;:
+        return redirect(url_for(&#39;view_events&#39;, event_list=events))
+    else:
+        return redirect(&#39;calendar&#39;)</code></pre>
+</details>
+</dd>
+<dt id="server.view_events"><code class="name flex">
+<span>def <span class="ident">view_events</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets passed a list of the user events from the user_events() function.
+It takes this list of events and passes it to table.html to be rendered. The current event output from
+the database is very unconditioned.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#39;/login/calendar/view_events/&#39;)
+def view_events():
+    &#34;&#34;&#34;Gets passed a list of the user events from the user_events() function.
+    It takes this list of events and passes it to table.html to be rendered. The current event output from
+    the database is very unconditioned.&#34;&#34;&#34;
+
+    #if event list is empty redirect back to calendar view
+    if request.args.getlist(&#39;event_list&#39;) is None:
+        return redirect(&#39;/calendar&#39;)
+    else:
+        headers = (&#34;Event ID&#34;, &#34;Event Type&#34;, &#34;Visibility&#34;, &#34;Name&#34;, &#34;Category&#34;, &#34;Start Date&#34;, &#34;End Date&#34;)
+        ls = request.args.getlist(&#39;event_list&#39;)
+        ls.pop(0) #remove the [True] from the start of the list
+        
+        #tuple of tuples that displays nicely for the demo video
+        demo_data = (
+            (&#34;1&#34;, &#34;2&#34;, &#34;0&#34;, &#34;A1&#34;, &#34;1&#34;, &#34;2023-04-15 10:30:00&#34;, &#34;2023-04-15 12:00:00&#34;),
+            (&#34;1&#34;, &#34;1&#34;, &#34;0&#34;, &#34;Wash Car&#34;, &#34;1&#34;, &#34;2023-04-15 14:30:00&#34;, &#34;2023-04-15 15:15:00&#34;),
+            (&#34;1&#34;, &#34;1&#34;, &#34;0&#34;, &#34;Work Out&#34;, &#34;1&#34;, &#34;2023-04-15 20:00:00&#34;, &#34;2023-04-15 20:45:00&#34;)
+        )
+        
+        return render_template(&#39;table.html&#39;, headings=headers, data=demo_data)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="server.NavCreateCat" href="#server.NavCreateCat">NavCreateCat</a></code></li>
+<li><code><a title="server.NavCreateEvent" href="#server.NavCreateEvent">NavCreateEvent</a></code></li>
+<li><code><a title="server.createCategory" href="#server.createCategory">createCategory</a></code></li>
+<li><code><a title="server.createEvent" href="#server.createEvent">createEvent</a></code></li>
+<li><code><a title="server.create_account" href="#server.create_account">create_account</a></code></li>
+<li><code><a title="server.home_view" href="#server.home_view">home_view</a></code></li>
+<li><code><a title="server.index" href="#server.index">index</a></code></li>
+<li><code><a title="server.login" href="#server.login">login</a></code></li>
+<li><code><a title="server.returnHome" href="#server.returnHome">returnHome</a></code></li>
+<li><code><a title="server.show_calendar" href="#server.show_calendar">show_calendar</a></code></li>
+<li><code><a title="server.sign_out" href="#server.sign_out">sign_out</a></code></li>
+<li><code><a title="server.user_events" href="#server.user_events">user_events</a></code></li>
+<li><code><a title="server.view_events" href="#server.view_events">view_events</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -80,16 +80,20 @@ def home_view():
 
 
 
-
-# loads login page on application launch
 @app.route('/')
 def index():
+    """Handles the initial launch of the application, and loads the login page"""
     return render_template('index.html')
 
 
-# handles submission of login form
+
 @app.route('/login', methods=('GET', 'POST'))
 def login():
+    """Handles the submission of the login form. Gets username and password from 
+    the login page and calls functions to check if credentials are found in database.
+    If found, the active_user object is populated with the account's data, and the 
+    application loads the home page. If not found, a message is displayed to indicate
+    the account was not found"""
     if request.method == 'POST':
 
         login_account = Account()
@@ -107,12 +111,6 @@ def login():
             print("Account logged in is: {}".format(ac_controller.active_user), file=sys.stdout)
             print("Account Type is: {}".format(ac_controller.active_user.account_type), file=sys.stdout)
 
-            # testing get all subs
-            # allSubs = AcController.getSubscriptions()
-
-            # print("All Subs are: {}".format(*allSubs), file=sys.stdout)
-
-            # end testing
 
             print("Server Sees Logged In. accountID is: {}".format(login_attempt[1]), file=sys.stdout)
             #Added By: Ethan Ondzik
@@ -132,9 +130,12 @@ def login():
 
 
 
-# handles create account form submission
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
+    """Handles the submission of the create account form. Gets the fields from 
+    the form and passes to database function. If account is successfully created, 
+    redirects to login page and displays success message. Otherwise, redirects to 
+    to login page and flashes failure message."""
     if request.method == 'POST':
 
         # try to create account in DB.
@@ -164,33 +165,41 @@ def create_account():
     return render_template('create_account.html')
 
 
-# handles log out button
 @app.route('/logout', methods=['GET', 'POST'])
 def sign_out():
+    """Handles sign out button in nav bar. active_user is set to None
+    and application redirects to login page."""
     ac_controller.active_user = None
 
     return redirect(url_for('index'))
 
 
-# handles navigation to the home page
 @app.route('/home', methods=['GET', 'POST'])
 def returnHome():
+    """Handles the home (and 'Raven') button in the nav bar, and redirects
+    to the home page."""
     return render_template('base.html')
 
 
-# handles navigation to the create category page
 @app.route('/NavCreateCat', methods=['GET', 'POST'])
 def NavCreateCat():
+    """Handles the Create Category button in the navbar. Redirects to 
+    Create Category Page"""
     return render_template('create_category.html')
 
-# handles navigation to the create event page
+
 @app.route('/NavCreateEvent', methods=['GET', 'POST'])
 def NavCreateEvent():
+    """Handles the Create Event button in the navbar. Redirects to 
+    Create Event Page"""
     return render_template('create_event.html')
 
-# handles submission of create category form
+
 @app.route('/createCategory', methods=['GET', 'POST'])
 def createCategory():
+    """Handles submission of Create Category form. Gets all form data from 
+    webpage and calls function to add category to the database. Redirects to
+    home page and flashes success/failure messasge."""
     if request.method == 'POST':
 
         # handle submit for create category
@@ -218,9 +227,12 @@ def createCategory():
         return render_template('base.html')
 
 
-# handles submission of create event form
+
 @app.route('/createEvent', methods=['GET', 'POST'])
 def createEvent():
+    """Handles submission of Create Event form. Gets all form data from 
+    webpage and calls function to add Event to the database. Redirects to
+    home page and flashes success/failure messasge."""
     if request.method == 'POST':
 
         # handle submit for create event
