@@ -1,8 +1,14 @@
 """
+Error Logs
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: A script that logging the error
+
 License: MIT License
+
 Dependencies: logging, os
 
 To install the required dependencies, run the following command:

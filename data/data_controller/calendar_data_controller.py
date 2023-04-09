@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -34,14 +40,17 @@ def read_all_user_calendar(account_obj):
             account_obj: An instance of the Account class containing the account ID.
 
         Returns:
-            Success case: A list containing the boolean value True followed by sublist of events in the user's calendar.
+            Success case:
+            A list containing the boolean value True followed by sublist of events in the user's calendar.
             [True, [event1], [event2], [sublist], [...]]
 
-            Fail case: A list containing the boolean value False followed by the error message.
+            Fail case:
+            A list containing the boolean value False followed by the error message.
             [False, [error message]]
 
         Raises:
-            Exception: If an error occurs during the database transaction or any other error.
+            Exception:
+            If an error occurs during the database transaction or any other error.
 
         """
 
@@ -111,15 +120,17 @@ def read_all_user_category_calendar(account_obj):
         account_obj: An instance of the Account class containing the account ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by sublist of events in the user's category
-        calendar.
+        Success case:
+        A list containing the boolean value True followed by sublist of events in the user's category calendar.
         [True, [event1], [event2], [sublist], [...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -195,14 +206,16 @@ def read_all_user_course_calendar(account_obj):
         Reads all events from a user's course calendar.
 
         Args:
-            account_obj: An instance of the Account class containing the account ID.
+            account_obj:
+            An instance of the Account class containing the account ID.
 
         Returns:
-            Success case: A list containing the boolean value True followed by sublist of deliverables in the user's
-            course calendar.
+            Success case:
+            A list containing the boolean value True followed by sublist of deliverables in the user's course calendar.
             [True, [deliverable1], [deliverable1], [sublist], [...]]
 
-            Fail case: A list containing the boolean value False followed by the error message.
+            Fail case:
+            A list containing the boolean value False followed by the error message.
             [False, [error message]]
 
         Raises:

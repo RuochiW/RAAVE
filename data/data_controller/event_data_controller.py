@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -36,15 +42,18 @@ def write_event(obj):
         obj: A Event and Deliverable object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True and followed by the event ID when new event created.
+        Success case:
+        A list containing the boolean value True and followed by the event ID when new event created.
         [True]
         [True, [event ID]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception:
+        If an error occurs during the database transaction.
 
     """
 
@@ -137,19 +146,23 @@ def read_event(event_obj):
     Reads a category object from the database, along with its corresponding course object.
 
     Args:
-        event_obj: An instance of the Event class containing the event ID.
+        event_obj:
+        An instance of the Event class containing the event ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the event data and its corresponding
-        deliverable data if there is one.
+        Success case:
+        A list containing the boolean value True followed by the event data and its corresponding deliverable data if
+        there is one.
         [True, [category, event_type, name, start_date, end_date, visibility]]
         [True, [category, event_type, name, start_date, end_date, visibility, weight, time_estimate, time_spent]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -248,17 +261,21 @@ def read_all_event(category_obj):
     Reads all categories belonging to the account from the database.
 
     Args:
-        category_obj: An instance of the Category class containing the category ID.
+        category_obj:
+        An instance of the Category class containing the category ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the categories' data.
+        Success case:
+        A list containing the boolean value True followed by the categories' data.
         [True, [event_id, name, start_date, end_date, visibility], [event2], [sublist], [...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
