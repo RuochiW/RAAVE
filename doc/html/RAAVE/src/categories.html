@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>RAAVE.src.categories API documentation</title>
+<meta name="description" content="@Reference: Ethan
+@Editor: RW" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>RAAVE.src.categories</code></h1>
+</header>
+<section id="section-intro">
+<p>@Reference: Ethan
+@Editor: RW</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># Author: Anandita Gupta
+# Contents: Category and Category controller class
+
+&#34;&#34;&#34;
+@Reference: Ethan
+@Editor: RW
+&#34;&#34;&#34;
+
+
+# from category_data_controller import *
+
+
+class Category:
+    &#34;&#34;&#34;The category class contains a layout of the information pertaining to a category.
+    &#34;&#34;&#34;
+
+    category_id = int()
+    category_type = int()
+    visibility = int()
+    name = str()
+    description = str()
+    owner = str()
+
+    def __init__(self, category_id=None, category_type=None, owner=None, name=None, visibility=None, description=None):
+        self.set_category_id(category_id)
+        self.set_category_type(category_type)
+        self.set_owner(owner)
+        self.set_name(name)
+        self.set_visibility(visibility)
+        self.set_description(description)
+
+    def __str__(self):
+        &#34;&#34;&#34;Formatted output for the Category object, it will print each attribute line by line.&#34;&#34;&#34;
+        return &#34;category_id: {self.category_id},\n category_type: {self.category_type},\n visibility: {&#34; \
+               &#34;self.visibility},\n name: {self.name}, description: {self.description},\n owner: {self.owner}&#34;
+
+    def get_category_id(self):
+        return self.category_id
+
+    # Likely will only be used for testing purposes
+    def set_category_id(self, category_id):
+        if not isinstance(category_id, type(Category.category_id)) and category_id is not None:
+            print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Category.category_id)))
+        else:
+            self.category_id = category_id
+
+    def get_category_type(self):
+        return self.category_type
+
+    def set_category_type(self, category_type):
+        if not isinstance(category_type, type(Category.category_type)) and category_type is not None:
+            print(&#34;Error: category_type must be of type {}.\n&#34;.format(type(Category.category_type)))
+        else:
+            self.category_type = category_type
+
+    def get_visibility(self):
+        return self.visibility
+
+    def set_visibility(self, visibility):
+        if not isinstance(visibility, type(Category.visibility)) and visibility is not None:
+            print(&#34;Error: visibility must be of type {}\n&#34;.format(type(Category.visibility)))
+        else:
+            self.visibility = visibility
+
+    def get_name(self):
+        return self.name
+
+    def set_name(self, name):
+        if not isinstance(name, type(Category.name)) and name is not None:
+            print(&#34;Error: name must be of type {}.\n&#34;.format(type(Category.name)))
+        else:
+            self.name = name
+
+    def get_description(self):
+        return self.description
+
+    def set_description(self, description):
+        if not isinstance(description, type(Category.description)) and description is not None:
+            print(&#34;Error: description must be of type {}.\n&#34;.format(type(Category.description)))
+        else:
+            self.description = description
+
+    def get_owner(self):
+        return self.owner
+
+    def set_owner(self, owner):
+        if not isinstance(owner, type(Category.owner)) and owner is not None:
+            print(&#34;Error: owner must be of type {}.\n&#34;.format(type(Category.owner)))
+        else:
+            self.owner = owner
+
+    def get_all_category(self):
+        attributes = list()
+        for i in dir(self):
+            if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
+                attributes.append(i)
+
+        return attributes  # in alphabetical order
+
+
+class Course:
+    course_id = int()
+    course = int()
+    department = str()
+    start_date = str()
+    end_date = str()
+    section = int()
+
+    def __init__(self, course_id=None, course=None, start_date=None, end_date=None, department=None, section=None):
+        self.set_course_id(course_id)
+        self.set_course(course)
+        self.set_department(department)
+        self.set_start_date(start_date)
+        self.set_end_date(end_date)
+        self.set_section(section)
+        # super().__init__()
+
+    def get_course_id(self):
+        return self.course_id
+
+    def set_course_id(self, course_id):
+        if not isinstance(course_id, type(Course.course_id)) and course_id is not None:
+            print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Course.course_id)))
+        else:
+            self.course_id = course_id
+
+    def get_course(self):
+        return self.course
+
+    def set_course(self, course):
+        if not isinstance(course, type(Course.course)) and course is not None:
+            print(&#34;Error: course must be of type {}.\n&#34;.format(type(Course.course)))
+        else:
+            self.course = course
+
+    def get_start_date(self):
+        return self.start_date
+
+    def set_start_date(self, start_date):
+        if not isinstance(start_date, type(Course.start_date)) and start_date is not None:
+            print(&#34;Error: start_date must be of type {}.\n&#34;.format(type(Course.start_date)))
+        else:
+            self.start_date = start_date
+
+    def get_end_date(self):
+        return self.end_date
+
+    def set_end_date(self, end_date):
+        if not isinstance(end_date, type(Course.end_date)) and end_date is not None:
+            print(&#34;Error: end_date must be of type {}.\n&#34;.format(type(Course.end_date)))
+        else:
+            self.end_date = end_date
+
+    def get_department(self):
+        return self.department
+
+    def set_department(self, department):
+        if not isinstance(department, type(Course.department)) and department is not None:
+            print(&#34;Error: department must be of type {}.\n&#34;.format(type(Course.department)))
+        else:
+            self.department = department
+
+    def get_section(self):
+        return self.section
+
+    def set_section(self, section):
+        if not isinstance(section, type(Course.section)) and section is not None:
+            print(&#34;Error: section must be of type {}.\n&#34;.format(type(Course.section)))
+        else:
+            self.section = section</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="RAAVE.src.categories.Category"><code class="flex name class">
+<span>class <span class="ident">Category</span></span>
+<span>(</span><span>category_id=None, category_type=None, owner=None, name=None, visibility=None, description=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The category class contains a layout of the information pertaining to a category.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Category:
+    &#34;&#34;&#34;The category class contains a layout of the information pertaining to a category.
+    &#34;&#34;&#34;
+
+    category_id = int()
+    category_type = int()
+    visibility = int()
+    name = str()
+    description = str()
+    owner = str()
+
+    def __init__(self, category_id=None, category_type=None, owner=None, name=None, visibility=None, description=None):
+        self.set_category_id(category_id)
+        self.set_category_type(category_type)
+        self.set_owner(owner)
+        self.set_name(name)
+        self.set_visibility(visibility)
+        self.set_description(description)
+
+    def __str__(self):
+        &#34;&#34;&#34;Formatted output for the Category object, it will print each attribute line by line.&#34;&#34;&#34;
+        return &#34;category_id: {self.category_id},\n category_type: {self.category_type},\n visibility: {&#34; \
+               &#34;self.visibility},\n name: {self.name}, description: {self.description},\n owner: {self.owner}&#34;
+
+    def get_category_id(self):
+        return self.category_id
+
+    # Likely will only be used for testing purposes
+    def set_category_id(self, category_id):
+        if not isinstance(category_id, type(Category.category_id)) and category_id is not None:
+            print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Category.category_id)))
+        else:
+            self.category_id = category_id
+
+    def get_category_type(self):
+        return self.category_type
+
+    def set_category_type(self, category_type):
+        if not isinstance(category_type, type(Category.category_type)) and category_type is not None:
+            print(&#34;Error: category_type must be of type {}.\n&#34;.format(type(Category.category_type)))
+        else:
+            self.category_type = category_type
+
+    def get_visibility(self):
+        return self.visibility
+
+    def set_visibility(self, visibility):
+        if not isinstance(visibility, type(Category.visibility)) and visibility is not None:
+            print(&#34;Error: visibility must be of type {}\n&#34;.format(type(Category.visibility)))
+        else:
+            self.visibility = visibility
+
+    def get_name(self):
+        return self.name
+
+    def set_name(self, name):
+        if not isinstance(name, type(Category.name)) and name is not None:
+            print(&#34;Error: name must be of type {}.\n&#34;.format(type(Category.name)))
+        else:
+            self.name = name
+
+    def get_description(self):
+        return self.description
+
+    def set_description(self, description):
+        if not isinstance(description, type(Category.description)) and description is not None:
+            print(&#34;Error: description must be of type {}.\n&#34;.format(type(Category.description)))
+        else:
+            self.description = description
+
+    def get_owner(self):
+        return self.owner
+
+    def set_owner(self, owner):
+        if not isinstance(owner, type(Category.owner)) and owner is not None:
+            print(&#34;Error: owner must be of type {}.\n&#34;.format(type(Category.owner)))
+        else:
+            self.owner = owner
+
+    def get_all_category(self):
+        attributes = list()
+        for i in dir(self):
+            if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
+                attributes.append(i)
+
+        return attributes  # in alphabetical order</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="RAAVE.src.categories.Category.category_id"><code class="name">var <span class="ident">category_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Category.category_type"><code class="name">var <span class="ident">category_type</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Category.description"><code class="name">var <span class="ident">description</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Category.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Category.owner"><code class="name">var <span class="ident">owner</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Category.visibility"><code class="name">var <span class="ident">visibility</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="RAAVE.src.categories.Category.get_all_category"><code class="name flex">
+<span>def <span class="ident">get_all_category</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_all_category(self):
+    attributes = list()
+    for i in dir(self):
+        if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
+            attributes.append(i)
+
+    return attributes  # in alphabetical order</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_category_id"><code class="name flex">
+<span>def <span class="ident">get_category_id</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_category_id(self):
+    return self.category_id</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_category_type"><code class="name flex">
+<span>def <span class="ident">get_category_type</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_category_type(self):
+    return self.category_type</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_description"><code class="name flex">
+<span>def <span class="ident">get_description</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_description(self):
+    return self.description</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_name"><code class="name flex">
+<span>def <span class="ident">get_name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_name(self):
+    return self.name</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_owner"><code class="name flex">
+<span>def <span class="ident">get_owner</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_owner(self):
+    return self.owner</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.get_visibility"><code class="name flex">
+<span>def <span class="ident">get_visibility</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_visibility(self):
+    return self.visibility</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_category_id"><code class="name flex">
+<span>def <span class="ident">set_category_id</span></span>(<span>self, category_id)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_category_id(self, category_id):
+    if not isinstance(category_id, type(Category.category_id)) and category_id is not None:
+        print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Category.category_id)))
+    else:
+        self.category_id = category_id</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_category_type"><code class="name flex">
+<span>def <span class="ident">set_category_type</span></span>(<span>self, category_type)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_category_type(self, category_type):
+    if not isinstance(category_type, type(Category.category_type)) and category_type is not None:
+        print(&#34;Error: category_type must be of type {}.\n&#34;.format(type(Category.category_type)))
+    else:
+        self.category_type = category_type</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_description"><code class="name flex">
+<span>def <span class="ident">set_description</span></span>(<span>self, description)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_description(self, description):
+    if not isinstance(description, type(Category.description)) and description is not None:
+        print(&#34;Error: description must be of type {}.\n&#34;.format(type(Category.description)))
+    else:
+        self.description = description</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_name"><code class="name flex">
+<span>def <span class="ident">set_name</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_name(self, name):
+    if not isinstance(name, type(Category.name)) and name is not None:
+        print(&#34;Error: name must be of type {}.\n&#34;.format(type(Category.name)))
+    else:
+        self.name = name</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_owner"><code class="name flex">
+<span>def <span class="ident">set_owner</span></span>(<span>self, owner)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_owner(self, owner):
+    if not isinstance(owner, type(Category.owner)) and owner is not None:
+        print(&#34;Error: owner must be of type {}.\n&#34;.format(type(Category.owner)))
+    else:
+        self.owner = owner</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Category.set_visibility"><code class="name flex">
+<span>def <span class="ident">set_visibility</span></span>(<span>self, visibility)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_visibility(self, visibility):
+    if not isinstance(visibility, type(Category.visibility)) and visibility is not None:
+        print(&#34;Error: visibility must be of type {}\n&#34;.format(type(Category.visibility)))
+    else:
+        self.visibility = visibility</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="RAAVE.src.categories.Course"><code class="flex name class">
+<span>class <span class="ident">Course</span></span>
+<span>(</span><span>course_id=None, course=None, start_date=None, end_date=None, department=None, section=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Course:
+    course_id = int()
+    course = int()
+    department = str()
+    start_date = str()
+    end_date = str()
+    section = int()
+
+    def __init__(self, course_id=None, course=None, start_date=None, end_date=None, department=None, section=None):
+        self.set_course_id(course_id)
+        self.set_course(course)
+        self.set_department(department)
+        self.set_start_date(start_date)
+        self.set_end_date(end_date)
+        self.set_section(section)
+        # super().__init__()
+
+    def get_course_id(self):
+        return self.course_id
+
+    def set_course_id(self, course_id):
+        if not isinstance(course_id, type(Course.course_id)) and course_id is not None:
+            print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Course.course_id)))
+        else:
+            self.course_id = course_id
+
+    def get_course(self):
+        return self.course
+
+    def set_course(self, course):
+        if not isinstance(course, type(Course.course)) and course is not None:
+            print(&#34;Error: course must be of type {}.\n&#34;.format(type(Course.course)))
+        else:
+            self.course = course
+
+    def get_start_date(self):
+        return self.start_date
+
+    def set_start_date(self, start_date):
+        if not isinstance(start_date, type(Course.start_date)) and start_date is not None:
+            print(&#34;Error: start_date must be of type {}.\n&#34;.format(type(Course.start_date)))
+        else:
+            self.start_date = start_date
+
+    def get_end_date(self):
+        return self.end_date
+
+    def set_end_date(self, end_date):
+        if not isinstance(end_date, type(Course.end_date)) and end_date is not None:
+            print(&#34;Error: end_date must be of type {}.\n&#34;.format(type(Course.end_date)))
+        else:
+            self.end_date = end_date
+
+    def get_department(self):
+        return self.department
+
+    def set_department(self, department):
+        if not isinstance(department, type(Course.department)) and department is not None:
+            print(&#34;Error: department must be of type {}.\n&#34;.format(type(Course.department)))
+        else:
+            self.department = department
+
+    def get_section(self):
+        return self.section
+
+    def set_section(self, section):
+        if not isinstance(section, type(Course.section)) and section is not None:
+            print(&#34;Error: section must be of type {}.\n&#34;.format(type(Course.section)))
+        else:
+            self.section = section</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="RAAVE.src.categories.Course.course"><code class="name">var <span class="ident">course</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Course.course_id"><code class="name">var <span class="ident">course_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Course.department"><code class="name">var <span class="ident">department</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Course.end_date"><code class="name">var <span class="ident">end_date</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Course.section"><code class="name">var <span class="ident">section</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="RAAVE.src.categories.Course.start_date"><code class="name">var <span class="ident">start_date</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="RAAVE.src.categories.Course.get_course"><code class="name flex">
+<span>def <span class="ident">get_course</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_course(self):
+    return self.course</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.get_course_id"><code class="name flex">
+<span>def <span class="ident">get_course_id</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_course_id(self):
+    return self.course_id</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.get_department"><code class="name flex">
+<span>def <span class="ident">get_department</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_department(self):
+    return self.department</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.get_end_date"><code class="name flex">
+<span>def <span class="ident">get_end_date</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_end_date(self):
+    return self.end_date</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.get_section"><code class="name flex">
+<span>def <span class="ident">get_section</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_section(self):
+    return self.section</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.get_start_date"><code class="name flex">
+<span>def <span class="ident">get_start_date</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_start_date(self):
+    return self.start_date</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_course"><code class="name flex">
+<span>def <span class="ident">set_course</span></span>(<span>self, course)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_course(self, course):
+    if not isinstance(course, type(Course.course)) and course is not None:
+        print(&#34;Error: course must be of type {}.\n&#34;.format(type(Course.course)))
+    else:
+        self.course = course</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_course_id"><code class="name flex">
+<span>def <span class="ident">set_course_id</span></span>(<span>self, course_id)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_course_id(self, course_id):
+    if not isinstance(course_id, type(Course.course_id)) and course_id is not None:
+        print(&#34;Error: category_id must be of type {}.\n&#34;.format(type(Course.course_id)))
+    else:
+        self.course_id = course_id</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_department"><code class="name flex">
+<span>def <span class="ident">set_department</span></span>(<span>self, department)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_department(self, department):
+    if not isinstance(department, type(Course.department)) and department is not None:
+        print(&#34;Error: department must be of type {}.\n&#34;.format(type(Course.department)))
+    else:
+        self.department = department</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_end_date"><code class="name flex">
+<span>def <span class="ident">set_end_date</span></span>(<span>self, end_date)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_end_date(self, end_date):
+    if not isinstance(end_date, type(Course.end_date)) and end_date is not None:
+        print(&#34;Error: end_date must be of type {}.\n&#34;.format(type(Course.end_date)))
+    else:
+        self.end_date = end_date</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_section"><code class="name flex">
+<span>def <span class="ident">set_section</span></span>(<span>self, section)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_section(self, section):
+    if not isinstance(section, type(Course.section)) and section is not None:
+        print(&#34;Error: section must be of type {}.\n&#34;.format(type(Course.section)))
+    else:
+        self.section = section</code></pre>
+</details>
+</dd>
+<dt id="RAAVE.src.categories.Course.set_start_date"><code class="name flex">
+<span>def <span class="ident">set_start_date</span></span>(<span>self, start_date)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_start_date(self, start_date):
+    if not isinstance(start_date, type(Course.start_date)) and start_date is not None:
+        print(&#34;Error: start_date must be of type {}.\n&#34;.format(type(Course.start_date)))
+    else:
+        self.start_date = start_date</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="RAAVE.src" href="index.html">RAAVE.src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="RAAVE.src.categories.Category" href="#RAAVE.src.categories.Category">Category</a></code></h4>
+<ul class="two-column">
+<li><code><a title="RAAVE.src.categories.Category.category_id" href="#RAAVE.src.categories.Category.category_id">category_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.category_type" href="#RAAVE.src.categories.Category.category_type">category_type</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.description" href="#RAAVE.src.categories.Category.description">description</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_all_category" href="#RAAVE.src.categories.Category.get_all_category">get_all_category</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_category_id" href="#RAAVE.src.categories.Category.get_category_id">get_category_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_category_type" href="#RAAVE.src.categories.Category.get_category_type">get_category_type</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_description" href="#RAAVE.src.categories.Category.get_description">get_description</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_name" href="#RAAVE.src.categories.Category.get_name">get_name</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_owner" href="#RAAVE.src.categories.Category.get_owner">get_owner</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.get_visibility" href="#RAAVE.src.categories.Category.get_visibility">get_visibility</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.name" href="#RAAVE.src.categories.Category.name">name</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.owner" href="#RAAVE.src.categories.Category.owner">owner</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_category_id" href="#RAAVE.src.categories.Category.set_category_id">set_category_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_category_type" href="#RAAVE.src.categories.Category.set_category_type">set_category_type</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_description" href="#RAAVE.src.categories.Category.set_description">set_description</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_name" href="#RAAVE.src.categories.Category.set_name">set_name</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_owner" href="#RAAVE.src.categories.Category.set_owner">set_owner</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.set_visibility" href="#RAAVE.src.categories.Category.set_visibility">set_visibility</a></code></li>
+<li><code><a title="RAAVE.src.categories.Category.visibility" href="#RAAVE.src.categories.Category.visibility">visibility</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="RAAVE.src.categories.Course" href="#RAAVE.src.categories.Course">Course</a></code></h4>
+<ul class="two-column">
+<li><code><a title="RAAVE.src.categories.Course.course" href="#RAAVE.src.categories.Course.course">course</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.course_id" href="#RAAVE.src.categories.Course.course_id">course_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.department" href="#RAAVE.src.categories.Course.department">department</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.end_date" href="#RAAVE.src.categories.Course.end_date">end_date</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_course" href="#RAAVE.src.categories.Course.get_course">get_course</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_course_id" href="#RAAVE.src.categories.Course.get_course_id">get_course_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_department" href="#RAAVE.src.categories.Course.get_department">get_department</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_end_date" href="#RAAVE.src.categories.Course.get_end_date">get_end_date</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_section" href="#RAAVE.src.categories.Course.get_section">get_section</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.get_start_date" href="#RAAVE.src.categories.Course.get_start_date">get_start_date</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.section" href="#RAAVE.src.categories.Course.section">section</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_course" href="#RAAVE.src.categories.Course.set_course">set_course</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_course_id" href="#RAAVE.src.categories.Course.set_course_id">set_course_id</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_department" href="#RAAVE.src.categories.Course.set_department">set_department</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_end_date" href="#RAAVE.src.categories.Course.set_end_date">set_end_date</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_section" href="#RAAVE.src.categories.Course.set_section">set_section</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.set_start_date" href="#RAAVE.src.categories.Course.set_start_date">set_start_date</a></code></li>
+<li><code><a title="RAAVE.src.categories.Course.start_date" href="#RAAVE.src.categories.Course.start_date">start_date</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
