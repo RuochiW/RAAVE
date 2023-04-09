@@ -33,13 +33,14 @@ Contents: Event and deliverable base classes and event controller class</p>
 Author: Ethan
 Contents: Event and deliverable base classes and event controller class
 &#34;&#34;&#34;
-#from event_data_controller import *
-#from data_controller.event_data_controller import *
-#from data_controller.event_data_controller import write_event, read_event, read_all_event
+
+
+# from event_data_controller import *
+
 
 class Event:
     &#34;&#34;&#34;The event class contains a layout of the information pertaining to an event. 
-    Conceptually it represents a simple task or event that is contained wthin 
+    Conceptually it represents a simple task or event that is contained thin
     a grouping, that is, the category class.
     &#34;&#34;&#34;
 
@@ -55,7 +56,7 @@ class Event:
                  visibility=None, name=None, category=None,
                  start_date=None, end_date=None):
         &#34;&#34;&#34;The event constructor defaults every attribute to None, otherwise 
-            it sets paramters as specified.        
+            it sets parameters as specified.
         &#34;&#34;&#34;
         self.set_event_id(event_id)
         self.set_event_type(event_type)
@@ -66,7 +67,7 @@ class Event:
         self.set_end_date(end_date)
 
     def __str__(self):
-        &#34;&#34;&#34;Formated output for the Event object, it will print each attribute line by line.&#34;&#34;&#34;
+        &#34;&#34;&#34;Formatted output for the Event object, it will print each attribute line by line.&#34;&#34;&#34;
         return f&#39;&#39;&#39;event_id: {self.event_id},\n event_type: {self.event_type},\n
                     visibility: {self.visibility},\n name: {self.name}, 
                     Category: {self.category},\n Start Date: {self.start_date}, \n 
@@ -76,12 +77,11 @@ class Event:
         &#34;&#34;&#34;Returns the value of the event_id attribute for an Event object&#34;&#34;&#34;
         return self.event_id
 
-
     def set_event_id(self, event_id):
         &#34;&#34;&#34;Sets the value of the event_id attribute for an Event object using the event_id
         parameter and checks if it is an integer. If event_id is not an integer or None the
         attribute will not be updated.&#34;&#34;&#34;
-        if type(event_id) is not type(Event.event_id) and type(event_id) is not type(None):
+        if not isinstance(event_id, type(Event.event_id)) and event_id is not None:
             print(f&#34;Error: event_id must be of type {type(Event.event_id)}.&#34;)
         else:
             self.event_id = event_id
@@ -94,7 +94,7 @@ class Event:
         &#34;&#34;&#34;Sets the value of the event_type attribute for an Event object using the event_type
         parameter and checks if it is an integer. If event_type is not an integer or None then 
         the attribute will not be updated.&#34;&#34;&#34;
-        if type(event_type) is not type(Event.event_type) and type(event_type) is not type(None):
+        if not isinstance(event_type, type(Event.event_type)) and event_type is not None:
             print(f&#34;Error: event_type must be of type {type(Event.event_type)}.&#34;)
         else:
             self.event_type = event_type
@@ -105,9 +105,9 @@ class Event:
 
     def set_visibility(self, visibility):
         &#34;&#34;&#34;Sets the value of the visibility attribute for an Event object using the visibility
-        parameter and checks if it is an integer. If visibility is not a integer the attribute 
+        parameter and checks if it is an integer. If visibility is not an integer the attribute
         will not be updated&#34;&#34;&#34;
-        if type(visibility) is not type(Event.visibility) and type(visibility) is not type(None):
+        if not isinstance(visibility, type(Event.visibility)) and visibility is not None:
             print(f&#34;Error: visibility must be of type {type(Event.visibility)}.&#34;)
         else:
             self.visibility = visibility
@@ -118,9 +118,9 @@ class Event:
 
     def set_name(self, name):
         &#34;&#34;&#34;Sets the value of the name attribute for an Event object using the name
-        parameter and checks if it is an string. If name is not a string this function 
+        parameter and checks if it is a string. If name is not a string this function
         will not update the attribute&#34;&#34;&#34;
-        if type(name) is not type(Event.name) and type(name) is not type(None):
+        if not isinstance(name, type(Event.name)) and name is not None:
             print(f&#34;Error: name must be of type {type(Event.name)}.&#34;)
         else:
             self.name = name
@@ -131,9 +131,9 @@ class Event:
 
     def set_category_id(self, category):
         &#34;&#34;&#34;Sets the value of the category attribute for an Event object using the category
-        parameter and checks if it is an integer. If name is not a integer this function 
+        parameter and checks if it is an integer. If name is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(category) is not type(Event.category) and type(category) is not type(None):
+        if not isinstance(category, type(Event.category)) and category is not None:
             print(f&#34;Error: category must be of type {type(Event.category)}.&#34;)
         else:
             self.category = category
@@ -144,9 +144,9 @@ class Event:
 
     def set_start_date(self, start_date):
         &#34;&#34;&#34;Sets the value of the start_date attribute for an Event object using the start_date
-        parameter and checks if it is an integer. If start_date is not a integer this function 
+        parameter and checks if it is an integer. If start_date is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(start_date) is not type(Event.start_date) and type(start_date) is not type(None):
+        if not isinstance(start_date, type(Event.start_date)) and start_date is not None:
             print(f&#34;Error: start_date must be of type {type(Event.start_date)}.&#34;)
         else:
             self.start_date = start_date
@@ -157,24 +157,24 @@ class Event:
 
     def set_end_date(self, end_date):
         &#34;&#34;&#34;Sets the value of the end_date attribute for an Event object using the end_date
-        parameter and checks if it is an integer. If end_date is not a integer this function 
+        parameter and checks if it is an integer. If end_date is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(end_date) is not type(Event.end_date) and type(end_date) is not type(None):
+        if not isinstance(end_date, type(Event.end_date)) and end_date is not None:
             print(f&#34;Error: end_date must be of type {type(Event.end_date)}.&#34;)
         else:
             self.end_date = end_date
 
-    def get_all(self):
+    def get_all_event(self):
         &#34;&#34;&#34;Returns a list of all user defined attributes of the event class in alphabetical order.&#34;&#34;&#34;
         attributes = list()
         for i in dir(self):
-            if not i.startswith[&#39;__&#39;] and not i.startswith[&#39;get&#39;] and not i.startswith[&#39;set&#39;]:
+            if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
                 attributes.append(i)
 
         return attributes  # in alphabetical order
 
 
-class Deliverable():
+class Deliverable:
     &#34;&#34;&#34;The Deliverable class contains a layout of the information pertaining to a deliverable. 
     Conceptually it represents a course assigment or any task a professor may want to put on a 
     course calendar that is also contained within a grouping, that is, the course class.
@@ -196,9 +196,9 @@ class Deliverable():
 
     def set_deliverable_id(self, deliverable_id):
         &#34;&#34;&#34;Sets the value of the deliverable_id attribute for a Deliverable object using the deliverable_id
-        parameter and checks if it is an integer. If deliverable_id is not a integer this function 
+        parameter and checks if it is an integer. If deliverable_id is not an integer this function
         will not update the attribute.&#34;&#34;&#34;
-        if type(deliverable_id) is not type(Deliverable.deliverable_id) and type(deliverable_id) is not type(None):
+        if not isinstance(deliverable_id, type(Deliverable.deliverable_id)) and deliverable_id is not None:
             print(f&#34;Error: deliverable_id must be of type {type(Deliverable.deliverable_id)}.&#34;)
         else:
             self.deliverable_id = deliverable_id
@@ -211,7 +211,7 @@ class Deliverable():
         &#34;&#34;&#34;Sets the value of the time_estimate attribute for a Deliverable object using the time_estimate
         parameter and checks if it is a string. If time_estimate is not a string this function 
         will not update the attribute.&#34;&#34;&#34;
-        if type(time_estimate) is not type(Deliverable.time_estimate) and type(time_estimate) is not type(None):
+        if not isinstance(time_estimate, type(Deliverable.time_estimate)) and time_estimate is not None:
             print(f&#34;Error: time_estimate must be of type {type(Deliverable.time_estimate)}.&#34;)
         else:
             self.time_estimate = time_estimate
@@ -222,9 +222,9 @@ class Deliverable():
 
     def set_time_spent(self, time_spent):
         &#34;&#34;&#34;Sets the value of the time_spent attribute for a Deliverable object using the time_spent
-        parameter and checks if it is an string. If time_spent is not a stirng this function 
+        parameter and checks if it is a string. If time_spent is not a string this function
         will not update the attribute.&#34;&#34;&#34;
-        if type(time_spent) is not type(Deliverable.time_spent) and type(time_spent) is not type(None):
+        if not isinstance(time_spent, type(Deliverable.time_spent)) and time_spent is not None:
             print(f&#34;Error: time_spent must be of type {type(Deliverable.time_spent)}.&#34;)
         else:
             self.time_spent = time_spent
@@ -237,100 +237,10 @@ class Deliverable():
         &#34;&#34;&#34;Sets the value of the weight attribute for a Deliverable object using the weight
         parameter and checks if it is an integer. If weight is not an integer this function 
         will not update the attribute.&#34;&#34;&#34;
-        if type(weight) is not type(Deliverable.weight) and type(weight) is not type(None):
+        if not isinstance(weight, type(Deliverable.weight)) and weight is not None:
             print(f&#34;Error: weight must be of type {type(Deliverable.weight)}.&#34;)
         else:
-            self.weight = weight
-
-
-class EventController(Event, Deliverable):
-    &#34;&#34;&#34;Inherits from the Event Class. It controls the interactions between the frontend and 
-    the database related to the creation, deletion, reading and writing of event objects&#34;&#34;&#34;
-
-    def create_event(self):
-        &#34;&#34;&#34;Initizlies an empty Event Object and and puts it into the database, returns 
-        the status of the write operation.&#34;&#34;&#34;
-        e = Event()
-        res = write_event(e)
-        return res
-
-    def update_event(self):
-        &#34;&#34;&#34;Until user interface input is complete, input will be drawn from the command line.
-        This functions will update the values of an event in the database and return the status of the operation&#34;&#34;&#34;
-
-        e = Event()
-
-        #get all the updates user wants, initially just command line input
-        update_list = get_event_input()
-
-        #get all the attributes that are in the event that is being updated
-        attributes = e.get_all()
-
-        #Update all varialbles unless input value specified is none or empty string
-        for i in enumerate(attributes, 0):
-            if update_list[i] == &#39;&#39; or update_list[i] is None:
-                continue
-
-            e.__setattr__(attributes[i], update_list[i])
-
-        res = write_event(e)
-        return res
-
-    def read_event(self):
-        &#34;&#34;&#34;Returns a list of event attributes with a given event_id if the operation is successful,
-        otherwise returns the read opertaion status and an error message&#34;&#34;&#34;
-
-        event_id = input(&#34;Enter the event_id of the event you would like to read: &#34;)
-        event_id = int(event_id) #input() always returns a string, cast it to an integer
-        e = Event(event_id)
-
-        res = read_event(e)
-        return res
-
-    def delete_event(self):
-        &#34;&#34;&#34;Will &#39;remove&#39; an event from the database, or rather, replace all the table values with 
-        Null. If this operation is successful it will return a list with the status and the empty 
-        attributes, otherwise will return a list with the status and an error message.&#34;&#34;&#34;
-        event_id = input(&#34;Enter the event_id of the event you would like to delete: &#34;)
-        event_id = int(event_id)
-        obj = Event(id)  # The other attributes will be defaulted to None
-
-        res = write_event(obj)
-        return res
-
-    def getAllNotifications(self):
-        &#34;&#34;&#34;Returns a list of all notifications for an event object if successful, 
-        otherwise returns a list with the status of the operation and an error message.&#34;&#34;&#34;
-        id = input(
-            &#34;Enter the event_id of the event you would like to fetch all notifications for: &#34;)
-        id = int(id)
-        e = Event(id)
-        res = read_all_notifications(e) #defined witin notification_data_controller.py
-        return res
-
-
-def get_event_input():
-    &#34;&#34;&#34;
-    Helper function that gets user input for updating attribute values,
-    likely to be replaced with html form input.
-    &#34;&#34;&#34;
-    e = Event()
-
-    # get_all() returns a list of only the user defined attributes of a class
-    source_attr = e.get_all()
-    updated_attr = list()
-
-    # iterate through all attributes prompting for input for each then storing that input in a list
-    for i in enumerate(source_attr, 0):
-
-        attr = input(f&#34;Enter value for {source_attr[i]}: &#34;)
-
-        if type(e.__getattribute__(source_attr[i])) == type(int):
-            attr = int(attr)
-
-        updated_attr.append(attr)
-
-    return updated_attr</code></pre>
+            self.weight = weight</code></pre>
 </details>
 </section>
 <section>
@@ -338,43 +248,6 @@ def get_event_input():
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-functions">Functions</h2>
-<dl>
-<dt id="events.get_event_input"><code class="name flex">
-<span>def <span class="ident">get_event_input</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Helper function that gets user input for updating attribute values,
-likely to be replaced with html form input.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_event_input():
-    &#34;&#34;&#34;
-    Helper function that gets user input for updating attribute values,
-    likely to be replaced with html form input.
-    &#34;&#34;&#34;
-    e = Event()
-
-    # get_all() returns a list of only the user defined attributes of a class
-    source_attr = e.get_all()
-    updated_attr = list()
-
-    # iterate through all attributes prompting for input for each then storing that input in a list
-    for i in enumerate(source_attr, 0):
-
-        attr = input(f&#34;Enter value for {source_attr[i]}: &#34;)
-
-        if type(e.__getattribute__(source_attr[i])) == type(int):
-            attr = int(attr)
-
-        updated_attr.append(attr)
-
-    return updated_attr</code></pre>
-</details>
-</dd>
-</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
@@ -391,7 +264,7 @@ course calendar that is also contained within a grouping, that is, the course cl
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Deliverable():
+<pre><code class="python">class Deliverable:
     &#34;&#34;&#34;The Deliverable class contains a layout of the information pertaining to a deliverable. 
     Conceptually it represents a course assigment or any task a professor may want to put on a 
     course calendar that is also contained within a grouping, that is, the course class.
@@ -413,9 +286,9 @@ course calendar that is also contained within a grouping, that is, the course cl
 
     def set_deliverable_id(self, deliverable_id):
         &#34;&#34;&#34;Sets the value of the deliverable_id attribute for a Deliverable object using the deliverable_id
-        parameter and checks if it is an integer. If deliverable_id is not a integer this function 
+        parameter and checks if it is an integer. If deliverable_id is not an integer this function
         will not update the attribute.&#34;&#34;&#34;
-        if type(deliverable_id) is not type(Deliverable.deliverable_id) and type(deliverable_id) is not type(None):
+        if not isinstance(deliverable_id, type(Deliverable.deliverable_id)) and deliverable_id is not None:
             print(f&#34;Error: deliverable_id must be of type {type(Deliverable.deliverable_id)}.&#34;)
         else:
             self.deliverable_id = deliverable_id
@@ -428,7 +301,7 @@ course calendar that is also contained within a grouping, that is, the course cl
         &#34;&#34;&#34;Sets the value of the time_estimate attribute for a Deliverable object using the time_estimate
         parameter and checks if it is a string. If time_estimate is not a string this function 
         will not update the attribute.&#34;&#34;&#34;
-        if type(time_estimate) is not type(Deliverable.time_estimate) and type(time_estimate) is not type(None):
+        if not isinstance(time_estimate, type(Deliverable.time_estimate)) and time_estimate is not None:
             print(f&#34;Error: time_estimate must be of type {type(Deliverable.time_estimate)}.&#34;)
         else:
             self.time_estimate = time_estimate
@@ -439,9 +312,9 @@ course calendar that is also contained within a grouping, that is, the course cl
 
     def set_time_spent(self, time_spent):
         &#34;&#34;&#34;Sets the value of the time_spent attribute for a Deliverable object using the time_spent
-        parameter and checks if it is an string. If time_spent is not a stirng this function 
+        parameter and checks if it is a string. If time_spent is not a string this function
         will not update the attribute.&#34;&#34;&#34;
-        if type(time_spent) is not type(Deliverable.time_spent) and type(time_spent) is not type(None):
+        if not isinstance(time_spent, type(Deliverable.time_spent)) and time_spent is not None:
             print(f&#34;Error: time_spent must be of type {type(Deliverable.time_spent)}.&#34;)
         else:
             self.time_spent = time_spent
@@ -454,15 +327,11 @@ course calendar that is also contained within a grouping, that is, the course cl
         &#34;&#34;&#34;Sets the value of the weight attribute for a Deliverable object using the weight
         parameter and checks if it is an integer. If weight is not an integer this function 
         will not update the attribute.&#34;&#34;&#34;
-        if type(weight) is not type(Deliverable.weight) and type(weight) is not type(None):
+        if not isinstance(weight, type(Deliverable.weight)) and weight is not None:
             print(f&#34;Error: weight must be of type {type(Deliverable.weight)}.&#34;)
         else:
             self.weight = weight</code></pre>
 </details>
-<h3>Subclasses</h3>
-<ul class="hlist">
-<li><a title="events.EventController" href="#events.EventController">EventController</a></li>
-</ul>
 <h3>Class variables</h3>
 <dl>
 <dt id="events.Deliverable.deliverable_id"><code class="name">var <span class="ident">deliverable_id</span></code></dt>
@@ -545,7 +414,7 @@ course calendar that is also contained within a grouping, that is, the course cl
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the deliverable_id attribute for a Deliverable object using the deliverable_id
-parameter and checks if it is an integer. If deliverable_id is not a integer this function
+parameter and checks if it is an integer. If deliverable_id is not an integer this function
 will not update the attribute.</p></div>
 <details class="source">
 <summary>
@@ -553,9 +422,9 @@ will not update the attribute.</p></div>
 </summary>
 <pre><code class="python">def set_deliverable_id(self, deliverable_id):
     &#34;&#34;&#34;Sets the value of the deliverable_id attribute for a Deliverable object using the deliverable_id
-    parameter and checks if it is an integer. If deliverable_id is not a integer this function 
+    parameter and checks if it is an integer. If deliverable_id is not an integer this function
     will not update the attribute.&#34;&#34;&#34;
-    if type(deliverable_id) is not type(Deliverable.deliverable_id) and type(deliverable_id) is not type(None):
+    if not isinstance(deliverable_id, type(Deliverable.deliverable_id)) and deliverable_id is not None:
         print(f&#34;Error: deliverable_id must be of type {type(Deliverable.deliverable_id)}.&#34;)
     else:
         self.deliverable_id = deliverable_id</code></pre>
@@ -576,7 +445,7 @@ will not update the attribute.</p></div>
     &#34;&#34;&#34;Sets the value of the time_estimate attribute for a Deliverable object using the time_estimate
     parameter and checks if it is a string. If time_estimate is not a string this function 
     will not update the attribute.&#34;&#34;&#34;
-    if type(time_estimate) is not type(Deliverable.time_estimate) and type(time_estimate) is not type(None):
+    if not isinstance(time_estimate, type(Deliverable.time_estimate)) and time_estimate is not None:
         print(f&#34;Error: time_estimate must be of type {type(Deliverable.time_estimate)}.&#34;)
     else:
         self.time_estimate = time_estimate</code></pre>
@@ -587,7 +456,7 @@ will not update the attribute.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the time_spent attribute for a Deliverable object using the time_spent
-parameter and checks if it is an string. If time_spent is not a stirng this function
+parameter and checks if it is a string. If time_spent is not a string this function
 will not update the attribute.</p></div>
 <details class="source">
 <summary>
@@ -595,9 +464,9 @@ will not update the attribute.</p></div>
 </summary>
 <pre><code class="python">def set_time_spent(self, time_spent):
     &#34;&#34;&#34;Sets the value of the time_spent attribute for a Deliverable object using the time_spent
-    parameter and checks if it is an string. If time_spent is not a stirng this function 
+    parameter and checks if it is a string. If time_spent is not a string this function
     will not update the attribute.&#34;&#34;&#34;
-    if type(time_spent) is not type(Deliverable.time_spent) and type(time_spent) is not type(None):
+    if not isinstance(time_spent, type(Deliverable.time_spent)) and time_spent is not None:
         print(f&#34;Error: time_spent must be of type {type(Deliverable.time_spent)}.&#34;)
     else:
         self.time_spent = time_spent</code></pre>
@@ -618,7 +487,7 @@ will not update the attribute.</p></div>
     &#34;&#34;&#34;Sets the value of the weight attribute for a Deliverable object using the weight
     parameter and checks if it is an integer. If weight is not an integer this function 
     will not update the attribute.&#34;&#34;&#34;
-    if type(weight) is not type(Deliverable.weight) and type(weight) is not type(None):
+    if not isinstance(weight, type(Deliverable.weight)) and weight is not None:
         print(f&#34;Error: weight must be of type {type(Deliverable.weight)}.&#34;)
     else:
         self.weight = weight</code></pre>
@@ -632,17 +501,17 @@ will not update the attribute.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>The event class contains a layout of the information pertaining to an event.
-Conceptually it represents a simple task or event that is contained wthin
+Conceptually it represents a simple task or event that is contained thin
 a grouping, that is, the category class.</p>
 <p>The event constructor defaults every attribute to None, otherwise
-it sets paramters as specified.</p></div>
+it sets parameters as specified.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Event:
     &#34;&#34;&#34;The event class contains a layout of the information pertaining to an event. 
-    Conceptually it represents a simple task or event that is contained wthin 
+    Conceptually it represents a simple task or event that is contained thin
     a grouping, that is, the category class.
     &#34;&#34;&#34;
 
@@ -658,7 +527,7 @@ it sets paramters as specified.</p></div>
                  visibility=None, name=None, category=None,
                  start_date=None, end_date=None):
         &#34;&#34;&#34;The event constructor defaults every attribute to None, otherwise 
-            it sets paramters as specified.        
+            it sets parameters as specified.
         &#34;&#34;&#34;
         self.set_event_id(event_id)
         self.set_event_type(event_type)
@@ -669,7 +538,7 @@ it sets paramters as specified.</p></div>
         self.set_end_date(end_date)
 
     def __str__(self):
-        &#34;&#34;&#34;Formated output for the Event object, it will print each attribute line by line.&#34;&#34;&#34;
+        &#34;&#34;&#34;Formatted output for the Event object, it will print each attribute line by line.&#34;&#34;&#34;
         return f&#39;&#39;&#39;event_id: {self.event_id},\n event_type: {self.event_type},\n
                     visibility: {self.visibility},\n name: {self.name}, 
                     Category: {self.category},\n Start Date: {self.start_date}, \n 
@@ -679,12 +548,11 @@ it sets paramters as specified.</p></div>
         &#34;&#34;&#34;Returns the value of the event_id attribute for an Event object&#34;&#34;&#34;
         return self.event_id
 
-
     def set_event_id(self, event_id):
         &#34;&#34;&#34;Sets the value of the event_id attribute for an Event object using the event_id
         parameter and checks if it is an integer. If event_id is not an integer or None the
         attribute will not be updated.&#34;&#34;&#34;
-        if type(event_id) is not type(Event.event_id) and type(event_id) is not type(None):
+        if not isinstance(event_id, type(Event.event_id)) and event_id is not None:
             print(f&#34;Error: event_id must be of type {type(Event.event_id)}.&#34;)
         else:
             self.event_id = event_id
@@ -697,7 +565,7 @@ it sets paramters as specified.</p></div>
         &#34;&#34;&#34;Sets the value of the event_type attribute for an Event object using the event_type
         parameter and checks if it is an integer. If event_type is not an integer or None then 
         the attribute will not be updated.&#34;&#34;&#34;
-        if type(event_type) is not type(Event.event_type) and type(event_type) is not type(None):
+        if not isinstance(event_type, type(Event.event_type)) and event_type is not None:
             print(f&#34;Error: event_type must be of type {type(Event.event_type)}.&#34;)
         else:
             self.event_type = event_type
@@ -708,9 +576,9 @@ it sets paramters as specified.</p></div>
 
     def set_visibility(self, visibility):
         &#34;&#34;&#34;Sets the value of the visibility attribute for an Event object using the visibility
-        parameter and checks if it is an integer. If visibility is not a integer the attribute 
+        parameter and checks if it is an integer. If visibility is not an integer the attribute
         will not be updated&#34;&#34;&#34;
-        if type(visibility) is not type(Event.visibility) and type(visibility) is not type(None):
+        if not isinstance(visibility, type(Event.visibility)) and visibility is not None:
             print(f&#34;Error: visibility must be of type {type(Event.visibility)}.&#34;)
         else:
             self.visibility = visibility
@@ -721,9 +589,9 @@ it sets paramters as specified.</p></div>
 
     def set_name(self, name):
         &#34;&#34;&#34;Sets the value of the name attribute for an Event object using the name
-        parameter and checks if it is an string. If name is not a string this function 
+        parameter and checks if it is a string. If name is not a string this function
         will not update the attribute&#34;&#34;&#34;
-        if type(name) is not type(Event.name) and type(name) is not type(None):
+        if not isinstance(name, type(Event.name)) and name is not None:
             print(f&#34;Error: name must be of type {type(Event.name)}.&#34;)
         else:
             self.name = name
@@ -734,9 +602,9 @@ it sets paramters as specified.</p></div>
 
     def set_category_id(self, category):
         &#34;&#34;&#34;Sets the value of the category attribute for an Event object using the category
-        parameter and checks if it is an integer. If name is not a integer this function 
+        parameter and checks if it is an integer. If name is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(category) is not type(Event.category) and type(category) is not type(None):
+        if not isinstance(category, type(Event.category)) and category is not None:
             print(f&#34;Error: category must be of type {type(Event.category)}.&#34;)
         else:
             self.category = category
@@ -747,9 +615,9 @@ it sets paramters as specified.</p></div>
 
     def set_start_date(self, start_date):
         &#34;&#34;&#34;Sets the value of the start_date attribute for an Event object using the start_date
-        parameter and checks if it is an integer. If start_date is not a integer this function 
+        parameter and checks if it is an integer. If start_date is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(start_date) is not type(Event.start_date) and type(start_date) is not type(None):
+        if not isinstance(start_date, type(Event.start_date)) and start_date is not None:
             print(f&#34;Error: start_date must be of type {type(Event.start_date)}.&#34;)
         else:
             self.start_date = start_date
@@ -760,26 +628,22 @@ it sets paramters as specified.</p></div>
 
     def set_end_date(self, end_date):
         &#34;&#34;&#34;Sets the value of the end_date attribute for an Event object using the end_date
-        parameter and checks if it is an integer. If end_date is not a integer this function 
+        parameter and checks if it is an integer. If end_date is not an integer this function
         will not update the attribute&#34;&#34;&#34;
-        if type(end_date) is not type(Event.end_date) and type(end_date) is not type(None):
+        if not isinstance(end_date, type(Event.end_date)) and end_date is not None:
             print(f&#34;Error: end_date must be of type {type(Event.end_date)}.&#34;)
         else:
             self.end_date = end_date
 
-    def get_all(self):
+    def get_all_event(self):
         &#34;&#34;&#34;Returns a list of all user defined attributes of the event class in alphabetical order.&#34;&#34;&#34;
         attributes = list()
         for i in dir(self):
-            if not i.startswith[&#39;__&#39;] and not i.startswith[&#39;get&#39;] and not i.startswith[&#39;set&#39;]:
+            if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
                 attributes.append(i)
 
         return attributes  # in alphabetical order</code></pre>
 </details>
-<h3>Subclasses</h3>
-<ul class="hlist">
-<li><a title="events.EventController" href="#events.EventController">EventController</a></li>
-</ul>
 <h3>Class variables</h3>
 <dl>
 <dt id="events.Event.category"><code class="name">var <span class="ident">category</span></code></dt>
@@ -813,8 +677,8 @@ it sets paramters as specified.</p></div>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="events.Event.get_all"><code class="name flex">
-<span>def <span class="ident">get_all</span></span>(<span>self)</span>
+<dt id="events.Event.get_all_event"><code class="name flex">
+<span>def <span class="ident">get_all_event</span></span>(<span>self)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns a list of all user defined attributes of the event class in alphabetical order.</p></div>
@@ -822,11 +686,11 @@ it sets paramters as specified.</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_all(self):
+<pre><code class="python">def get_all_event(self):
     &#34;&#34;&#34;Returns a list of all user defined attributes of the event class in alphabetical order.&#34;&#34;&#34;
     attributes = list()
     for i in dir(self):
-        if not i.startswith[&#39;__&#39;] and not i.startswith[&#39;get&#39;] and not i.startswith[&#39;set&#39;]:
+        if not i.startswith(&#39;__&#39;) and not i.startswith(&#39;get&#39;) and not i.startswith(&#39;set&#39;):
             attributes.append(i)
 
     return attributes  # in alphabetical order</code></pre>
@@ -935,7 +799,7 @@ it sets paramters as specified.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the category attribute for an Event object using the category
-parameter and checks if it is an integer. If name is not a integer this function
+parameter and checks if it is an integer. If name is not an integer this function
 will not update the attribute</p></div>
 <details class="source">
 <summary>
@@ -943,9 +807,9 @@ will not update the attribute</p></div>
 </summary>
 <pre><code class="python">def set_category_id(self, category):
     &#34;&#34;&#34;Sets the value of the category attribute for an Event object using the category
-    parameter and checks if it is an integer. If name is not a integer this function 
+    parameter and checks if it is an integer. If name is not an integer this function
     will not update the attribute&#34;&#34;&#34;
-    if type(category) is not type(Event.category) and type(category) is not type(None):
+    if not isinstance(category, type(Event.category)) and category is not None:
         print(f&#34;Error: category must be of type {type(Event.category)}.&#34;)
     else:
         self.category = category</code></pre>
@@ -956,7 +820,7 @@ will not update the attribute</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the end_date attribute for an Event object using the end_date
-parameter and checks if it is an integer. If end_date is not a integer this function
+parameter and checks if it is an integer. If end_date is not an integer this function
 will not update the attribute</p></div>
 <details class="source">
 <summary>
@@ -964,9 +828,9 @@ will not update the attribute</p></div>
 </summary>
 <pre><code class="python">def set_end_date(self, end_date):
     &#34;&#34;&#34;Sets the value of the end_date attribute for an Event object using the end_date
-    parameter and checks if it is an integer. If end_date is not a integer this function 
+    parameter and checks if it is an integer. If end_date is not an integer this function
     will not update the attribute&#34;&#34;&#34;
-    if type(end_date) is not type(Event.end_date) and type(end_date) is not type(None):
+    if not isinstance(end_date, type(Event.end_date)) and end_date is not None:
         print(f&#34;Error: end_date must be of type {type(Event.end_date)}.&#34;)
     else:
         self.end_date = end_date</code></pre>
@@ -987,7 +851,7 @@ attribute will not be updated.</p></div>
     &#34;&#34;&#34;Sets the value of the event_id attribute for an Event object using the event_id
     parameter and checks if it is an integer. If event_id is not an integer or None the
     attribute will not be updated.&#34;&#34;&#34;
-    if type(event_id) is not type(Event.event_id) and type(event_id) is not type(None):
+    if not isinstance(event_id, type(Event.event_id)) and event_id is not None:
         print(f&#34;Error: event_id must be of type {type(Event.event_id)}.&#34;)
     else:
         self.event_id = event_id</code></pre>
@@ -1008,7 +872,7 @@ the attribute will not be updated.</p></div>
     &#34;&#34;&#34;Sets the value of the event_type attribute for an Event object using the event_type
     parameter and checks if it is an integer. If event_type is not an integer or None then 
     the attribute will not be updated.&#34;&#34;&#34;
-    if type(event_type) is not type(Event.event_type) and type(event_type) is not type(None):
+    if not isinstance(event_type, type(Event.event_type)) and event_type is not None:
         print(f&#34;Error: event_type must be of type {type(Event.event_type)}.&#34;)
     else:
         self.event_type = event_type</code></pre>
@@ -1019,7 +883,7 @@ the attribute will not be updated.</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the name attribute for an Event object using the name
-parameter and checks if it is an string. If name is not a string this function
+parameter and checks if it is a string. If name is not a string this function
 will not update the attribute</p></div>
 <details class="source">
 <summary>
@@ -1027,9 +891,9 @@ will not update the attribute</p></div>
 </summary>
 <pre><code class="python">def set_name(self, name):
     &#34;&#34;&#34;Sets the value of the name attribute for an Event object using the name
-    parameter and checks if it is an string. If name is not a string this function 
+    parameter and checks if it is a string. If name is not a string this function
     will not update the attribute&#34;&#34;&#34;
-    if type(name) is not type(Event.name) and type(name) is not type(None):
+    if not isinstance(name, type(Event.name)) and name is not None:
         print(f&#34;Error: name must be of type {type(Event.name)}.&#34;)
     else:
         self.name = name</code></pre>
@@ -1040,7 +904,7 @@ will not update the attribute</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the start_date attribute for an Event object using the start_date
-parameter and checks if it is an integer. If start_date is not a integer this function
+parameter and checks if it is an integer. If start_date is not an integer this function
 will not update the attribute</p></div>
 <details class="source">
 <summary>
@@ -1048,9 +912,9 @@ will not update the attribute</p></div>
 </summary>
 <pre><code class="python">def set_start_date(self, start_date):
     &#34;&#34;&#34;Sets the value of the start_date attribute for an Event object using the start_date
-    parameter and checks if it is an integer. If start_date is not a integer this function 
+    parameter and checks if it is an integer. If start_date is not an integer this function
     will not update the attribute&#34;&#34;&#34;
-    if type(start_date) is not type(Event.start_date) and type(start_date) is not type(None):
+    if not isinstance(start_date, type(Event.start_date)) and start_date is not None:
         print(f&#34;Error: start_date must be of type {type(Event.start_date)}.&#34;)
     else:
         self.start_date = start_date</code></pre>
@@ -1061,7 +925,7 @@ will not update the attribute</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the value of the visibility attribute for an Event object using the visibility
-parameter and checks if it is an integer. If visibility is not a integer the attribute
+parameter and checks if it is an integer. If visibility is not an integer the attribute
 will not be updated</p></div>
 <details class="source">
 <summary>
@@ -1069,253 +933,15 @@ will not be updated</p></div>
 </summary>
 <pre><code class="python">def set_visibility(self, visibility):
     &#34;&#34;&#34;Sets the value of the visibility attribute for an Event object using the visibility
-    parameter and checks if it is an integer. If visibility is not a integer the attribute 
+    parameter and checks if it is an integer. If visibility is not an integer the attribute
     will not be updated&#34;&#34;&#34;
-    if type(visibility) is not type(Event.visibility) and type(visibility) is not type(None):
+    if not isinstance(visibility, type(Event.visibility)) and visibility is not None:
         print(f&#34;Error: visibility must be of type {type(Event.visibility)}.&#34;)
     else:
         self.visibility = visibility</code></pre>
 </details>
 </dd>
 </dl>
-</dd>
-<dt id="events.EventController"><code class="flex name class">
-<span>class <span class="ident">EventController</span></span>
-<span>(</span><span>event_id=None, event_type=None, visibility=None, name=None, category=None, start_date=None, end_date=None)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Inherits from the Event Class. It controls the interactions between the frontend and
-the database related to the creation, deletion, reading and writing of event objects</p>
-<p>The event constructor defaults every attribute to None, otherwise
-it sets paramters as specified.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class EventController(Event, Deliverable):
-    &#34;&#34;&#34;Inherits from the Event Class. It controls the interactions between the frontend and 
-    the database related to the creation, deletion, reading and writing of event objects&#34;&#34;&#34;
-
-    def create_event(self):
-        &#34;&#34;&#34;Initizlies an empty Event Object and and puts it into the database, returns 
-        the status of the write operation.&#34;&#34;&#34;
-        e = Event()
-        res = write_event(e)
-        return res
-
-    def update_event(self):
-        &#34;&#34;&#34;Until user interface input is complete, input will be drawn from the command line.
-        This functions will update the values of an event in the database and return the status of the operation&#34;&#34;&#34;
-
-        e = Event()
-
-        #get all the updates user wants, initially just command line input
-        update_list = get_event_input()
-
-        #get all the attributes that are in the event that is being updated
-        attributes = e.get_all()
-
-        #Update all varialbles unless input value specified is none or empty string
-        for i in enumerate(attributes, 0):
-            if update_list[i] == &#39;&#39; or update_list[i] is None:
-                continue
-
-            e.__setattr__(attributes[i], update_list[i])
-
-        res = write_event(e)
-        return res
-
-    def read_event(self):
-        &#34;&#34;&#34;Returns a list of event attributes with a given event_id if the operation is successful,
-        otherwise returns the read opertaion status and an error message&#34;&#34;&#34;
-
-        event_id = input(&#34;Enter the event_id of the event you would like to read: &#34;)
-        event_id = int(event_id) #input() always returns a string, cast it to an integer
-        e = Event(event_id)
-
-        res = read_event(e)
-        return res
-
-    def delete_event(self):
-        &#34;&#34;&#34;Will &#39;remove&#39; an event from the database, or rather, replace all the table values with 
-        Null. If this operation is successful it will return a list with the status and the empty 
-        attributes, otherwise will return a list with the status and an error message.&#34;&#34;&#34;
-        event_id = input(&#34;Enter the event_id of the event you would like to delete: &#34;)
-        event_id = int(event_id)
-        obj = Event(id)  # The other attributes will be defaulted to None
-
-        res = write_event(obj)
-        return res
-
-    def getAllNotifications(self):
-        &#34;&#34;&#34;Returns a list of all notifications for an event object if successful, 
-        otherwise returns a list with the status of the operation and an error message.&#34;&#34;&#34;
-        id = input(
-            &#34;Enter the event_id of the event you would like to fetch all notifications for: &#34;)
-        id = int(id)
-        e = Event(id)
-        res = read_all_notifications(e) #defined witin notification_data_controller.py
-        return res</code></pre>
-</details>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li><a title="events.Event" href="#events.Event">Event</a></li>
-<li><a title="events.Deliverable" href="#events.Deliverable">Deliverable</a></li>
-</ul>
-<h3>Methods</h3>
-<dl>
-<dt id="events.EventController.create_event"><code class="name flex">
-<span>def <span class="ident">create_event</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Initizlies an empty Event Object and and puts it into the database, returns
-the status of the write operation.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def create_event(self):
-    &#34;&#34;&#34;Initizlies an empty Event Object and and puts it into the database, returns 
-    the status of the write operation.&#34;&#34;&#34;
-    e = Event()
-    res = write_event(e)
-    return res</code></pre>
-</details>
-</dd>
-<dt id="events.EventController.delete_event"><code class="name flex">
-<span>def <span class="ident">delete_event</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Will 'remove' an event from the database, or rather, replace all the table values with
-Null. If this operation is successful it will return a list with the status and the empty
-attributes, otherwise will return a list with the status and an error message.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def delete_event(self):
-    &#34;&#34;&#34;Will &#39;remove&#39; an event from the database, or rather, replace all the table values with 
-    Null. If this operation is successful it will return a list with the status and the empty 
-    attributes, otherwise will return a list with the status and an error message.&#34;&#34;&#34;
-    event_id = input(&#34;Enter the event_id of the event you would like to delete: &#34;)
-    event_id = int(event_id)
-    obj = Event(id)  # The other attributes will be defaulted to None
-
-    res = write_event(obj)
-    return res</code></pre>
-</details>
-</dd>
-<dt id="events.EventController.getAllNotifications"><code class="name flex">
-<span>def <span class="ident">getAllNotifications</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Returns a list of all notifications for an event object if successful,
-otherwise returns a list with the status of the operation and an error message.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def getAllNotifications(self):
-    &#34;&#34;&#34;Returns a list of all notifications for an event object if successful, 
-    otherwise returns a list with the status of the operation and an error message.&#34;&#34;&#34;
-    id = input(
-        &#34;Enter the event_id of the event you would like to fetch all notifications for: &#34;)
-    id = int(id)
-    e = Event(id)
-    res = read_all_notifications(e) #defined witin notification_data_controller.py
-    return res</code></pre>
-</details>
-</dd>
-<dt id="events.EventController.read_event"><code class="name flex">
-<span>def <span class="ident">read_event</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Returns a list of event attributes with a given event_id if the operation is successful,
-otherwise returns the read opertaion status and an error message</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def read_event(self):
-    &#34;&#34;&#34;Returns a list of event attributes with a given event_id if the operation is successful,
-    otherwise returns the read opertaion status and an error message&#34;&#34;&#34;
-
-    event_id = input(&#34;Enter the event_id of the event you would like to read: &#34;)
-    event_id = int(event_id) #input() always returns a string, cast it to an integer
-    e = Event(event_id)
-
-    res = read_event(e)
-    return res</code></pre>
-</details>
-</dd>
-<dt id="events.EventController.update_event"><code class="name flex">
-<span>def <span class="ident">update_event</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Until user interface input is complete, input will be drawn from the command line.
-This functions will update the values of an event in the database and return the status of the operation</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def update_event(self):
-    &#34;&#34;&#34;Until user interface input is complete, input will be drawn from the command line.
-    This functions will update the values of an event in the database and return the status of the operation&#34;&#34;&#34;
-
-    e = Event()
-
-    #get all the updates user wants, initially just command line input
-    update_list = get_event_input()
-
-    #get all the attributes that are in the event that is being updated
-    attributes = e.get_all()
-
-    #Update all varialbles unless input value specified is none or empty string
-    for i in enumerate(attributes, 0):
-        if update_list[i] == &#39;&#39; or update_list[i] is None:
-            continue
-
-        e.__setattr__(attributes[i], update_list[i])
-
-    res = write_event(e)
-    return res</code></pre>
-</details>
-</dd>
-</dl>
-<h3>Inherited members</h3>
-<ul class="hlist">
-<li><code><b><a title="events.Event" href="#events.Event">Event</a></b></code>:
-<ul class="hlist">
-<li><code><a title="events.Event.get_all" href="#events.Event.get_all">get_all</a></code></li>
-<li><code><a title="events.Event.get_category_id" href="#events.Event.get_category_id">get_category_id</a></code></li>
-<li><code><a title="events.Event.get_end_date" href="#events.Event.get_end_date">get_end_date</a></code></li>
-<li><code><a title="events.Event.get_event_id" href="#events.Event.get_event_id">get_event_id</a></code></li>
-<li><code><a title="events.Event.get_event_type" href="#events.Event.get_event_type">get_event_type</a></code></li>
-<li><code><a title="events.Event.get_name" href="#events.Event.get_name">get_name</a></code></li>
-<li><code><a title="events.Event.get_start_date" href="#events.Event.get_start_date">get_start_date</a></code></li>
-<li><code><a title="events.Event.get_visibility" href="#events.Event.get_visibility">get_visibility</a></code></li>
-<li><code><a title="events.Event.set_category_id" href="#events.Event.set_category_id">set_category_id</a></code></li>
-<li><code><a title="events.Event.set_end_date" href="#events.Event.set_end_date">set_end_date</a></code></li>
-<li><code><a title="events.Event.set_event_id" href="#events.Event.set_event_id">set_event_id</a></code></li>
-<li><code><a title="events.Event.set_event_type" href="#events.Event.set_event_type">set_event_type</a></code></li>
-<li><code><a title="events.Event.set_name" href="#events.Event.set_name">set_name</a></code></li>
-<li><code><a title="events.Event.set_start_date" href="#events.Event.set_start_date">set_start_date</a></code></li>
-<li><code><a title="events.Event.set_visibility" href="#events.Event.set_visibility">set_visibility</a></code></li>
-</ul>
-</li>
-<li><code><b><a title="events.Deliverable" href="#events.Deliverable">Deliverable</a></b></code>:
-<ul class="hlist">
-<li><code><a title="events.Deliverable.get_deliverable_id" href="#events.Deliverable.get_deliverable_id">get_deliverable_id</a></code></li>
-<li><code><a title="events.Deliverable.get_time_estimate" href="#events.Deliverable.get_time_estimate">get_time_estimate</a></code></li>
-<li><code><a title="events.Deliverable.get_time_spent" href="#events.Deliverable.get_time_spent">get_time_spent</a></code></li>
-<li><code><a title="events.Deliverable.get_weight" href="#events.Deliverable.get_weight">get_weight</a></code></li>
-<li><code><a title="events.Deliverable.set_deliverable_id" href="#events.Deliverable.set_deliverable_id">set_deliverable_id</a></code></li>
-<li><code><a title="events.Deliverable.set_time_estimate" href="#events.Deliverable.set_time_estimate">set_time_estimate</a></code></li>
-<li><code><a title="events.Deliverable.set_time_spent" href="#events.Deliverable.set_time_spent">set_time_spent</a></code></li>
-<li><code><a title="events.Deliverable.set_weight" href="#events.Deliverable.set_weight">set_weight</a></code></li>
-</ul>
-</li>
-</ul>
 </dd>
 </dl>
 </section>
@@ -1326,11 +952,6 @@ This functions will update the values of an event in the database and return the
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="events.get_event_input" href="#events.get_event_input">get_event_input</a></code></li>
-</ul>
-</li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
@@ -1357,7 +978,7 @@ This functions will update the values of an event in the database and return the
 <li><code><a title="events.Event.end_date" href="#events.Event.end_date">end_date</a></code></li>
 <li><code><a title="events.Event.event_id" href="#events.Event.event_id">event_id</a></code></li>
 <li><code><a title="events.Event.event_type" href="#events.Event.event_type">event_type</a></code></li>
-<li><code><a title="events.Event.get_all" href="#events.Event.get_all">get_all</a></code></li>
+<li><code><a title="events.Event.get_all_event" href="#events.Event.get_all_event">get_all_event</a></code></li>
 <li><code><a title="events.Event.get_category_id" href="#events.Event.get_category_id">get_category_id</a></code></li>
 <li><code><a title="events.Event.get_end_date" href="#events.Event.get_end_date">get_end_date</a></code></li>
 <li><code><a title="events.Event.get_event_id" href="#events.Event.get_event_id">get_event_id</a></code></li>
@@ -1375,16 +996,6 @@ This functions will update the values of an event in the database and return the
 <li><code><a title="events.Event.set_visibility" href="#events.Event.set_visibility">set_visibility</a></code></li>
 <li><code><a title="events.Event.start_date" href="#events.Event.start_date">start_date</a></code></li>
 <li><code><a title="events.Event.visibility" href="#events.Event.visibility">visibility</a></code></li>
-</ul>
-</li>
-<li>
-<h4><code><a title="events.EventController" href="#events.EventController">EventController</a></code></h4>
-<ul class="">
-<li><code><a title="events.EventController.create_event" href="#events.EventController.create_event">create_event</a></code></li>
-<li><code><a title="events.EventController.delete_event" href="#events.EventController.delete_event">delete_event</a></code></li>
-<li><code><a title="events.EventController.getAllNotifications" href="#events.EventController.getAllNotifications">getAllNotifications</a></code></li>
-<li><code><a title="events.EventController.read_event" href="#events.EventController.read_event">read_event</a></code></li>
-<li><code><a title="events.EventController.update_event" href="#events.EventController.update_event">update_event</a></code></li>
 </ul>
 </li>
 </ul>
