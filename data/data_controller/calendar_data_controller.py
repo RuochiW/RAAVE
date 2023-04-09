@@ -110,8 +110,9 @@ def read_all_user_category_calendar(account_obj):
     Args:
         account_obj: An Account object representing the user.
 
-    Returns: Success case: A list containing the boolean value True followed by sublist of events in the user's
-        category calendar.
+    Returns:
+        Success case: A list containing the boolean value True followed by sublist of events in the user's category
+        calendar.
         [True, [event1], [event2], [sublist], [...]]
 
         Fail case: A list containing the boolean value False followed by the error message.
@@ -122,16 +123,17 @@ def read_all_user_category_calendar(account_obj):
 
     """
 
+    # Attempt to read all events from the user's calendar
     try:
 
-        # Attempt to read all events from the user's calendar
+        # Check if account_obj is an instance of the Account class
         if isinstance(account_obj, Account):
 
             # Connect to the database and create a cursor object
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
 
-            # Execute a SQL query to retrieve the account ID for the given username and password
+            # Execute a SQL query to retrieve the account data from the database
             c.execute('''SELECT e.event_id, e.category, e.event_type, e.name, 
                          strftime('%Y-%m-%d %H:%M', e.start_date) AS start_date,
                          strftime('%Y-%m-%d %H:%M', e.end_date) AS end_date, e.visibility
@@ -139,30 +141,46 @@ def read_all_user_category_calendar(account_obj):
                          JOIN raave_category AS c ON e.category = c.category_id
                          WHERE c.owner = ?
                          ORDER BY e.start_date''', (account_obj.account_id,))
+
+            # Get the result of the query
             result = c.fetchall()
+
+            # Check if the query returns any results
             if result:
+
+                # Convert the tuples in the result to lists
                 user_category_calendar_data = [list(t) for t in result]
-                
+
                 # Close the database connection
                 conn.close()
+
+                # Create a list containing True followed by the list of account data
                 bool_true = [True]
                 bool_true.extend(user_category_calendar_data)
+
                 return bool_true
+
+            # If the query returns no results
             else:
-                
+
+                # Close the database connection
+                conn.close()
+
+                # Log the error
                 e = 'No user category calendars found for the account.'
                 logger.error("An error occurred: %s", e)
+
                 return [False, e]
 
         # If account_obj is not an instance of the Account class
         else:
-            
+
             # Log the error
             e = 'Invalid object type.'
             logger.error("An error occurred: %s", e)
 
             return [False, e]
-        
+
     # If any other exceptions occur
     except Exception as e:
 
@@ -173,10 +191,36 @@ def read_all_user_category_calendar(account_obj):
 
 
 def read_all_user_course_calendar(account_obj):
+    """
+        Reads all events from a user's course calendar.
+
+        Args:
+            account_obj: An Account object representing the user.
+
+        Returns:
+            Success case: A list containing the boolean value True followed by sublist of deliverables in the user's
+            course calendar.
+            [True, [deliverable1], [deliverable1], [sublist], [...]]
+
+            Fail case: A list containing the boolean value False followed by the error message.
+            [False, [error message]]
+
+        Raises:
+            Exception: If an error occurs during the database transaction.
+
+        """
+
+    # Attempt to read all events from the user's calendar
     try:
+
+        # Check if account_obj is an instance of the Account class
         if isinstance(account_obj, Account):
+
+            # Connect to the database and create a cursor object
             conn = sqlite3.connect(db_path)
             c = conn.cursor()
+
+            # Execute a SQL query to retrieve the account data from the database
             c.execute('''SELECT d.deliverable_id, r.course_id, e.event_type, e.name,
                          strftime('%Y-%m-%d %H:%M', e.start_date) AS start_date,
                          strftime('%Y-%m-%d %H:%M', e.end_date) AS end_date, 
@@ -188,23 +232,37 @@ def read_all_user_course_calendar(account_obj):
                          JOIN raave_deliverable AS d ON e.event_id = d.deliverable_id
                          WHERE s.subscriber = ? AND e.visibility = 0
                          ORDER BY e.start_date''', (account_obj.account_id,))
+
+            # Get the result of the query
             result = c.fetchall()
+
+            # Check if the query returns any results
             if result:
+
+                # Convert the tuples in the result to lists
                 user_course_calendar_data = [list(t) for t in result]
-                
+
                 # Close the database connection
                 conn.close()
+
+                # Create a list containing True followed by the list of account data
                 bool_true = [True]
                 bool_true.extend(user_course_calendar_data)
+
                 return bool_true
+
+            # If the query returns no results
             else:
-                
+
                 # Close the database connection
                 conn.close()
+
+                # Log the error
                 e = 'No user course calendars found for the account.'
                 logger.error("An error occurred: %s", e)
+
                 return [False, e]
-        
+
         # If account_obj is not an instance of the Account class
         else:
 
@@ -213,7 +271,7 @@ def read_all_user_course_calendar(account_obj):
             logger.error("An error occurred: %s", e)
 
             return [False, e]
-    
+
     # If any other exceptions occur
     except Exception as e:
 
