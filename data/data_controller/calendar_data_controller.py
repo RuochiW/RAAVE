@@ -31,7 +31,7 @@ def read_all_user_calendar(account_obj):
         Reads all events from a user's calendar.
 
         Args:
-            account_obj: An Account object representing the user.
+            account_obj: An instance of the Account class containing the account ID.
 
         Returns:
             Success case: A list containing the boolean value True followed by sublist of events in the user's calendar.
@@ -108,7 +108,7 @@ def read_all_user_category_calendar(account_obj):
     Reads all events from a user's category calendar.
 
     Args:
-        account_obj: An Account object representing the user.
+        account_obj: An instance of the Account class containing the account ID.
 
     Returns:
         Success case: A list containing the boolean value True followed by sublist of events in the user's category
@@ -195,7 +195,7 @@ def read_all_user_course_calendar(account_obj):
         Reads all events from a user's course calendar.
 
         Args:
-            account_obj: An Account object representing the user.
+            account_obj: An instance of the Account class containing the account ID.
 
         Returns:
             Success case: A list containing the boolean value True followed by sublist of deliverables in the user's

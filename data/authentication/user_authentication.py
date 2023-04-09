@@ -32,8 +32,8 @@ def user_login(account_obj):
         account_obj: An instance of the Account class containing the username and password.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the account data ID.
-        [True, [account id]]
+        Success case: A list containing the boolean value True followed by the account ID.
+        [True, [account_id]]
 
         Fail case: A list containing the boolean value False followed by the error message.
         [False, [error message]]

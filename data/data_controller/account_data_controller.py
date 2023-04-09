@@ -34,7 +34,7 @@ def write_account(account_obj):
     Returns:
         Success case: A list containing the boolean value True and followed by the account ID when new account created.
         [True]
-        [True, [account id]]
+        [True, [account_id]]
 
         Fail case: A list containing the boolean value False followed by the error message.
         [False, [error message]]
@@ -115,7 +115,7 @@ def read_account(account_obj):
     Reads an account object from the database.
 
     Args:
-        account_obj: An Account object to read from the database.
+        account_obj: An instance of the Account class containing the account ID.
 
     Returns:
         Success case: A list containing the boolean value True followed by the account data.
