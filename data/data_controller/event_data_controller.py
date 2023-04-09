@@ -1,7 +1,7 @@
 """
 Author: Ruochi Wang
 Date: April 8, 2023
-Purpose: A script that logging the error
+Purpose: Provide a simple and consistent way to read and write database
 License: MIT License
 Dependencies: sqlite3
 
