@@ -1,5 +1,14 @@
 """
-@RW
+Author: Ruochi Wang
+Date: April 8, 2023
+Purpose: Provide a simple and consistent way to read and write database
+License: MIT License
+Dependencies: sqlite3
+
+To install the required dependencies, run the following command:
+
+pip install sqlite3
+
 """
 
 import sqlite3

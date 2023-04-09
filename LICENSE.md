@@ -1,8 +1,8 @@
 MIT License
 
 Copyright (c) 2023 Ruochi Wang
-Copyright (c) 2023 Austin Shouli
 Copyright (c) 2023 Ethan Ondzik
+Copyright (c) 2023 Austin Shouli
 Copyright (c) 2023 Vladislav Mazur
 Copyright (c) 2023 Anandita Gupta
 
