@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -35,19 +41,22 @@ def write_notification(notification_obj):
     Writes a notification object to the database.
 
     Args:
-        notification_obj: An Notification object to write to the database.
+        notification_obj:
+        An Notification object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True and followed by the notify ID when new notification
-        created.
+        Success case:
+        A list containing the boolean value True and followed by the notify ID when new notification created.
         [True]
         [True, [notify ID]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -121,17 +130,21 @@ def read_notification(notification_obj):
     Reads a notification object from the database.
 
     Args:
-        notification_obj: An instance of the Notification class containing the notify ID.
+        notification_obj:
+        An instance of the Notification class containing the notify ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the notification data.
+        Success case:
+        A list containing the boolean value True followed by the notification data.
         [True, [notify_id, event, account, notify_date, info]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -203,17 +216,21 @@ def read_all_notification(obj):
     Reads all notifications belonging to the account or event from the database.
 
     Args:
-        obj: An instance of the Account class containing the account ID or Event class containing the event ID.
+        obj:
+        An instance of the Account class containing the account ID or Event class containing the event ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the notifications' notify ID.
+        Success case:
+        A list containing the boolean value True followed by the notifications' notify ID.
         [True, [notify_id1, notify_id2, ...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 

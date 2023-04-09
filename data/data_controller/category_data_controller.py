@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -35,16 +41,18 @@ def write_category(obj):
         obj: A Category or Course object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True and followed by the category ID when new category
-        created.
+        Success case:
+        A list containing the boolean value True and followed by the category ID when new category created.
         [True]
         [True, [category ID]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction.
+        Exception:
+        If an error occurs during the database transaction.
 
     """
 
@@ -136,19 +144,23 @@ def read_category(category_obj):
     Reads a category object from the database, along with its corresponding course object.
 
     Args:
-        category_obj: An instance of the Category class containing the category ID.
+        category_obj:
+        An instance of the Category class containing the category ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the category data and its corresponding
-        course data if there is one.
+        Success case:
+        A list containing the boolean value True followed by the category data and its corresponding course data if
+        there is one.
         [True, [category_type, owner, name, visibility, description]]
         [True, [category_type, owner, name, visibility, description, department, course, section, start_date, end_date]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -247,17 +259,21 @@ def read_all_category(account_obj):
     Reads all categories belonging to the account from the database.
 
     Args:
-        account_obj: An instance of the Account class containing the account ID.
+        account_obj:
+        An instance of the Account class containing the account ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the categories' data.
+        Success case:
+        A list containing the boolean value True followed by the categories' data.
         [True, [category ID, name], [category ID, name], [sublist], [...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 

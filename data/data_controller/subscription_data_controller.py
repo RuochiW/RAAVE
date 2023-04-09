@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -32,18 +38,24 @@ def write_subscription(account_obj, course_obj):
     Writes subscription to the database.
 
     Args:
-        account_obj: An instance of the Account class containing the account ID.
-        course_obj: An instance of the Course class containing the course ID.
+        account_obj:
+        An instance of the Account class containing the account ID.
+
+        course_obj:
+        An instance of the Course class containing the course ID.
 
     Returns:
-        Success case: A list containing the boolean value True.
+        Success case:
+        A list containing the boolean value True.
         [True]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -92,18 +104,22 @@ def read_all_subscription(obj):
     Writes subscription to the database.
 
     Args:
-        obj: An instance of the Account class containing the account ID or Course class containing the course ID.
+        obj:
+        An instance of the Account class containing the account ID or Course class containing the course ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the account ID or course ID.
+        Success case:
+        A list containing the boolean value True followed by the account ID or course ID.
         [True, [account_id1, account_id2, ...]]
         [True, [course_id1, course_id2, ...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -213,14 +229,17 @@ def read_all_subscribable():
         None.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the course ID.
+        Success case:
+        A list containing the boolean value True followed by the course ID.
         [True, [course_id1, course_id2, ...]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 

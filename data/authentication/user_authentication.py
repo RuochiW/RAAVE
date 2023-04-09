@@ -1,8 +1,14 @@
 """
+User Authentication
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to login user by username and password
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -29,17 +35,21 @@ def user_login(account_obj):
     Login the user with the given account object.
 
     Args:
-        account_obj: An instance of the Account class containing the username and password.
+        account_obj:
+        An instance of the Account class containing the username and password.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the account ID.
+        Success case:
+        A list containing the boolean value True followed by the account ID.
         [True, [account_id]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 

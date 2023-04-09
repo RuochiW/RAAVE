@@ -1,8 +1,14 @@
 """
+Database Interaction
+
 Author: Ruochi Wang
+
 Date: April 8, 2023
+
 Purpose: Provide a simple and consistent way to read and write database
+
 License: MIT License
+
 Dependencies: sqlite3
 
 To install the required dependencies, run the following command:
@@ -32,15 +38,18 @@ def write_account(account_obj):
         account_obj: An Account object to write to the database.
 
     Returns:
-        Success case: A list containing the boolean value True and followed by the account ID when new account created.
+        Success case:
+        A list containing the boolean value True and followed by the account ID when new account created.
         [True]
         [True, [account_id]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
@@ -115,17 +124,21 @@ def read_account(account_obj):
     Reads an account object from the database.
 
     Args:
-        account_obj: An instance of the Account class containing the account ID.
+        account_obj:
+        An instance of the Account class containing the account ID.
 
     Returns:
-        Success case: A list containing the boolean value True followed by the account data.
+        Success case:
+        A list containing the boolean value True followed by the account data.
         [True, [account_type, username, first_name, last_name, email]]
 
-        Fail case: A list containing the boolean value False followed by the error message.
+        Fail case:
+        A list containing the boolean value False followed by the error message.
         [False, [error message]]
 
     Raises:
-        Exception: If an error occurs during the database transaction or any other error.
+        Exception:
+        If an error occurs during the database transaction or any other error.
 
     """
 
