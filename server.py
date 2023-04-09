@@ -23,18 +23,22 @@ ac_controller = AccountController()
 
 
 
-#ls has major formatting issues
+
 @app.route('/login/calendar/view_events/')
 def view_events():
+    """Gets passed a list of the user events from the user_events() function.
+    It takes this list of events and passes it to table.html to be rendered. The current event output from
+    the database is very unconditioned."""
 
-    if request.args.get('event_list') is None:
-        return redirect('calendar')
+    #if event list is empty redirect back to calendar view
+    if request.args.getlist('event_list') is None:
+        return redirect('/calendar')
     else:
         headers = ("Event ID", "Event Type", "Visibility", "Name", "Category", "Start Date", "End Date")
         ls = request.args.getlist('event_list')
-        ls.pop(0)
+        ls.pop(0) #remove the [True] from the start of the list
         
-
+        #tuple of tuples that displays nicely for the demo video
         demo_data = (
             ("1", "2", "0", "A1", "1", "2023-09-15 10:30:00", "2023-09-15 12:00:00"),
             ("1", "1", "0", "Wash Car", "1", "2023-09-15 14:30:00", "2023-09-15 15:15:00"),
@@ -42,32 +46,36 @@ def view_events():
         )
         
         return render_template('table.html', headings=headers, data=demo_data)
-        #return f"{ls[0]},\n{ls[1]},\n{ls[2]}, \t {len(ls)}"
-        #can access ls row by row but it is filled with whitespaces
 
 
 
 @app.route('/login/calendar/', methods=['POST', 'GET'])
 def user_events():
+    """Gets the account_id of the currently logged in user and queries the database to return
+    all accessable events for that user. Redirects to the ./view_events route and passes the 
+    list of events from the database."""
 
     id = ac_controller.active_user.account_id #acc_id of the currently logged in user
     c = Category(id)
-    events = read_all_event(c)
+    events = read_all_event(c) #get all user events from the db
 
     if request.method == 'GET':
         return redirect(url_for('view_events', event_list=events))
     else:
         return redirect('calendar')
 
-# renders a super simple calendar
+
 @app.route('/calendar')
 def show_calendar():
+    """Renders the calendar.html template. This template inherits a 
+    navigation bar from the base.html template."""
+
     return render_template('calendar.html')
 
 
-# clicking on view calendar in navbar will render a calendar
 @app.route('/home')
 def home_view():
+    """Renders the home view for the application which consists of a navigation bar."""
     return render_template('base.html')
 
 
